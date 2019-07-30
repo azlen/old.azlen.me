@@ -321,7 +321,8 @@ def renderQueue():
             'collection': {
                 'blog': blogCollection,
                 'pages': pageCollection,
-                'wiki': wikiCollection
+                'wiki': wikiCollection,
+                'projects': projectCollection
             }
         }
 
