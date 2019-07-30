@@ -353,12 +353,19 @@ def renderQueue():
         temp = templateEnv.from_string(outputText)
         outputText = temp.render(**template_data)
 
-        folder = os.path.join('_temp', page['path'][1:])
+        folder = os.path.join(temp_dir, page['path'][1:])
         os.makedirs(folder, exist_ok=True)
 
         with open(os.path.join(folder, 'index.html'), 'w') as f:
             f.write(outputText)
     
+    with open(os.path.join(temp_dir, 'glossary.ndtl'), 'w') as f:
+        for category in glossary:
+            f.write(category.upper() + '\n')
+
+            for term, definition in glossary[category].items():
+                f.write('  {}: {}\n'.format(term, definition))
+
     shutil.rmtree(public_dir)
     os.rename(temp_dir, public_dir)
 
@@ -379,10 +386,8 @@ import subprocess, sys
 
 cmd = "cd {}; python3 -m http.server".format(public_dir)
  
-## run it ##
 p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
  
-## But do not wait till netstat finish, start displaying output immediately ##
 while True:
     out = p.stderr.read(1)
     if out == '' and p.poll() != None:
