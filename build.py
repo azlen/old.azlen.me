@@ -197,7 +197,7 @@ def componentToHTML(block, lt, nt):
                 if category not in glossary:
                     glossary[category] = {}
                 
-                glossary[category][item] = glossary_text.strip()
+                glossary[category.strip()][item.strip()] = glossary_text.strip()
             return ''
         elif icon == '🗑️':
             return ''
