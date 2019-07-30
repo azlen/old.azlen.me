@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title></title>
+    <meta name="description" content="">
+
+    <!-- META TAGS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    
+    <!-- STYLE -->
+    <style>
+        /* WEBSITE STYLES */
+        {% include 'css/main.css' %}
+
+        /* CODE BLOCK STYLING */
+        {% include 'css/manni.css' %}
+    </style>
+</head>
+<body>
+    <div id="tl">
+        <a href="/" id="logo">
+            {% include 'svg/logo.svg' %}
+        </a>
+        {% if page.path == '/' %}
+            <div class="stat">{{ site.wordcount | commafy }} words</div>
+            <div class="stat">{{ site.pagecount | commafy }} pages</div>
+            <nav>
+                <a href="/about">About</a>
+                <!--<a href="/reading">Reading</a>-->
+                <!--<a href="/contact">Contact</a>-->
+            </nav>
+            <nav>
+                <a href="https://instagram.com/azlenelza" target="_blank">{% include 'svg/instagram.svg' %}</a>
+                <a href="https://github.com/azlen" target="_blank">{% include 'svg/github.svg' %}</a>
+                <a href="https://merveilles.town/web/accounts/33669" target="_blank">{% include 'svg/mastodon.svg' %}</a>
+                <a href='https://webring.xxiivv.com/#random' target='_blank'>
+                    <span style="display:inline-block; transform:scale(1.2);"> <!-- webring logo looks too small -->
+                        {% include 'svg/webring.svg' %}
+                    </span>
+                </a>
+            </nav>
+        {% endif %}
+    </div>
+    <main>
+        <h1 class="title">{{ page.title }}</h1>
+        {{ content }}
+    </main>
+</body>
+</html>
