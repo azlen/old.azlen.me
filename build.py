@@ -291,14 +291,16 @@ def renderQueue():
         else:
             shutil.rmtree(old_file)"""
     
-    os.makedirs('_temp', exist_ok=True)
-    os.makedirs('_temp/images', exist_ok=True)
+    os.makedirs(temp_dir, exist_ok=True)
+    os.makedirs('{}/images'.format(temp_dir), exist_ok=True)
 
     src_files = os.listdir('www')
     for file_name in src_files:
         full_file_name = os.path.join('www', file_name)
         if os.path.isfile(full_file_name):
-            shutil.copy(full_file_name, '_temp')
+            shutil.copy(full_file_name, temp_dir)
+        elif os.path.isdir(full_file_name):
+            shutil.copytree(full_file_name, os.path.join(temp_dir, file_name))
 
     for page_id in processingQueue:
         page = processingQueue[page_id]
