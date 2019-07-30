@@ -27,6 +27,8 @@ blog     = client.get_collection_view("https://www.notion.so/eidka/7dc1a478d8274
 wiki     = client.get_collection_view("https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9")
 projects = client.get_collection_view("https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8")
 
+twtxt    = client.get_collection_view("https://www.notion.so/eidka/51c6a2837c4c4d20b843b936f45ff75b?v=78a7ba17c6da434d8cc61232be5d7064")
+
 temp_dir = '_temp'
 public_dir = 'public'
 
@@ -54,6 +56,9 @@ def addCollectionToQueue(database, folder):
                 permalink = re.sub(r'\s+', '_', permalink.strip()) # convert spaces to underscore
                 
                 props["permalink"] = permalink
+            else:
+                if props["permalink"][0] == '/':
+                    props["permalink"] = props["permalink"][1:]
             
             path = os.path.join("/", folder, props["permalink"])
             print(path)
@@ -367,6 +372,14 @@ def renderQueue():
 
             for term, definition in glossary[category].items():
                 f.write('  {}: {}\n'.format(term, definition))
+    
+    with open(os.path.join(temp_dir, 'twtxt.txt'), 'w') as f:
+        entries = twtxt.collection.get_rows()
+        entries = list(map(lambda x: x.get_all_properties(), entries))
+        entries = list(sorted(entries, key=lambda x: x['created'], reverse=True))
+
+        for row in entries:            
+            f.write('{}\t{}\n'.format(row['created'].isoformat(), row['text']))
 
     shutil.rmtree(public_dir)
     os.rename(temp_dir, public_dir)
