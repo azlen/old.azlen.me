@@ -121,6 +121,7 @@ img {
 main {
     position: relative;
     width: 100%;
+    padding: 0px 20px;
     max-width: 36em;
     margin: auto;
     margin-bottom: 10rem;
@@ -168,6 +169,60 @@ main {
 #tl nav a:hover svg {
     fill: #444;
     stroke: #444;
+}
+
+.column-container {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+}
+
+@media screen and (max-width: 1200px) {
+    #tl {
+        position: static;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    #tl .stat {
+        display: none;
+    }
+    #tl nav {
+        margin-top: 0;
+    }
+    #tl nav a {
+        display: inline-block;
+        font-size: 16px;
+    }
+    #tl nav a:not(:last-child) {
+        margin-right: 20px;
+    }
+    #tl nav.social {
+        display: none;
+    }
+    #tl nav a svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .column-container {
+        display: block;
+    }
+    .column {
+        margin: auto;
+        margin-bottom: 2.0rem;
+        width: 400px;
+        max-width: 100%;
+    }
+    a.wiki-link {
+        font-size: inherit;
+    }
+    a.homepage-link {
+        font-size: inherit;
+    }
 }
 
         /* CODE BLOCK STYLING */
@@ -270,6 +325,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -279,7 +338,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -298,7 +361,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -327,6 +394,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -336,7 +407,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -355,7 +430,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -384,6 +463,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -393,7 +476,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -412,7 +499,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -441,6 +532,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -450,7 +545,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -469,7 +568,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -498,6 +601,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -507,7 +614,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -526,7 +637,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -555,6 +670,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -564,7 +683,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -583,7 +706,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -605,6 +732,10 @@ main {
 	
 	
 		
+			
+		
+	
+		
 	
 		
 	
@@ -612,7 +743,11 @@ main {
 	
 		
 	
+		
+	
 
+	
+		
 	
 
 	
@@ -621,7 +756,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -640,7 +779,11 @@ main {
 
 	
 
+	
 	
+		
+	
+		
 	
 		
 	
@@ -659,7 +802,11 @@ main {
 
 	
 
+	
+	
+		
 	
+		
 	
 		
 	
@@ -678,7 +825,13 @@ main {
 
 	
 
+	
+	
+		
 	
+		
+			
+		
 	
 		
 			
@@ -711,6 +864,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -730,7 +887,9 @@ main {
 	
 		
 	
-
+		
+	
+		
 	
 
 	
@@ -740,6 +899,12 @@ main {
 	
 
 	
+
+	
+	
+		
+	
+		
 	
 		
 	
@@ -774,6 +939,10 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
 
@@ -786,6 +955,10 @@ main {
 	
 
 	
+	
+		
+	
+		
 	
 		
 	
@@ -819,6 +992,10 @@ main {
 		
 	
 		
+	
+		
+	
+		
 			
 		
 	
@@ -847,25 +1024,6 @@ main {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -888,25 +1046,6 @@ main {
 		
 	
 		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
 	
 		
 	
@@ -939,25 +1078,6 @@ main {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -985,9 +1105,94 @@ main {
 	
 		
 	
+		
+	
+		
+	
 
 	
-<div style="display: flex"><div style="flex: 0.33333333333333337"></div><div style="flex: 0.33333333333333337"></div><div style="flex: 0.3333333333333333"></div></div>
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+<div class="column-container"><div class="column" style="flex: 0.33333333333333337"></div><div class="column" style="flex: 0.33333333333333337"></div><div class="column" style="flex: 0.3333333333333333"></div></div>
     </main>
 </body>
 </html>

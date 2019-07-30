@@ -27,6 +27,9 @@ blog     = client.get_collection_view("https://www.notion.so/eidka/7dc1a478d8274
 wiki     = client.get_collection_view("https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9")
 projects = client.get_collection_view("https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8")
 
+temp_dir = '_temp'
+public_dir = 'public'
+
 glossary = {}
 
 processingQueue = {}
@@ -46,7 +49,11 @@ def addCollectionToQueue(database, folder):
                 block_ids = data['content']
 
             if props["permalink"].strip() == "":
-                props["permalink"] = re.sub(" ", "_", props["name"].lower())
+                permalink = props["name"].lower()
+                permalink = re.sub(r'[^\w -]', '', permalink) # remove symbols
+                permalink = re.sub(r'\s+', '_', permalink.strip()) # convert spaces to underscore
+                
+                props["permalink"] = permalink
             
             path = os.path.join("/", folder, props["permalink"])
             print(path)
@@ -205,14 +212,19 @@ def componentToHTML(block, lt, nt):
         source = block.get('properties.source')[0][0]
         file_id = block.get('file_ids')[0]
         extension = re.match('.*(\..*)', source).group(1)
-        
-        dest = '/images/{}{}'.format(file_id, extension)
 
-        r = client.session.get(block.source)
-        with open('public' + dest, 'wb') as image:
-            image.write(r.content)
+        image_name = file_id + extension
+        public_path = os.path.join(public_dir, 'images', image_name)
+        temp_path = os.path.join(temp_dir, 'images', image_name)
 
-        return '<img src="{}"/>'.format(dest)
+        if os.path.isfile(public_path):
+            shutil.copy2(public_path, temp_path)
+        else:
+            r = client.session.get(block.source)
+            with open(temp_path, 'wb') as image:
+                image.write(r.content)
+
+        return '<img src="{}"/>'.format(os.path.join('/images', image_name))
     elif block.type == 'to_do':
         # TO BE IMPLEMENTED
         return ""
@@ -245,10 +257,10 @@ def componentToHTML(block, lt, nt):
     elif block.type == 'column_list':
         block_ids = block.get('content')
 
-        output = '<div style="display: flex">'
+        output = '<div class="column-container">'
         for column_id in block.get('content'):
             column = client.get_block(column_id)
-            output += '<div style="flex: {}">'.format(column.get('format.column_ratio'))
+            output += '<div class="column" style="flex: {}">'.format(column.get('format.column_ratio'))
 
             block_ids = column.get('content')
             for i in range(len(block_ids)):
@@ -273,19 +285,20 @@ def componentToHTML(block, lt, nt):
 
 def renderQueue():
     # Remove old files
-    for old_file in glob.glob('public/*'):
+    """for old_file in glob.glob('public/*'):
         if os.path.isfile(old_file):
             os.unlink(old_file)
         else:
-            shutil.rmtree(old_file)
+            shutil.rmtree(old_file)"""
     
-    os.makedirs('public/images', exist_ok=True)
+    os.makedirs('_temp', exist_ok=True)
+    os.makedirs('_temp/images', exist_ok=True)
 
     src_files = os.listdir('www')
     for file_name in src_files:
         full_file_name = os.path.join('www', file_name)
         if os.path.isfile(full_file_name):
-            shutil.copy(full_file_name, 'public')
+            shutil.copy(full_file_name, '_temp')
 
     for page_id in processingQueue:
         page = processingQueue[page_id]
@@ -340,12 +353,14 @@ def renderQueue():
         temp = templateEnv.from_string(outputText)
         outputText = temp.render(**template_data)
 
-        folder = os.path.join('public', page['path'][1:])
+        folder = os.path.join('_temp', page['path'][1:])
         os.makedirs(folder, exist_ok=True)
 
-        #print(fullpath)
         with open(os.path.join(folder, 'index.html'), 'w') as f:
             f.write(outputText)
+    
+    shutil.rmtree(public_dir)
+    os.rename(temp_dir, public_dir)
 
         
 
@@ -358,3 +373,20 @@ renderQueue()
 
 
 print(glossary)
+
+
+import subprocess, sys
+
+cmd = "cd {}; python3 -m http.server".format(public_dir)
+ 
+## run it ##
+p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
+ 
+## But do not wait till netstat finish, start displaying output immediately ##
+while True:
+    out = p.stderr.read(1)
+    if out == '' and p.poll() != None:
+        break
+    if out != '':
+        sys.stdout.write(out)
+        sys.stdout.flush()
