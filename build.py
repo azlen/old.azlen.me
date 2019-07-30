@@ -187,11 +187,12 @@ def componentToHTML(block, lt, nt):
                 
                 glossary[category][item] = glossary_text.strip()
             return ''
-        if icon == '🗑️':
+        elif icon == '🗑️':
             return ''
         else:
             print(block.get())
-            return '<aside class="sidenote">{}</aside>'.format(text)
+            return ''
+            ##return '<aside class="sidenote">{}</aside>'.format(text)
         
     elif block.type == 'quote':
         return '<blockquote>{}</blockquote>'.format(text)
