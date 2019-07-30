@@ -56,6 +56,11 @@ def addCollectionToQueue(database, folder):
                 'path': path
             }
 
+            if folder == 'projects':
+                print(dir(props['date']))
+                print(type(props['date'].start))
+                print(props['date'].end)
+
             for key in props:
                 itemData[key] = props[key]
             
