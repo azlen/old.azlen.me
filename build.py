@@ -381,7 +381,7 @@ def renderQueue():
             f.write(category.upper() + '\n')
 
             for term, definition in glossary[category].items():
-                f.write('  {}: {}\n'.format(term, definition))
+                f.write('  {} : {}\n'.format(term, definition))
     
     with open(os.path.join(temp_dir, 'twtxt.txt'), 'w') as f:
         entries = twtxt.collection.get_rows()
