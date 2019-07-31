@@ -388,8 +388,11 @@ def renderQueue():
         entries = list(map(lambda x: x.get_all_properties(), entries))
         entries = list(sorted(entries, key=lambda x: x['created'], reverse=True))
 
-        for row in entries:            
-            f.write('{}\t{}\n'.format(row['created'].isoformat(), row['text']))
+        for row in entries:         
+            #date = row['created'].isoformat()   
+            # By default `.isoformat()` returns without timezone stamp
+            date = row['created'].strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            f.write('{}\t{}\n'.format(date, row['text']))
 
     shutil.rmtree(public_dir)
     os.rename(temp_dir, public_dir)
