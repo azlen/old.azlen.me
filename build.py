@@ -218,6 +218,8 @@ def componentToHTML(block, lt, nt):
         file_id = block.get('file_ids')[0]
         extension = re.match('.*(\..*)', source).group(1)
 
+        caption = block.get('properties.caption')
+
         image_name = file_id + extension
         public_path = os.path.join(public_dir, 'images', image_name)
         temp_path = os.path.join(temp_dir, 'images', image_name)
@@ -229,7 +231,15 @@ def componentToHTML(block, lt, nt):
             with open(temp_path, 'wb') as image:
                 image.write(r.content)
 
-        return '<img src="{}"/>'.format(os.path.join('/images', image_name))
+        if caption == None:
+            return '<img src="{}"/>'.format(os.path.join('/images', image_name))
+        else:
+            return """
+                <figure>
+                    <img src="{}"/>
+                    <figcaption>{}</figcaption>
+                </figure>
+            """.format(os.path.join('/images', image_name), caption[0][0])
     elif block.type == 'to_do':
         # TO BE IMPLEMENTED
         return ""

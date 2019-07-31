@@ -198,6 +198,19 @@ main {
     flex: 1;
 }
 
+figure {
+    margin-bottom: 1.4rem;
+}
+figure img {
+    margin-bottom: 0.4rem;
+}
+figcaption {
+    font-family: 'EB Garamond', Garamond, serif;
+    font-size: 16px;
+    color: #999;
+    font-style: italic;
+}
+
 @media screen and (max-width: 1200px) {
     #tl {
         position: static;
@@ -321,7 +334,12 @@ main {
     </div>
     <main>
         <h1 class="title">New Website</h1>
-        <p>My website has always been a pet peeve of mine. Every few months I would get tired of the current design and completely rewrite the website from the ground up. Each time with the intention of starting a blog or actually using the website for something useful. And each time, the website would sit there stagnant, collecting dust.</p><p>Now, I could say that I was simply too busy, but I think my problem was actually with <em>technology</em>. As a programmer, I would write each website in HTML and CSS, and often using Jekyll to build a static site from markdown files.</p><img src="/images/2bf2311f-fdb8-40c1-a76f-262004869148.png"/><p>Sometimes I just wished for a proper CMS (content management system). To have a nice interface from which to write and update posts. At one point I was even tempted to try Wordpress, but <em>no</em> that would be going too far; I had to make it myself.</p><p>While cleaning my desk to organize my physical workspace I had a sudden realization of just how messy my <em>digital workspace</em> really was. To fix this problem and organize my digital life, I discovered <a href="https://www.notion.so/">Notion</a>, a cross between a personal wiki, google docs, and productivity tool. It was perfect to keep track of all my projects, writing, lists, ideas etc.</p><p>Now, realization number two came when I realized that Notion must have an API. It doesn't really, but I found an <a href="https://github.com/jamalex/notion-py">unofficial python API</a>. From there, it was just a single afternoon before I had written an entire static site generator which pulls pages from my Notion workspace and compiles them into a little blog / wiki.</p><p>I hope this will not only inspire me to write more, but also to write for an audience and keep my website up-to-date with all the current happenings and projects.</p>
+        <p>My website has always been a pet peeve of mine. Every few months I would get tired of the current design and completely rewrite the website from the ground up. Each time with the intention of starting a blog or actually using the website for something useful. And each time, the website would sit there stagnant, collecting dust.</p><p>Now, I could say that I was simply too busy, but I think my problem was actually with <em>technology</em>. As a programmer, I would write each website in HTML and CSS, and often using Jekyll to build a static site from markdown files.</p>
+                <figure>
+                    <img src="/images/2bf2311f-fdb8-40c1-a76f-262004869148.png"/>
+                    <figcaption>My previous website designed to use minimal CSS while still looking nice-ish</figcaption>
+                </figure>
+            <p>Sometimes I just wished for a proper CMS (content management system). To have a nice interface from which to write and update posts. At one point I was even tempted to try Wordpress, but <em>no</em> that would be going too far; I had to make it myself.</p><p>While cleaning my desk to organize my physical workspace I had a sudden realization of just how messy my <em>digital workspace</em> really was. To fix this problem and organize my digital life, I discovered <a href="https://www.notion.so/">Notion</a>, a cross between a personal wiki, google docs, and productivity tool. It was perfect to keep track of all my projects, writing, lists, ideas etc.</p><p>Now, realization number two came when I realized that Notion must have an API. It doesn't really, but I found an <a href="https://github.com/jamalex/notion-py">unofficial python API</a>. From there, it was just a single afternoon before I had written an entire static site generator which pulls pages from my Notion workspace and compiles them into a little blog / wiki.</p><p>I hope this will not only inspire me to write more, but also to write for an audience and keep my website up-to-date with all the current happenings and projects.</p>
     </main>
 </body>
 </html>

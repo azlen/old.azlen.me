@@ -163,6 +163,19 @@ main {
     flex: 1;
 }
 
+figure {
+    margin-bottom: 1.4rem;
+}
+figure img {
+    margin-bottom: 0.4rem;
+}
+figcaption {
+    font-family: 'EB Garamond', Garamond, serif;
+    font-size: 16px;
+    color: #999;
+    font-style: italic;
+}
+
 @media screen and (max-width: 1200px) {
     #tl {
         position: static;
