@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -334,7 +362,7 @@ figcaption {
     </div>
     <main>
         <h1 class="title">Internet ⇠ Car</h1>
-        <p><em>The internet is like a car for the mind.</em> It makes it so much easier to get from point A to point B; to find certain knowledge, or the answer to a question. But most of the time, our mental cars are sitting idle, polluting the air around us with facebook posts, top 10 lists, or targeted advertisements.</p><p>If a car is your primary mode of transportation, or the internet your way of discovering knowledge, you will never know what it is like to get to that knowledge by foot. Never experience the journey of learning the knowledge yourself.</p><p><strong>Cars can only get you so far.</strong> They can only bring you to well developed and explored areas. If you limit yourself only to what is accessible by road, you are limiting yourself from whole fields of information. Forests, mountains, lakes, and oceans of knowledge exist for you to explore.</p><p><strong>Cars are anti-social.</strong> We all stare into our flat screens without interacting with the people around us. On the journey of learning you may find new friends or have serindipitous encounters. But with a car, you skip all human interaction. No smiling at people as they walk by, just annoyance or road rage as someone weaves in and out of traffic or cuts you off. Cars do not foster positive human interaction but instead alienate one-another.</p><p><strong>Cars take up a lot of space.</strong> In garages, on roads, and then there is all the road infrastructure itself. The bridges, the parking lots , the streets. In some cities, more than fifty percent of the area in the downtown areas are dedicated to cars. This infrastructure often makes it hard <em>not </em>to use a car. The internet too has an enormous infrastructure built around it, not only in the physical world (routers, servers, ISPs, undersea cables, etc.) but also within our minds and society. Think of how Google serves as an extension to our memory, or how social networks take up the majority of social interactions. Society is built around the internet much in the same way modern cities are built around roads.</p><p>On foot, we have time to remember our journey, we can stare in awe as we pass a landmark or sit to enjoy the sunset. We experience and remember the journey. In a car, all these sights are just fleeting moments and we only remember bits and fragments. Watching YouTube videos or scrolling facebook generally doesn't teach you anything, but instead leaves your mind with fragments of arbitrary facts and information of little practical importance to your daily life.</p><p>Cars have completely changed the infrastructure of cities over the past 100 years. Cities are built around cars not people. Now the internet is not only changing the infrastructure of our minds, but is also changing the infrastructure of our cities, and how we interact with our cities. Google Maps chooses peoples route through the city, and makes its own decisions about which areas to avoid or how to most quickly get somewhere. The internet of things wants cities to be "smart" and monitor every street, sidewalk, or building with a plethora of sensors...</p><p>Because of cars, people are able to live further and further away from the city in sprawling suburbs upon suburbs. Because of the internet, people are able to live further and further away from each other but also from their own minds. People don't need to think for themselves when the internet is ready to think for you.</p>
+        <p><em>The internet is like a car for the mind.</em> It makes it so much easier to get from point A to point B; to find certain knowledge, or the answer to a question. But most of the time, our mental cars are sitting idle, polluting the air around us with facebook posts, top 10 lists, or targeted advertisements.</p><p>If a car is your primary mode of transportation, or the internet your way of discovering knowledge, you will never know what it is like to get to that knowledge by foot. Never experience the journey of learning the knowledge yourself.</p><p><strong>Cars can only get you so far.</strong> They can only bring you to well developed and explored areas. If you limit yourself only to what is accessible by road, you are limiting yourself from whole fields of information. Forests, mountains, lakes, and oceans of knowledge exist for you to explore.</p><p><strong>Cars are anti-social.</strong> We all stare into our flat screens without interacting with the people around us. On the journey of learning you may find new friends or have serindipitous encounters. But with a car, you skip all human interaction. No smiling at people as they walk by, just annoyance or road rage as someone weaves in and out of traffic or cuts you off. Cars do not foster positive human interaction but instead alienate one-another.</p><p><strong>Cars take up a lot of space.</strong> In garages, on roads, and then there is all the road infrastructure itself. The bridges, the parking lots , the streets. In some cities, more than fifty percent of the area in the downtown areas are dedicated to cars. This infrastructure often makes it hard <em>not </em>to use a car. The internet too has an enormous infrastructure built around it, not only in the physical world (routers, servers, ISPs, undersea cables, etc.) but also within our minds and society. Think of how Google serves as an extension to our memory, or how social networks take up the majority of social interactions. Society is built around the internet much in the same way modern cities are built around roads.</p><div class="divider"></div><p>On foot, we have time to remember our journey, we can stare in awe as we pass a landmark or sit to enjoy the sunset. We experience and remember the journey. In a car, all these sights are just fleeting moments and we only remember bits and fragments. Watching YouTube videos or scrolling facebook generally doesn't teach you anything, but instead leaves your mind with fragments of arbitrary facts and information of little practical importance to your daily life.</p><p>Cars have completely changed the infrastructure of cities over the past 100 years. Cities are built around cars not people. Now the internet is not only changing the infrastructure of our minds, but is also changing the infrastructure of our cities, and how we interact with our cities. Google Maps chooses peoples route through the city, and makes its own decisions about which areas to avoid or how to most quickly get somewhere. The internet of things wants cities to be "smart" and monitor every street, sidewalk, or building with a plethora of sensors...</p><p>Because of cars, people are able to live further and further away from the city in sprawling suburbs upon suburbs. Because of the internet, people are able to live further and further away from each other but also from their own minds. People don't need to think for themselves when the internet is ready to think for you.</p>
     </main>
 </body>
 </html>

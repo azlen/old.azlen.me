@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -331,8 +359,8 @@ figcaption {
 </svg>
         </a>
         
-            <div class="stat">3,081 words</div>
-            <div class="stat">21 pages</div>
+            <div class="stat">6,470 words</div>
+            <div class="stat">26 pages</div>
             <nav>
                 <a href="/about">About</a>
                 <!--<a href="/reading">Reading</a>-->
@@ -364,13 +392,21 @@ figcaption {
     </div>
     <main>
         <h1 class="title">Home</h1>
-        <img src="/images/3ee5b400-3f37-46ff-a3c8-105138d03c99.png"/><div class="column-container"><div class="column" style="flex: 0.33333333333333337"><h2>Blog</h2><p>
+        <img src="/images/61c75cdb-b1c7-4bc6-ad46-58d23a640515.png"/><div class="column-container"><div class="column" style="flex: 0.33333333333333337"><h2>Blog</h2><p>
 
 	<a href="/blog/new_website" class="homepage-link">
 		New Website
 	</a><br/>
 
 </p></div><div class="column" style="flex: 0.33333333333333337"><h2>Wiki</h2><p>
+
+	
+
+	
+
+	
+
+	
 
 	
 

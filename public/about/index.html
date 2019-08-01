@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -334,7 +362,7 @@ figcaption {
     </div>
     <main>
         <h1 class="title">About</h1>
-        <img src="/images/d26f5cff-4c81-41e3-a099-7a5fe5b51372.png"/><p>Hello! I am a programmer+ designer. I currently work as a research assistant at <a href="https://www.ecuad.ca/">Emily Carr University</a> creating art with deep learning algorithms.</p>
+        <img src="/images/d08011a4-cc25-4733-b33d-c0a3b3e89f2a.png"/><p>Hello! I am a programmer+ designer. I currently work as a research assistant at <a href="https://www.ecuad.ca/">Emily Carr University</a> creating art with deep learning algorithms.</p>
     </main>
 </body>
 </html>

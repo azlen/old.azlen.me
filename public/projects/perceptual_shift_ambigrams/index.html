@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -336,12 +364,12 @@ figcaption {
         <h1 class="title">Perceptual Shift Ambigrams</h1>
         <p>Experiment in creating perceptual shift ambigrams, words that can be read as two different words depending on how the shape of the letters is interpereted.</p><p>Created 1200+ hand-drawn glyphs combining 2 or more letters (e.g T+F, ls+u), and coded a small web interface in which you can input your own words for it to merge.</p>
                 <figure>
-                    <img src="/images/bbdaa060-febf-4d70-aebf-6cb98f078ace.png"/>
+                    <img src="/images/77717a01-e735-47ea-b754-5d8369d717a3.png"/>
                     <figcaption>True / False</figcaption>
                 </figure>
             
                 <figure>
-                    <img src="/images/9334ae73-60bc-445a-a4a3-e97b7f330846.png"/>
+                    <img src="/images/c9feb911-3452-4a75-99f8-72779f93d2ea.png"/>
                     <figcaption>hot / Cold</figcaption>
                 </figure>
             

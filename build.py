@@ -215,7 +215,8 @@ def componentToHTML(block, lt, nt):
         return '<blockquote>{}</blockquote>'.format(text)
     elif block.type == 'image':
         source = block.get('properties.source')[0][0]
-        file_id = block.get('file_ids')[0]
+
+        file_id = block.get('id')
         extension = re.match('.*(\..*)', source).group(1)
 
         caption = block.get('properties.caption')
@@ -244,7 +245,8 @@ def componentToHTML(block, lt, nt):
         # TO BE IMPLEMENTED
         return ""
     elif block.type == 'divider':
-        return '<hr/>'
+        #return '<hr/>'
+        return '<div class="divider"></div>'
     elif block.type == 'numbered_list':
         output = ''
 
@@ -299,6 +301,10 @@ def componentToHTML(block, lt, nt):
         return ''
 
 def renderQueue():
+    # Remove temp dir if already exists
+    if os.path.isdir(temp_dir):
+        shutil.rmtree(temp_dir)
+
     # Remove old files
     """for old_file in glob.glob('public/*'):
         if os.path.isfile(old_file):
@@ -348,7 +354,8 @@ def renderQueue():
             'content': page['html'],
             'site': {
                 'wordcount': wordcount,
-                'pagecount': len(processingQueue.keys())
+                'pagecount': len(processingQueue.keys()),
+                'glossary': glossary
             },
             'page': {
                 'title': page['name'],

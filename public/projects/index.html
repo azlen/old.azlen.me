@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -334,7 +362,7 @@ figcaption {
     </div>
     <main>
         <h1 class="title">Projects</h1>
-        <img src="/images/5498017e-dc04-4586-a819-a4c7b479483d.png"/>
+        <img src="/images/b59a3bce-5ec9-4bf0-91c9-b52a7ebc8319.png"/>
 	<p>
 		<a href="/projects/ink_chinese">Ink Chinese</a> <span style="opacity:0.3"> – December 2018</span><br/>
 		<i>Cross-platform app for learning to read and write Chinese Characters.</i>

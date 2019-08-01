@@ -67,7 +67,7 @@ h1.title {
     margin-bottom: 2.0rem
 }
 
-p, ol, ul {
+p, ol, ul, table {
     margin-bottom: 1.6rem;
     line-height: 1.42em;
     line-height: 1.6em;
@@ -199,9 +199,12 @@ main {
 }
 
 figure {
+    display: block;
+    text-align: center;
     margin-bottom: 1.4rem;
 }
 figure img {
+    display: inline-block;
     margin-bottom: 0.4rem;
 }
 figcaption {
@@ -209,6 +212,31 @@ figcaption {
     font-size: 16px;
     color: #999;
     font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+
+.divider {
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -334,7 +362,7 @@ figcaption {
     </div>
     <main>
         <h1 class="title">Wiki</h1>
-        <img src="/images/032f9aca-b90e-4970-9b2a-6282ec10a4c2.png"/><p><em>Personal wiki serving as a repository for essays, research, lists, and ideas.</em></p><p><em>Full directory listing under construction...</em></p>
+        <img src="/images/7665cfd6-0fed-48d1-9fb7-d98f600593e6.png"/><p><em>Personal wiki serving as a repository for essays, research, lists, and ideas.</em></p>
 
 
 
@@ -361,21 +389,6 @@ figcaption {
 	
 		
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -393,11 +406,7 @@ figcaption {
 
 	
 
-	
-	
-		
 	
-		
 	
 		
 	
@@ -406,18 +415,7 @@ figcaption {
 		
 	
 		
-	
-
-	
-
-	
-
 	
-
-	
-
-	
-	
 		
 	
 		
@@ -439,11 +437,7 @@ figcaption {
 
 	
 
-	
 	
-		
-	
-		
 	
 		
 	
@@ -453,17 +447,6 @@ figcaption {
 	
 		
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
 		
 	
 		
@@ -485,11 +468,7 @@ figcaption {
 
 	
 
-	
 	
-		
-	
-		
 	
 		
 	
@@ -498,18 +477,7 @@ figcaption {
 		
 	
 		
-	
-
 	
-
-	
-
-	
-
-	
-
-	
-	
 		
 	
 		
@@ -531,11 +499,7 @@ figcaption {
 
 	
 
-	
-	
-		
 	
-		
 	
 		
 	
@@ -544,18 +508,7 @@ figcaption {
 		
 	
 		
-	
-
-	
-
 	
-
-	
-
-	
-
-	
-	
 		
 	
 		
@@ -577,11 +530,7 @@ figcaption {
 
 	
 
-	
 	
-		
-	
-		
 	
 		
 	
@@ -590,18 +539,7 @@ figcaption {
 		
 	
 		
-	
-
-	
-
-	
-
 	
-
-	
-
-	
-	
 		
 	
 		
@@ -623,11 +561,7 @@ figcaption {
 
 	
 
-	
-	
-		
 	
-		
 	
 		
 	
@@ -636,18 +570,7 @@ figcaption {
 		
 	
 		
-	
-
-	
-
-	
-
-	
-
 	
-
-	
-	
 		
 	
 		
@@ -669,11 +592,7 @@ figcaption {
 
 	
 
-	
 	
-		
-	
-		
 	
 		
 	
@@ -682,18 +601,7 @@ figcaption {
 		
 	
 		
-	
-
-	
-
-	
-
-	
-
-	
-
 	
-	
 		
 	
 		
@@ -715,7 +623,15 @@ figcaption {
 
 	
 
+	
+	
+		
+	
+		
+	
+		
 	
+		
 	
 		
 	
@@ -738,7 +654,15 @@ figcaption {
 
 	
 
+	
+	
+		
 	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -777,6 +701,84 @@ figcaption {
 	
 		
 	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
 
 	
 		
@@ -802,21 +804,6 @@ figcaption {
 	
 		
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -848,7 +835,13 @@ figcaption {
 	
 		
 	
-
+		
+	
+		
+	
+		
+	
+		
 	
 
 	
@@ -858,6 +851,251 @@ figcaption {
 	
 
 	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+		
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+		
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -883,6 +1121,8 @@ figcaption {
 	
 
 	
+		
+	
 
 	
 
@@ -895,21 +1135,6 @@ figcaption {
 		
 	
 		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 	
 		
 	
@@ -929,10 +1154,53 @@ figcaption {
 	
 
 	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
 
 	
 
 	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -975,6 +1243,14 @@ figcaption {
 	
 		
 	
+		
+	
+		
+	
+		
+	
+		
+	
 
 	
 
@@ -987,6 +1263,14 @@ figcaption {
 	
 
 	
+	
+		
+	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -1014,8 +1298,18 @@ figcaption {
 	
 
 	
+		
+	
 
 	
+	
+		
+	
+		
+	
+		
+	
+		
 	
 		
 	
@@ -1060,25 +1354,6 @@ figcaption {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -1109,25 +1384,6 @@ figcaption {
 		
 	
 		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
 	
 		
 	
@@ -1168,25 +1424,6 @@ figcaption {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
-	
-		
-	
-		
-	
 		
 	
 		
@@ -1222,9 +1459,213 @@ figcaption {
 	
 		
 	
+		
+	
+		
+	
+		
+	
+		
+	
 
 	
-<div class="column-container"><div class="column" style="flex: 0.33333333333333337"></div><div class="column" style="flex: 0.33333333333333337"></div><div class="column" style="flex: 0.3333333333333333"></div></div>
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+<div class="column-container"><div class="column" style="flex: 0.33333333333333337">
+
+	<h3>A</h3>
+	<p>
+		
+			<a href="/wiki/aphantasia" class="wiki-link">
+				Aphantasia
+			</a><br/>
+		
+	</p>
+
+	<h3>B</h3>
+	<p>
+		
+			<a href="/wiki/bananagram_variations" class="wiki-link">
+				Bananagram Variations
+			</a><br/>
+		
+	</p>
+
+	<h3>C</h3>
+	<p>
+		
+			<a href="/wiki/chiastic_structure" class="wiki-link">
+				Chiastic Structure
+			</a><br/>
+		
+	</p>
+
+	<h3>H</h3>
+	<p>
+		
+			<a href="/wiki/hidden_question" class="wiki-link">
+				Hidden Question
+			</a><br/>
+		
+	</p>
+
+</div><div class="column" style="flex: 0.33333333333333337">
+
+	<h3>I</h3>
+	<p>
+		
+			<a href="/wiki/internet_car" class="wiki-link">
+				Internet ⇠ Car
+			</a><br/>
+		
+	</p>
+
+	<h3>M</h3>
+	<p>
+		
+			<a href="/wiki/mechanical_horror" class="wiki-link">
+				Mechanical Horror
+			</a><br/>
+		
+			<a href="/wiki/merveilles" class="wiki-link">
+				Merveilles Town
+			</a><br/>
+		
+	</p>
+
+	<h3>P</h3>
+	<p>
+		
+			<a href="/wiki/possibility_space" class="wiki-link">
+				Possibility Space
+			</a><br/>
+		
+	</p>
+
+	<h3>R</h3>
+	<p>
+		
+			<a href="/wiki/rituals" class="wiki-link">
+				Rituals
+			</a><br/>
+		
+	</p>
+
+</div><div class="column" style="flex: 0.3333333333333333">
+
+	<h3>S</h3>
+	<p>
+		
+			<a href="/wiki/speed_reading" class="wiki-link">
+				Speed Reading
+			</a><br/>
+		
+	</p>
+
+</div></div>
     </main>
 </body>
 </html>
