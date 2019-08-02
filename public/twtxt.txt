@@ -1,2 +1,2 @@
-2019-08-01T19:25:00+00:00	/wiki @<neauoire [https://wiki.xxiivv.com/twtxt.txt](https://wiki.xxiivv.com/twtxt.txt)> question about glossaries for the wiki: should there be any special notation for terms we come up ourselves?
+2019-08-01T19:25:00+00:00	/wiki @<neauoire https://wiki.xxiivv.com/twtxt.txt> question about glossaries for the wiki: should there be any special notation for terms we come up ourselves?
 2019-07-31T16:01:00+00:00	Hello everybody! 
