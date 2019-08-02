@@ -200,6 +200,12 @@ table.normal td, table.normal th {
     outline: 1px solid #BBB;
 }
 
+blockquote {
+    padding-left: 25px;
+    border-left: 5px solid #BBB;
+    color: #999;
+}
+
 .divider {
     margin-bottom: 10rem;
 }
