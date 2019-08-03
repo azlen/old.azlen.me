@@ -350,7 +350,7 @@ def renderQueue():
             page['html'] += componentToHTML(block, last_block_type, next_block_type)
     
     for item in wikiCollection:
-            print(item['name'])
+        print(item['name'])
 
     for page_id in processingQueue:
 
