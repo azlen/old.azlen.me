@@ -90,6 +90,8 @@ def parseText(textitems):
         if len(item) == 2:
             text, props = item
 
+            text = text.replace('\n', '<br/>')
+
             before = ""
             after = ""
 
@@ -141,6 +143,8 @@ def parseText(textitems):
         
         else:
             text = item[0]
+            
+            text = text.replace('\n', '<br/>')
 
             #wordcount = wordcount + len(text.split())
 
@@ -180,7 +184,7 @@ def componentToHTML(block, lt, nt):
         lang = data["properties"]["language"][0][0].lower()
 
         if lang == 'markup': # RESERVED FOR JINJA CODE AND SUCH
-            return text
+            return block.title
 
         return '<pre><code>{% highlight \'' + lang + '\' %}' + text + '{% endhighlight %}</code></pre>'
     elif block.type == 'callout':
@@ -331,6 +335,9 @@ def renderQueue():
         for i in range(len(page['block_ids'])):
             block_id = page['block_ids'][i]
             block = client.get_block(block_id)
+
+            #if page['path'] == '/wiki/riddles':
+            #    print(block.get())
             
             last_block_type = ''
             if i > 0:
@@ -342,6 +349,9 @@ def renderQueue():
             
             page['html'] += componentToHTML(block, last_block_type, next_block_type)
     
+    for item in wikiCollection:
+            print(item['name'])
+
     for page_id in processingQueue:
 
         page = processingQueue[page_id]
