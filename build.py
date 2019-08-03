@@ -16,6 +16,7 @@ templateEnv = jinja2.Environment(loader=templateLoader, extensions=['jinja2_high
 
 templateEnv.extend(jinja2_highlight_cssclass = 'highlight')
 templateEnv.filters['commafy'] = lambda v: "{:,}".format(v)
+templateEnv.filters['flatten'] = lambda A: [y for x in A for y in x]
 
 # Obtain the `token_v2` value by inspecting your browser cookies on a logged-in session on Notion.so
 from secret import token
