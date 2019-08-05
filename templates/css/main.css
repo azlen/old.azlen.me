@@ -179,6 +179,10 @@ figcaption {
     font-style: italic;
 }
 
+
+.table-container {
+    overflow-x: auto;
+}
 table {
     border-spacing: 1px;
     border-collapse: separate;
@@ -199,6 +203,9 @@ table.normal td, table.normal th {
     text-align: left;
     padding: 4px 15px;
     outline: 1px solid #BBB;
+}
+table.nowrap td, table.nowrap th {
+    white-space: nowrap;
 }
 
 blockquote {
