@@ -7,8 +7,15 @@ import jinja2
 from html5print import HTMLBeautifier
 import jinja2_highlight
 
+import json
+import argparse
+
 import requests
 import urllib.parse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--cached', action='store_true', help='Use cached pages')
+args = parser.parse_args()
 
 # Initialize jinja filesystem
 templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
@@ -37,6 +44,13 @@ glossary = {}
 
 processingQueue = {}
 
+cache = {}
+if args.cached and os.path.exists('.cache.json'):
+    with open('.cache.json', 'r') as f:
+        _c = json.loads(f.read())
+        cache = _c['data']
+        glossary = _c['glossary']
+
 wordcount = 0
 
 def addCollectionToQueue(database, folder):
@@ -45,6 +59,8 @@ def addCollectionToQueue(database, folder):
     for row in database.collection.get_rows():
         props = row.get_all_properties()
         data  = row.get()
+
+        #print(data)
         
         if props['published'] == True:
             block_ids = []
@@ -66,7 +82,8 @@ def addCollectionToQueue(database, folder):
 
             itemData = {
                 'block_ids': block_ids,
-                'path': path
+                'path': path,
+                'last_edited_time': data['last_edited_time'],
             }
 
             if folder == 'projects':
@@ -156,6 +173,8 @@ def parseText(textitems):
 def componentToHTML(block, lt, nt):
     text = ''
     data = block.get()
+
+    self_wordcount = 0
     
     title = block.get('properties.title')
     if title != None:
@@ -163,31 +182,33 @@ def componentToHTML(block, lt, nt):
 
         try:
             global wordcount
-            
-            wordcount += len(block.title.split())
-            print(len(block.title.split()), wordcount)
+
+            self_wordcount = len(block.title.split())
+            wordcount += self_wordcount
+            print(self_wordcount, wordcount)
         except:
             pass
         
+    html = ''
 
     if block.type == 'text':
         if len(text) > 0:
-            return '<p>{}</p>'.format(text)
+            html = '<p>{}</p>'.format(text)
         else:
-            return ''
+            html = ''
     elif block.type == 'header':
-        return '<h1>{}</h1>'.format(text)
+        html = '<h1>{}</h1>'.format(text)
     elif block.type == 'sub_header':
-        return '<h2>{}</h2>'.format(text)
+        html = '<h2>{}</h2>'.format(text)
     elif block.type == 'sub_sub_header':
-        return '<h3>{}</h3>'.format(text)
+        html = '<h3>{}</h3>'.format(text)
     elif block.type == 'code':
         lang = data["properties"]["language"][0][0].lower()
 
         if lang == 'markup': # RESERVED FOR JINJA CODE AND SUCH
-            return block.title
-
-        return '<pre><code>{% highlight \'' + lang + '\' %}' + text + '{% endhighlight %}</code></pre>'
+            html = block.title
+        else:
+            html = '<pre><code>{% highlight \'' + lang + '\' %}' + text + '{% endhighlight %}</code></pre>'
     elif block.type == 'callout':
         # BASIC IMPLEMENTATION
         # Should there be different kinds of callouts?
@@ -208,16 +229,16 @@ def componentToHTML(block, lt, nt):
                     glossary[category] = {}
                 
                 glossary[category.strip()][item.strip()] = glossary_text.strip()
-            return ''
+            html = ''
         elif icon == '🗑️':
-            return ''
+            html = ''
         else:
             print(block.get())
-            return ''
+            html = ''
             ##return '<aside class="sidenote">{}</aside>'.format(text)
         
     elif block.type == 'quote':
-        return '<blockquote>{}</blockquote>'.format(text)
+        html = '<blockquote>{}</blockquote>'.format(text)
     elif block.type == 'image':
         source = block.get('properties.source')[0][0]
 
@@ -238,9 +259,9 @@ def componentToHTML(block, lt, nt):
                 image.write(r.content)
 
         if caption == None:
-            return '<img src="{}"/>'.format(os.path.join('/images', image_name))
+            html = '<img src="{}"/>'.format(os.path.join('/images', image_name))
         else:
-            return """
+            html = """
                 <figure>
                     <img src="{}"/>
                     <figcaption>{}</figcaption>
@@ -248,10 +269,10 @@ def componentToHTML(block, lt, nt):
             """.format(os.path.join('/images', image_name), caption[0][0])
     elif block.type == 'to_do':
         # TO BE IMPLEMENTED
-        return ""
+        html = ""
     elif block.type == 'divider':
         #return '<hr/>'
-        return '<div class="divider"></div>'
+        html = '<div class="divider"></div>'
     elif block.type == 'numbered_list':
         output = ''
 
@@ -263,7 +284,7 @@ def componentToHTML(block, lt, nt):
         if nt != 'numbered_list':
             output += '</ol>'
         
-        return output
+        html = output
     elif block.type == 'bulleted_list':
         output = ''
         
@@ -275,7 +296,7 @@ def componentToHTML(block, lt, nt):
         if nt != 'bulleted_list':
             output += '</ul>'
         
-        return output
+        html = output
     elif block.type == 'column_list':
         block_ids = block.get('content')
 
@@ -294,16 +315,18 @@ def componentToHTML(block, lt, nt):
                 if i < len(block_ids)-1:
                     next_block_type = client.get_block(block_ids[i+1]).type
                 
-                output += componentToHTML(client.get_block(block_ids[i]), last_block_type, next_block_type)
+                output += componentToHTML(client.get_block(block_ids[i]), last_block_type, next_block_type)[0]
             
             output += '</div>'
         
         output += '</div>'
         
-        return output
+        html = output
     else:
         print('ERROR UNIMPLEMENTED BLOCK TYPE:', block.type)
-        return ''
+        html = ''
+
+    return (html, self_wordcount)
 
 def renderQueue():
     # Remove temp dir if already exists
@@ -318,7 +341,10 @@ def renderQueue():
             shutil.rmtree(old_file)"""
     
     os.makedirs(temp_dir, exist_ok=True)
-    os.makedirs('{}/images'.format(temp_dir), exist_ok=True)
+    if args.cached and os.path.exists('public/images'):
+        shutil.copytree('public/images', os.path.join(temp_dir, 'images'))
+    else:
+        os.makedirs('{}/images'.format(temp_dir), exist_ok=True)
 
     src_files = os.listdir('www')
     for file_name in src_files:
@@ -328,10 +354,25 @@ def renderQueue():
         elif os.path.isdir(full_file_name):
             shutil.copytree(full_file_name, os.path.join(temp_dir, file_name))
 
+    
+
     for page_id in processingQueue:
         page = processingQueue[page_id]
 
+        if args.cached and page_id in cache.keys():
+            cached_page = cache[page_id]
+
+            if cached_page['last_edited_time'] <= page['last_edited_time']:
+                page['html'] = cached_page['html']
+                page['wordcount'] = cached_page['wordcount']
+
+                global wordcount
+                wordcount += page['wordcount']
+
+                continue
+
         page['html'] = ''
+        page['wordcount'] = 0
 
         for i in range(len(page['block_ids'])):
             block_id = page['block_ids'][i]
@@ -348,7 +389,10 @@ def renderQueue():
             if i < len(page['block_ids'])-1:
                 next_block_type = client.get_block(page['block_ids'][i+1]).type
             
-            page['html'] += componentToHTML(block, last_block_type, next_block_type)
+            html, block_wordcount = componentToHTML(block, last_block_type, next_block_type)
+
+            page['html'] += html
+            page['wordcount'] += block_wordcount
     
     for item in wikiCollection:
         print(item['name'])
@@ -424,6 +468,24 @@ projectCollection = addCollectionToQueue(projects, 'projects')
 
 renderQueue()
 
+with open('.newcache.json', 'w') as f:
+    cache_data = {}
+    for page_id in processingQueue:
+        cache_data[page_id] = {
+            'last_edited_time': processingQueue[page_id]['last_edited_time'],
+            'wordcount': processingQueue[page_id]['wordcount'],
+            'html': processingQueue[page_id]['html']
+        }
+    
+    f.write(json.dumps({
+        'data': cache_data,
+        'glossary': glossary
+    }))
+
+if os.path.exists('.cache.json'):
+    os.remove('.cache.json')
+
+os.rename('.newcache.json', '.cache.json')
 
 print(glossary)
 

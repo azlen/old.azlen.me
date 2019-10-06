@@ -1,3 +1,4 @@
 **/__pycache__
 **/.DS_STORE
 secret.py
+.cache.json
