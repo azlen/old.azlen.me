@@ -523,9 +523,10 @@ messages = [
     "DECIPHERING SQUIGGLY SYMBOLS"
 ]
 
-if (args.push and did_anything_change) or (args.forcepush):
+#if (args.push and did_anything_change) or (args.forcepush):
+if args.push:
     subprocess.run(['git', 'add', '-A'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-    subprocess.run(['git', 'commit', '-m', '"🤖 {} 🤖"'.format(random.choice(messages))], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    subprocess.run(['git', 'commit', '-m', '🤖 {} 🤖'.format(random.choice(messages))], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     subprocess.run(['git', 'push'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
 if args.serve:
