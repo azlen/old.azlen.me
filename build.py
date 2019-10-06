@@ -15,6 +15,9 @@ import urllib.parse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cached', action='store_true', help='Use cached pages')
+parser.add_argument('--push', action='store_true', help='Commit and push new changes')
+parser.add_argument('--forcepush', action='store_true', help='Commit and push new changes')
+parser.add_argument('--serve', action='store_true', help='Commit and push new changes')
 args = parser.parse_args()
 
 # Initialize jinja filesystem
@@ -50,6 +53,7 @@ if args.cached and os.path.exists('.cache.json'):
         _c = json.loads(f.read())
         cache = _c['data']
         glossary = _c['glossary']
+did_anything_change = False
 
 wordcount = 0
 
@@ -370,6 +374,9 @@ def renderQueue():
                 wordcount += page['wordcount']
 
                 continue
+        
+        global did_anything_change
+        did_anything_change = True
 
         page['html'] = ''
         page['wordcount'] = 0
@@ -491,15 +498,45 @@ print(glossary)
 
 
 import subprocess, sys
+import random
 
-cmd = "cd {}; python3 -m http.server".format(public_dir)
- 
-p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
- 
-while True:
-    out = p.stderr.read(1)
-    if out == '' and p.poll() != None:
-        break
-    if out != '':
-        sys.stdout.write(out)
-        sys.stdout.flush()
+messages = [
+    "AUTOMAGIC BUILD",
+    "RETICULATING SPLINES",
+    "TRANSFERRING VITAL INFORMATION",
+    "WRITING WORDS",
+    "WORDS HAVE BEEN WRITTEN",
+    "ONE PLUS ONE EQUALS",
+    "NEW CONTENT REPLACES OLD",
+    "IN WITH THE NEW OUT WITH THE OLD",
+    "THE GIT THAT KEEPS ON GIVING",
+    "MAY THE --FORCE BE WITH YOU",
+    "CECI N'EST PAS UNE COMMIT",
+    "TO UPDATE ONE'S WEBSITE SHOWS TRUE COMMITMENT",
+    "ADDED ANOTHER PAGE ABOUT GIRAFFES",
+    "RECONCEPTUALIZING MEMEX SOFTWARE PROTOCOL",
+    "ADJUSTING BELL CURVES",
+    "ALIGNING COVARIANCE MATRICES",
+    "INSERTING SUBMLIMINAL MESSAGES",
+    "REARRANGING PLANCK UNITS",
+    "DECONSTRUCTING CONCEPTUAL PHENOMENA",
+    "DECIPHERING SQUIGGLY SYMBOLS"
+]
+
+if (args.push and did_anything_change) or (args.forcepush):
+    subprocess.run(['git', 'add', '-A'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    subprocess.run(['git', 'commit', '-m', '"🤖 {} 🤖"'.format(random.choice(messages))], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    subprocess.run(['git', 'push'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+
+if args.serve:
+    cmd = "cd {}; python3 -m http.server".format(public_dir)
+    
+    p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
+    
+    while True:
+        out = p.stderr.read(1)
+        if out == '' and p.poll() != None:
+            break
+        if out != '':
+            sys.stdout.write(out)
+            sys.stdout.flush()
