@@ -413,7 +413,6 @@ def renderQueue():
         # print(page)
 
         template_data = {
-            'id': page_id,
             'content': page['html'],
             'site': {
                 'wordcount': wordcount,
@@ -421,6 +420,7 @@ def renderQueue():
                 'glossary': glossary
             },
             'page': {
+                'id': page_id,
                 'title': page['name'],
                 'path': page['path']
             },
