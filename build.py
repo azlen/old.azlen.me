@@ -87,13 +87,14 @@ def addCollectionToQueue(database, folder):
             itemData = {
                 'block_ids': block_ids,
                 'path': path,
-                'last_edited_time': data['last_edited_time'],
             }
 
             if folder == 'projects':
                 print(dir(props['date']))
                 print(type(props['date'].start))
                 print(props['date'].end)
+
+            print('updated' in props.keys())
 
             for key in props:
                 itemData[key] = props[key]
@@ -365,8 +366,8 @@ def renderQueue():
 
         if args.cached and page_id in cache.keys():
             cached_page = cache[page_id]
-
-            if cached_page['last_edited_time'] <= page['last_edited_time']:
+            
+            if cached_page['updated'] <= page['updated'].timestamp():
                 page['html'] = cached_page['html']
                 page['wordcount'] = cached_page['wordcount']
 
@@ -480,7 +481,7 @@ with open('.newcache.json', 'w') as f:
     cache_data = {}
     for page_id in processingQueue:
         cache_data[page_id] = {
-            'last_edited_time': processingQueue[page_id]['last_edited_time'],
+            'updated': processingQueue[page_id]['updated'].timestamp(),
             'wordcount': processingQueue[page_id]['wordcount'],
             'html': processingQueue[page_id]['html']
         }
