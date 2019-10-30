@@ -286,6 +286,22 @@ def componentToHTML(block, lt, nt):
         
         output += '<li>{}</li>'.format(text)
 
+        children = block.get('content')
+        
+        if children != None:
+            children = list(map(client.get_block, children))
+
+            for i in range(len(children)):
+                sub_lt = ''
+                if i > 1:
+                    sub_lt = children[i-1].type
+                
+                sub_nt = ''
+                if i < len(children) - 1:
+                    sub_nt = children[i+1].type
+
+                output += componentToHTML(children[i], sub_lt, sub_nt)[0]
+
         if nt != 'numbered_list':
             output += '</ol>'
         
@@ -298,12 +314,28 @@ def componentToHTML(block, lt, nt):
         
         output += '<li>{}</li>'.format(text)
 
+        children = block.get('content')
+
+        if children != None:
+            children = list(map(client.get_block, children))
+
+            for i in range(len(children)):
+                sub_lt = ''
+                if i > 1:
+                    sub_lt = children[i-1].type
+                
+                sub_nt = ''
+                if i < len(children) - 1:
+                    sub_nt = children[i+1].type
+
+                output += componentToHTML(children[i], sub_lt, sub_nt)[0]
+
         if nt != 'bulleted_list':
             output += '</ul>'
         
         html = output
     elif block.type == 'column_list':
-        block_ids = block.get('content')
+        #block_ids = block.get('content')
 
         output = '<div class="column-container">'
         for column_id in block.get('content'):
@@ -382,20 +414,22 @@ def renderQueue():
         page['html'] = ''
         page['wordcount'] = 0
 
+        all_blocks = list(map(client.get_block, page['block_ids']))
+
         for i in range(len(page['block_ids'])):
-            block_id = page['block_ids'][i]
-            block = client.get_block(block_id)
+            #block_id = page['block_ids'][i]
+            block = all_blocks[i]
 
             #if page['path'] == '/wiki/riddles':
             #    print(block.get())
             
             last_block_type = ''
             if i > 0:
-                last_block_type = client.get_block(page['block_ids'][i-1]).type
+                last_block_type = all_blocks[i-1].type
             
             next_block_type = ''
             if i < len(page['block_ids'])-1:
-                next_block_type = client.get_block(page['block_ids'][i+1]).type
+                next_block_type = all_blocks[i+1].type
             
             html, block_wordcount = componentToHTML(block, last_block_type, next_block_type)
 
