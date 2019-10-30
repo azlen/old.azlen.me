@@ -82,19 +82,19 @@ def addCollectionToQueue(database, folder):
                     props["permalink"] = props["permalink"][1:]
             
             path = os.path.join("/", folder, props["permalink"])
-            print(path)
+            # print(path)
 
             itemData = {
                 'block_ids': block_ids,
                 'path': path,
             }
 
-            if folder == 'projects':
-                print(dir(props['date']))
-                print(type(props['date'].start))
-                print(props['date'].end)
+            #if folder == 'projects':
+            #    print(dir(props['date']))
+            #    print(type(props['date'].start))
+            #    print(props['date'].end)
 
-            print('updated' in props.keys())
+            #print('updated' in props.keys())
 
             for key in props:
                 itemData[key] = props[key]
