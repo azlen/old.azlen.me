@@ -321,7 +321,7 @@ def componentToHTML(block, lt, nt):
 
             for i in range(len(children)):
                 sub_lt = ''
-                if i > 1:
+                if i > 0:
                     sub_lt = children[i-1].type
                 
                 sub_nt = ''
