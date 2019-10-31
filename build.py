@@ -47,6 +47,8 @@ glossary = {}
 
 processingQueue = {}
 
+#tableofcontents = []
+
 cache = {}
 if args.cached and os.path.exists('.cache.json'):
     with open('.cache.json', 'r') as f:
@@ -293,7 +295,7 @@ def componentToHTML(block, lt, nt):
 
             for i in range(len(children)):
                 sub_lt = ''
-                if i > 1:
+                if i > 0:
                     sub_lt = children[i-1].type
                 
                 sub_nt = ''
@@ -416,7 +418,12 @@ def renderQueue():
 
         all_blocks = list(map(client.get_block, page['block_ids']))
 
-        for i in range(len(page['block_ids'])):
+        header_types = {'header': 1, 'sub_header': 2, 'sub_sub_header': 3}
+        tableofcontents = list(filter(lambda x: x.type in header_types, all_blocks))
+        tableofcontents = list(map(lambda x: [header_types[x.type], x.get('properties.title')], tableofcontents))
+        print(tableofcontents)
+
+        for i in range(len(all_blocks)):
             #block_id = page['block_ids'][i]
             block = all_blocks[i]
 
