@@ -83,7 +83,7 @@ main a {
     text-decoration: none;
     /*border-bottom: 1px dotted;*/
 }
-main a:not(.viewmore) {
+main a:not(.viewmore) > span {
     background-image: radial-gradient(1px 1px at center, #ff3392 0.5px, transparent 1px);
     background-position: 0 1.10em;
     background-repeat: repeat-x;
@@ -93,8 +93,8 @@ main a:not(.viewmore) {
                     1.5px 1.5px #FBF8F5, 1.5px -1.5px #FBF8F5, -1.5px 1.5px #FBF8F5, -1.5px -1.5px #FBF8F5;
 
 }
-h1 a {
-    border-width: 2px;
+h1 a > span, h2 a > span, h3 a > span{
+    /*border-width: 2px;*/
 
     background-image: radial-gradient(1px 1px at center, #ff3392 1px, transparent 1.6px);
     background-position: 0 1.15em;
