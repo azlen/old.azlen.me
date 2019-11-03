@@ -28,6 +28,24 @@ templateEnv.extend(jinja2_highlight_cssclass = 'highlight')
 templateEnv.filters['commafy'] = lambda v: "{:,}".format(v)
 templateEnv.filters['flatten'] = lambda A: [y for x in A for y in x]
 
+id_cache = []
+def idfy(string_to_idfy):
+    #if page_id not in id_cache:
+    #    id_cache[page_id] = []
+
+    a = string_to_idfy.lower()
+    a = re.sub(r'\s+', '_', a)
+    a = re.sub(r'\W+', '', a)
+
+    out = a
+    i = 1
+    while out in id_cache:
+        out = a + str(i)
+        i += 1
+    
+    id_cache.append(out)
+    return out
+
 # Obtain the `token_v2` value by inspecting your browser cookies on a logged-in session on Notion.so
 from secret import token
 client = NotionClient(token_v2=token)
@@ -47,7 +65,7 @@ glossary = {}
 
 processingQueue = {}
 
-#tableofcontents = []
+tableofcontents = []
 
 cache = {}
 if args.cached and os.path.exists('.cache.json'):
@@ -204,11 +222,20 @@ def componentToHTML(block, lt, nt):
         else:
             html = ''
     elif block.type == 'header':
-        html = '<h1>{}</h1>'.format(text)
+        header_id = idfy(block.title)
+        html = '<h1 id="{}">{}</h1>'.format(header_id, text)
+
+        tableofcontents.append([1, block.title, header_id])
     elif block.type == 'sub_header':
-        html = '<h2>{}</h2>'.format(text)
+        header_id = idfy(block.title)
+        html = '<h2 id="{}">{}</h2>'.format(header_id, text)
+
+        tableofcontents.append([2, block.title, header_id])
     elif block.type == 'sub_sub_header':
-        html = '<h3>{}</h3>'.format(text)
+        header_id = idfy(block.title)
+        html = '<h3 id="{}">{}</h3>'.format(header_id, text)
+
+        tableofcontents.append([3, block.title, header_id])
     elif block.type == 'code':
         lang = data["properties"]["language"][0][0].lower()
 
@@ -413,15 +440,20 @@ def renderQueue():
         global did_anything_change
         did_anything_change = True
 
+        global id_cache
+        global tableofcontents
+        id_cache = []
+        tableofcontents = []
+
         page['html'] = ''
         page['wordcount'] = 0
 
         all_blocks = list(map(client.get_block, page['block_ids']))
 
-        header_types = {'header': 1, 'sub_header': 2, 'sub_sub_header': 3}
-        tableofcontents = list(filter(lambda x: x.type in header_types, all_blocks))
-        tableofcontents = list(map(lambda x: [header_types[x.type], x.get('properties.title')], tableofcontents))
-        print(tableofcontents)
+        #header_types = {'header': 1, 'sub_header': 2, 'sub_sub_header': 3}
+        #tableofcontents = list(filter(lambda x: x.type in header_types, all_blocks))
+        #tableofcontents = list(map(lambda x: [header_types[x.type], x.get('properties.title')], tableofcontents))
+        #print(tableofcontents)
 
         for i in range(len(all_blocks)):
             #block_id = page['block_ids'][i]
@@ -442,7 +474,15 @@ def renderQueue():
 
             page['html'] += html
             page['wordcount'] += block_wordcount
-    
+
+        if len(tableofcontents) > 0:
+            lowest = min(list(list(zip(*tableofcontents))[0]))
+            if lowest > 1:
+                for i in range(len(tableofcontents)):
+                    tableofcontents[i][0] -= (lowest-1)
+        
+        page['tableofcontents'] = tableofcontents
+
     for item in wikiCollection:
         print(item['name'])
 
@@ -464,7 +504,8 @@ def renderQueue():
             'page': {
                 'id': page_id,
                 'title': page['name'],
-                'path': page['path']
+                'path': page['path'],
+                'tableofcontents': page['tableofcontents']
             },
             'collection': {
                 'blog': blogCollection,
@@ -524,7 +565,8 @@ with open('.newcache.json', 'w') as f:
         cache_data[page_id] = {
             'updated': processingQueue[page_id]['updated'].timestamp(),
             'wordcount': processingQueue[page_id]['wordcount'],
-            'html': processingQueue[page_id]['html']
+            'html': processingQueue[page_id]['html'],
+            'tableofcontents': processingQueue[page_id]['tableofcontents']
         }
     
     f.write(json.dumps({

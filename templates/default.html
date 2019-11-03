@@ -65,6 +65,15 @@
                 </a>
             </nav>
         {% endif %}
+        <!--
+        {% if page.tableofcontents | length > 0 %}
+            <nav class="toc">
+                {% for item in page.tableofcontents %}
+                    <a class="toc-indent-{{ item[0] }}"href="#{{ item[2] }}">{{ item[1] }}</a>
+                {% endfor %}
+            </nav>
+        {% endif %}
+        -->
     </div>
     <main>
         <h1 class="title">{{ page.title }}</h1>

@@ -254,6 +254,11 @@ blockquote {
     margin-bottom: 10rem;
 }
 
+.toc { margin-top: 0; }
+.toc-indent-1 { padding-left: 0px ; }
+.toc-indent-2 { padding-left: 25px; }
+.toc-indent-3 { padding-left: 50px; }
+
 @media screen and (max-width: 1200px) {
     #tl {
         position: static;
@@ -280,6 +285,8 @@ blockquote {
         width: 20px;
         height: 20px;
     }
+
+    .toc { display: none; }
 }
 
 @media screen and (max-width: 720px) {
@@ -375,10 +382,19 @@ blockquote {
 </svg>
         </a>
         
+        <!--
+        
+            <nav class="toc">
+                
+                    <a class="toc-indent-1"href="#values">Values</a>
+                
+            </nav>
+        
+        -->
     </div>
     <main>
         <h1 class="title">Merveilles Town</h1>
-        <img src="/images/4802324f-262c-4ea1-8713-6ce53146be6b.png"/><p><em>Merveilles </em>is an eclectic community of creatives, programmers, and generalists. The community resides within a Mastodon instance <a href="http://merveilles.town">merveilles.town</a> where individuals share and discuss projects, books, games, sailing, among other topics.</p><p>Many of the inhabitants of Merveilles have made their own websites or personal wikis which are generally listed as part of <a href="https://webring.xxiivv.com/">this webring</a>.</p><h2>Values</h2><p>The Merveilles community centres itself around #solarpunk values:</p><ul><li>A demand for technology and society to re-center around sustainability, longevity, and balance with an emphasis on renewable energy.</li><li>A focus on decentralization, community activism, social justice, and civic empowerment.</li><li>A recognition that economic, social, and ecological injustices are all deeply interconnected.</li></ul>
+        <img src="/images/4802324f-262c-4ea1-8713-6ce53146be6b.png"/><p><em>Merveilles </em>is an eclectic community of creatives, programmers, and generalists. The community resides within a Mastodon instance <a href="http://merveilles.town">merveilles.town</a> where individuals share and discuss projects, books, games, sailing, among other topics.</p><p>Many of the inhabitants of Merveilles have made their own websites or personal wikis which are generally listed as part of <a href="https://webring.xxiivv.com/">this webring</a>.</p><h2 id="values">Values</h2><p>The Merveilles community centres itself around #solarpunk values:</p><ul><li>A demand for technology and society to re-center around sustainability, longevity, and balance with an emphasis on renewable energy.</li><li>A focus on decentralization, community activism, social justice, and civic empowerment.</li><li>A recognition that economic, social, and ecological injustices are all deeply interconnected.</li></ul>
     </main>
 </body>
 </html>
