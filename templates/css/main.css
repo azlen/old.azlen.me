@@ -288,3 +288,9 @@ blockquote {
         font-size: inherit;
     }
 }
+
+::selection {
+    background-color: #ff3392;
+    text-shadow: none;
+    color: #FFFFFF;
+}
