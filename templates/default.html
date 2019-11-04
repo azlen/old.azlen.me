@@ -49,8 +49,10 @@
             <div class="stat">{{ site.wordcount | commafy }} words</div>
             <div class="stat">{{ site.pagecount | commafy }} pages</div>
             <nav>
-                {% for p in collection.pages %}
-                    <a href="{{ p.path }}">{{ p.name }}</a>
+                {% for p in collection.pages | rejectattr('navigation', 'none') | sort(attribute="navigation") %}
+                    {% if p.navigation > 0 %}
+                        <a href="{{ p.path }}">{{ p.name }}</a>
+                    {% endif %}
                 {% endfor %}
                 <!--<a href="/about">About</a>
                 <a href="/wiki">Wiki</a>

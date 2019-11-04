@@ -185,6 +185,7 @@ def parseText(textitems):
                 
                 else:
                     print("ERROR: UNKNOWN TEXT TYPE '%s'" % prop_type)
+                    print(text)
                     print(prop)
             
             #wordcount = wordcount + len(text.split())
