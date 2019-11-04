@@ -61,9 +61,9 @@ main a:not(.viewmore) > span {
 h1 a > span, h2 a > span, h3 a > span{
     /*border-width: 2px;*/
 
-    background-image: radial-gradient(1px 1px at center, #ff3392 1px, transparent 1.6px);
-    background-position: 0 1.15em;
-    background-size: 4px 3px;
+    background-image: radial-gradient(1px 1px at center, #ff3392 1px, transparent 1.6px) !important;
+    background-position: 0 1.15em !important;
+    background-size: 4px 3px !important;
 }
 
 a.viewmore {
