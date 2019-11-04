@@ -514,7 +514,7 @@ def renderQueue():
             print(datetime.now().timestamp())
             print(datetime.fromordinal(page['posted'].start.toordinal()).timestamp())
             print(1000*60*60*24*7)
-            if datetime.now().timestamp() - datetime.fromordinal(page['posted'].start.toordinal()).timestamp() < (1000*60*60*24*7):
+            if datetime.now().timestamp() - datetime.fromordinal(page['posted'].start.toordinal()).timestamp() < (60*60*24*7):
                 page['flags']['new'] = True
         
         """if 'updated' in page and page['updated'] != None:
