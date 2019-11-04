@@ -7,6 +7,8 @@ import jinja2
 from html5print import HTMLBeautifier
 import jinja2_highlight
 
+from datetime import datetime
+
 import json
 import argparse
 
@@ -492,6 +494,21 @@ def renderQueue():
                     tableofcontents[i][0] -= (lowest-1)
         
         page['tableofcontents'] = tableofcontents
+
+        page['flags'] = {
+            'new': False,
+            'updated': False
+        }
+
+        if 'posted' in page and page['posted'] != None:
+            print(page['posted'].start)
+            if datetime.now().timestamp() - datetime.fromordinal(page['posted'].start.toordinal()).timestamp() < (1000*60*60*24*7):
+                page['flags']['new'] = True
+        
+        """if 'updated' in page and page['updated'] != None:
+            if datetime.now().timestamp() - page['updated'].start.timestamp() < (1000*60*60*24*7):
+                page['flags']['updated'] = True"""
+
 
     for item in wikiCollection:
         print(item['name'])

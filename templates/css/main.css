@@ -126,7 +126,7 @@ main {
     padding: 0px 20px;
     max-width: 36em;
     margin: auto;
-    margin-bottom: 10rem;
+    padding-bottom: 10rem;
 }
 
 #logo svg {
@@ -227,14 +227,31 @@ table.nowrap td, table.nowrap th {
 }
 
 blockquote {
+    margin-left: 20px;
+    margin-right: 40px;
+
     padding-left: 25px;
-    border-left: 5px solid #BBB;
+    border-left: 5px solid #DAD7D7;
     color: #999;
 }
 
 .divider {
     margin-bottom: 10rem;
 }
+
+.tag {
+    background-color: #999;
+    font-family: "Space Mono", courier;
+    font-size: 9px;
+    padding: 0px 7px 1px 7px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 5px;
+}
+.tag.green { background-color: #76ad00; }
+.tag.blue { background-color: ##0095eb; }
 
 .toc { margin-top: 0; }
 .toc-indent-1 { padding-left: 0px ; }
@@ -291,12 +308,14 @@ blockquote {
 
 ::-moz-selection {
     background-color: #ff3392;
+    background-color: #000000;
     text-shadow: none;
     color: #FFFFFF;
 }
 
 ::selection {
     background-color: #ff3392;
+    background-color: #000000;
     text-shadow: none;
     color: #FFFFFF;
 }
