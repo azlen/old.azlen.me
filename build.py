@@ -185,6 +185,15 @@ def parseText(textitems):
                     before += '<code>'
                     after += '</code>'
                 
+                elif prop_type == 'd':
+                    before += '<span class="tag blue">'
+                    text = prop[1]['start_date']
+
+                    if 'end_date' in prop[1]:
+                        text += ' – ' + prop[1]['end_date']
+                    
+                    after += '</span>'
+
                 else:
                     print("ERROR: UNKNOWN TEXT TYPE '%s'" % prop_type)
                     print(text)
@@ -502,6 +511,9 @@ def renderQueue():
 
         if 'posted' in page and page['posted'] != None:
             print(page['posted'].start)
+            print(datetime.now().timestamp())
+            print(datetime.fromordinal(page['posted'].start.toordinal()).timestamp())
+            print(1000*60*60*24*7)
             if datetime.now().timestamp() - datetime.fromordinal(page['posted'].start.toordinal()).timestamp() < (1000*60*60*24*7):
                 page['flags']['new'] = True
         
