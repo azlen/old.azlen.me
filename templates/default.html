@@ -49,8 +49,12 @@
             <div class="stat">{{ site.wordcount | commafy }} words</div>
             <div class="stat">{{ site.pagecount | commafy }} pages</div>
             <nav>
-                <a href="/about">About</a>
-                <a href="/learning">Learning</a>
+                {% for p in collection.pages %}
+                    <a href="{{ p.path }}">{{ p.name }}</a>
+                {% endfor %}
+                <!--<a href="/about">About</a>
+                <a href="/wiki">Wiki</a>
+                <a href="/learning">Learning</a>-->
                 <!--<a href="/reading">Reading</a>-->
                 <!--<a href="/contact">Contact</a>-->
             </nav>

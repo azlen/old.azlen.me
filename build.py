@@ -66,6 +66,7 @@ glossary = {}
 processingQueue = {}
 
 tableofcontents = []
+navigation = []
 
 cache = {}
 if args.cached and os.path.exists('.cache.json'):
@@ -108,6 +109,10 @@ def addCollectionToQueue(database, folder):
                 'block_ids': block_ids,
                 'path': path,
             }
+
+            #if database == pages:
+            #    if props['navigation'] == True:
+            #        navigation.append(props['name'], itemData)
 
             #if folder == 'projects':
             #    print(dir(props['date']))
@@ -177,6 +182,10 @@ def parseText(textitems):
                 elif prop_type == 'c':
                     before += '<code>'
                     after += '</code>'
+                
+                else:
+                    print("ERROR: UNKNOWN TEXT TYPE '%s'" % prop_type)
+                    print(prop)
             
             #wordcount = wordcount + len(text.split())
 
