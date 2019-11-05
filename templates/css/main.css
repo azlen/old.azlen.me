@@ -250,6 +250,7 @@ blockquote {
     display: inline;
     margin-left: 5px;
 }
+.tag.inline-date { margin-left: 0px; font-size: 10px; margin-right: 4px; }
 .tag.green { background-color: #76ad00; }
 .tag.blue { background-color: #0095eb; }
 

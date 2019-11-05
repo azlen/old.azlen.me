@@ -186,7 +186,7 @@ def parseText(textitems):
                     after += '</code>'
                 
                 elif prop_type == 'd':
-                    before += '<span class="tag blue">'
+                    before += '<span class="tag blue inline-date">'
                     text = prop[1]['start_date']
 
                     if 'end_date' in prop[1]:
