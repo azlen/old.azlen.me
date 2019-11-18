@@ -180,7 +180,10 @@ def parseText(textitems):
                 elif prop_type == 'a': # external link
                     before += '<a href="{}" target="_blank"><span>'.format(prop[1])
                     if re.search(r'^\#.+', prop[1]) is None:
-                        after  += '</span><svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="fill: #ff3392;margin-left: 1px;margin-bottom: 4px;width: 0.5em;height: 0.5em;"><path d="M83.865,97.5H2.5V16.134h45.301v13.635H15.987v54.244h54.244V52.346h13.634V97.5z M97.5,38.564H83.865V25.81L47.947,61.582  l-9.528-9.53l35.917-35.918H61.582V2.5H97.5V38.564z"></path></svg></a>'
+                        after  += '</span><svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="fill: #ff3392;margin-left: 1px;margin-bottom: 4px;width: 0.5em;height: 0.5em;"><path d="M83.865,97.5H2.5V16.134h45.301v13.635H15.987v54.244h54.244V52.346h13.634V97.5z M97.5,38.564H83.865V25.81L47.947,61.582  l-9.528-9.53l35.917-35.918H61.582V2.5H97.5V38.564z"></path></svg>'
+                    else:
+                        after += '</span>'
+                    after += '</a>'
 
                 elif prop_type == 'c':
                     before += '<code>'
