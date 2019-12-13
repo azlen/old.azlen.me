@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Projects</title>
+    <title>Geolograph</title>
     <meta name="description" content="">
 
     <!-- META TAGS -->
@@ -426,7 +426,7 @@ blockquote {
     </style>
 </head>
 <body>
-    <!--NOTION_ID:23343ab3-744a-4bb4-8a91-c8eaeabbcfc7-->
+    <!--NOTION_ID:792317ac-099c-409a-b003-9807e4c83084-->
     <div id="tl">
         <a href="/" id="logo">
             <svg width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -438,86 +438,25 @@ blockquote {
         
         <!--
         
+            <nav class="toc">
+                
+                    <a class="toc-indent-1"href="#difficulties">Difficulties</a>
+                
+                    <a class="toc-indent-2"href="#turning_elevation_data_into_sound">Turning elevation data into sound</a>
+                
+                    <a class="toc-indent-2"href="#speed">Speed</a>
+                
+                    <a class="toc-indent-2"href="#interface_design">Interface Design</a>
+                
+                    <a class="toc-indent-1"href="#future">Future</a>
+                
+            </nav>
+        
         -->
     </div>
     <main>
-        <h1 class="title">Projects</h1>
-        <img src="/images/b59a3bce-5ec9-4bf0-91c9-b52a7ebc8319.png"/>
-	<p>
-		<a href="/projects/geolograph"><span>Geolograph</span></a> <span style="opacity:0.3"> – November 2019</span><br/>
-		<i>Synthesizer which uses topographic data to generate sound waves.</i>
-	</p>
-
-	<p>
-		<a href="/projects/micro_learning_futures"><span>Micro Learning Futures</span></a> <span style="opacity:0.3"> – November 2019</span><br/>
-		<i></i>
-	</p>
-
-	<p>
-		<a href="/projects/collaborative_learning_platform"><span>Collaborative Learning Platform</span></a> <span style="opacity:0.3"> – February 2019</span><br/>
-		<i>Online learning platform where students build their own curriculum.</i>
-	</p>
-
-	<p>
-		<a href="/projects/ink_chinese"><span>Ink Chinese</span></a> <span style="opacity:0.3"> – December 2018</span><br/>
-		<i>Cross-platform app for learning to read and write Chinese Characters.</i>
-	</p>
-
-	<p>
-		<a href="/projects/face_detection_instrument"><span>Face Detection Instrument</span></a> <span style="opacity:0.3"> – October 2018</span><br/>
-		<i>Plays sound based off facial landmark detection using Python and SuperCollider.</i>
-	</p>
-
-	<p>
-		<a href="/projects/generative_business_cards"><span>Generative Business Cards</span></a> <span style="opacity:0.3"> – September 2018</span><br/>
-		<i>Experiment in teaching computer program to design business cards.</i>
-	</p>
-
-	<p>
-		<a href="/projects/reddit_logo_generator"><span>Reddit Logo Generator</span></a> <span style="opacity:0.3"> – August 2018</span><br/>
-		<i>Logo Generator for made for /r/proceduralgeneration subreddit.</i>
-	</p>
-
-	<p>
-		<a href="/projects/bananagram_variations"><span>Bananagram Variations</span></a> <span style="opacity:0.3"> – May 2018</span><br/>
-		<i>Constraints and spinoffs of the popular wordgame, Bananagrams.</i>
-	</p>
-
-	<p>
-		<a href="/projects/neuropolis"><span>Neuropolis</span></a> <span style="opacity:0.3"> – March 2018</span><br/>
-		<i>Future video series focused on the intersection between psychology and city design.</i>
-	</p>
-
-	<p>
-		<a href="/projects/pattern_generator"><span>Pattern Generator</span></a> <span style="opacity:0.3"> – February 2018</span><br/>
-		<i>Pattern generator through iterative combination.</i>
-	</p>
-
-	<p>
-		<a href="/projects/embol"><span>Embol</span></a> <span style="opacity:0.3"> – December 2017</span><br/>
-		<i>Video game about social anxiety made for Ludum Dare 40.</i>
-	</p>
-
-	<p>
-		<a href="/projects/cthulhu_tarot"><span>Cthulhu Tarot</span></a> <span style="opacity:0.3"> – May 2017</span><br/>
-		<i>Tarot deck inspired by the works of H.P. Lovecraft.</i>
-	</p>
-
-	<p>
-		<a href="/projects/nymero"><span>Nymero</span></a> <span style="opacity:0.3"> – October 2016</span><br/>
-		<i>Tool for remembering long numbers using the Mnemonic Major System.</i>
-	</p>
-
-	<p>
-		<a href="/projects/perceptual_shift_ambigrams"><span>Perceptual Shift Ambigrams</span></a> <span style="opacity:0.3"> – March 2016</span><br/>
-		<i>Combine two words into a single word that can be read as either.</i>
-	</p>
-
-	<p>
-		<a href="/projects/sprite_generator"><span>Sprite Generator</span></a> <span style="opacity:0.3"> – December 2015</span><br/>
-		<i>Video game sprite generator based on Dave Bollinger's Pixel Spaceships.</i>
-	</p>
-
+        <h1 class="title">Geolograph</h1>
+        <img src="/images/f9100501-34bb-428e-a49c-821e6212128f.png"/><p>The geological phonograph is a musical instrument which uses topological data of the Earth to generate a sound wave. Sounds are synthesized by placing a circle or other closed shape at any GPS location, and sampling elevations of hundred or thousands of points along the path. The ups and downs of mountains and valleys become ups and downs in the waveform which creates a unique timbre compared to other synthesis techniques.</p><p>Read more about the process in my blogpost about the instrument → <a href="/blog/geological_phonograph"><span>Geological Phonograph</span></a> </p><h2 id="difficulties">Difficulties</h2><p><em>Short reflection on some of the difficulties behind building such an instrument.</em></p><h3 id="turning_elevation_data_into_sound">Turning elevation data into sound</h3><p>This was not exactly straight forward. The elevation data ranges from around zero to over 3000, and sound samples have to be constrained between -1 and 1. As well, it’s best for the sound samples to oscillate up and down through 0, so if I simply map 0 => 3000 to -1 => 1, much of the sound will be very quiet and not be making good use of the speakers. I have solved this by continually calculating the average elevation in a certain area and mapping the elevations on either side within the range of -1 => 1. This might not be the best solution as it tends to make most places sound similar regardless of their elevation; there is definitely room for more exploration in how the elevation data is converted into sound waves.</p><h3 id="speed">Speed</h3><p>Originally writing the code in python and using srtm.py to query elevation data at different places in the world, I soon began to run into issues in the amount of time that it would take to generate sound. Even after experimenting with multithreading and other efficiency optimizations, the fastest I could get the program to run would take ~1.2 seconds to generate one second of audio. This would result in constantly clicking as it stops momentarily to generate the next buffer.</p><p>To solve this, I eventually decided to rewrite the code in Rust. I have never used Rust before, but I had recently learned about a new creative coding framework called Nannou which I was interested in trying out. This had the added benefit of solving two problems at once as Python is not exactly stellar for creating visuals for an interface and I wanted to stay away from having to use pygame to create a display.</p><p>Rust is a much lower-level language than I am used to and the documentation for Nannou is rather lacking (in fact, the documentation for the latest version was non-existent as it failed to build) but I managed to learn enough from the example projects to figure out most things fairly easily. Maybe one of the biggest “programming culture shocks” from switching to rust is when I tried to use a modulus operator on two floating point numbers, which seemingly had no effect.</p><h3 id="interface_design">Interface Design</h3><p>Designing a good interface can be a long project in itself, especially for the types of projects that I tend to work on. As such, I didn’t end up spending too much time on this aspect of the project. The interface was inspired by Teenage Engineering’s OP-1. And the time that I did spend designing the interface was mostly with how the numbers and icons would correspond to dials and circles on screen. I spent very little time considering my choices for what to actually display on the screen.</p><p>Having chosen a rather literal representation of topological contours with circles layered overtop, spinning around each other as one circle modulates the other. This representation had initially made sense to me as it represented how I am collecting the data in the first place—moving circles around each other and sampling points around a circle to create sound waves. However, now I realize that it doesn’t <em>feel</em> like the sound. Many of the OP-1 screens for example don’t have very literal interface designs, a cow, a spaceship, etc. But these screens make sense, because instead of mapping to how the sound is generated, they are mapping the interface to how we feel and experience the sound.</p><p>This completely flips around my conception of interface design—particularly in terms of synthesizers and musical instruments; although I imagine the idea will become useful for other types of interface design as well. What does the sound feel like, and how can the interface reflect the feel of the sound? And how might I still keep the topological aspect of the interface so that you can choose any GPS location in a way that makes sense to the user? I have some ideas for moving forward, but I will definitely have to think about these ideas to continue designing the interface for this instrument.</p><h2 id="future">Future</h2><p>This is all just scratching the surface of the possibilities of this instrument. I mentioned already that I want to use moon or mars elevation data to explore the sound topologies of the solar system, but there are so many more possibilities to explore.</p><ul><li>Add a joystick to move the central GPS coordinate</li><li>Experiment with different ways to convert elevation data into sound</li><li>Bring in elevation data of the moon, or mars, how would different planets sound different than earth?</li><li>What other different datasets could be used? Wind? Geology? Roads or building footprints?</li><li>Experimenting with making the interface feel more like the sound that it creates</li><li>What if this synthesis system was incorporated into a physical instrument? like an electric guitar that sounds different depending on where in the world you play it; so that you physically have to move your own location to change the sound that it makes.</li><li>Build or laser-cut a nice enclosure for the synthesizer</li><li>Would be interesting to connect to a piano keyboard, or experiment with designing some physical interface that lets you more easily “play” the instrument.</li><li>Make a musical composition using only sounds from the Geolograph</li></ul>
     </main>
 </body>
 </html>
