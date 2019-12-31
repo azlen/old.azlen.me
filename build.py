@@ -20,7 +20,7 @@ sitedata = {
 }
 
 def addGlossaryItem(data):
-    match = re.match(r'(.+)\((.+)\):(.+)', data['rawtext'])
+    match = re.match(r'(.+)\((.+)\):(.+)', data['block']['rawtext'])
     if match != None:
         item, category, glossary_text = match.groups()
         if category not in sitedata['glossary']:
@@ -29,10 +29,16 @@ def addGlossaryItem(data):
         sitedata['glossary'][category.strip()][item.strip()] = glossary_text.strip()
 
 def countwords(data):
-    if data['type'] not in ['code', 'callout'] and 'rawtext' in data:
-        sitedata['wordcount'] += len(data['rawtext'].split())
+    block = data['block']
+    page = data['page']
 
-def countpages(data):
+    if block['type'] not in ['code', 'callout'] and 'rawtext' in block:
+        count = len(block['rawtext'].split())
+        sitedata['wordcount'] += count
+
+        page['wordcount'] = page['wordcount'] + count if 'wordcount' in page else count
+
+def countpages(page):
     sitedata['pagecount'] += 1
 
 website.listen('blocks/callout/🔮', addGlossaryItem)
@@ -53,6 +59,10 @@ for page in website.cache.values():
 
 from datetime import datetime
 website.env.globals['fromiso'] = datetime.fromisoformat
+
+#def wordcount_to_freq(wordcount):
+#   return 
+website.env.filters['wordcount_to_freq'] = lambda x: int(min(100.0 + x / 13000.0 * 19800.0, 19900.0) / 100.0) * 100
 
 website.render({
     'site': sitedata

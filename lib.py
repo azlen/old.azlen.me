@@ -228,12 +228,16 @@ class NotionWebsiteBuilder:
         print(page['name'])
 
         for block in blocks:
-            self._cb('blocks', block)
-            self._cb('blocks/%s' % block['type'], block)
+            data = {
+                'page': page,
+                'block': block
+            }
+            self._cb('blocks', data)
+            self._cb('blocks/%s' % block['type'], data)
             if block['type'] == 'callout':
-                self._cb('blocks/callout/%s' % block['icon'], block)
+                self._cb('blocks/callout/%s' % block['icon'], data)
             elif block['type'] == 'code':
-                self._cb('blocks/code/%s' % block['code_lang'], block)
+                self._cb('blocks/code/%s' % block['code_lang'], data)
 
     # convert relevant data to JSON to be able to cache website before HTML is generated
     def pageToJSON(self, page_id, cache_path=None):
