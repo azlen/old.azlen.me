@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Sprite Generator</title>
+    <title></title>
     <meta name="description" content="">
 
     <!-- META TAGS -->
@@ -29,6 +29,8 @@
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">
+
     
     <!-- STYLE -->
     <style>
@@ -53,6 +55,7 @@ body {
     background-color: #FBF8F5;
     color: #000000;
     font-family: 'EB Garamond', Garamond, serif;
+    font-family: 'Ibarra Real Nova', Garamond, serif;
     font-size: 20px;
     padding-top: 4rem;
 }
@@ -227,6 +230,7 @@ figure img {
 }
 figcaption {
     font-family: 'EB Garamond', Garamond, serif;
+    font-family: 'Ibarra Real Nova', Garamond, serif;
     font-size: 16px;
     color: #999;
     font-style: italic;
@@ -438,17 +442,30 @@ blockquote {
         
         <!--
         
-            <nav class="toc">
-                
-                    <a class="toc-indent-1"href="#features">Features</a>
-                
-            </nav>
-        
         -->
     </div>
     <main>
         <h1 class="title">Sprite Generator</h1>
-        <p>Video game sprite generator based on <em>Dave Bollinger’s</em> <em><a href="http://davebollinger.org/works/pixelspaceships/" target="_blank"><span>Pixel Spaceships</em></span><svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="fill: #ff3392;margin-left: 1px;margin-bottom: 4px;width: 0.5em;height: 0.5em;"><path d="M83.865,97.5H2.5V16.134h45.301v13.635H15.987v54.244h54.244V52.346h13.634V97.5z M97.5,38.564H83.865V25.81L47.947,61.582  l-9.528-9.53l35.917-35.918H61.582V2.5H97.5V38.564z"></path></svg></span></a>.</p><img src="/images/2d511f62-64ea-44f3-8dcd-bcd0188bb9f7.png"/><h2 id="features">Features</h2><ul><li>Draw template for sprite generation</li><li>HSL color range picker</li><li><strong>Frame Animation</strong></li><li>X/Y mirroring</li></ul><img src="/images/18777c07-afae-4ab8-b8bb-4b0051ae4d08.gif"/><p>Fun program I created for sprite generation — mostly in the span of a few days. It’s kind-of almost usable, just needs a bit of work to become user-friendly. The most exciting feature is the animation. For this I created a special move tool which lets you move a specific pixel while keeping its state.</p><p>I stopped working on this project for multiple reasons, one of which is that I could not find an adequate method to select <em>ranges of colours</em>. The inital colour system (shown in image above) involved three range sliders for hue, saturation, and lightness (HSL). There were some obvious flaws with this system, for example one cannot create a palette of purple and yellow without including blue, teal, and green. I tried to design alternate systems to specify a palette of colours, the most successful of which is shown below. There are nodes of colour which can be connected together to specify the range of colours <em>between</em> the two nodes.</p><img src="/images/9df008a5-2cae-49c8-9268-476671ef1f74.png"/>
+        <p>Video game sprite generator based on <em>Dave Bollinger’s</em> 
+            <a href="http://davebollinger.org/works/pixelspaceships/" target="_blank">
+                <span><em>Pixel Spaceships</em></span>
+                <svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="fill: #ff3392;margin-left: 1px;margin-bottom: 4px;width: 0.5em;height: 0.5em;">
+                    <path d="M83.865,97.5H2.5V16.134h45.301v13.635H15.987v54.244h54.244V52.346h13.634V97.5z M97.5,38.564H83.865V25.81L47.947,61.582  l-9.528-9.53l35.917-35.918H61.582V2.5H97.5V38.564z"></path>
+                </svg>
+            </a>
+        .</p>
+            
+                <img src="/images/2d511f62-64ea-44f3-8dcd-bcd0188bb9f7.png"/>
+            
+        <h2 id="">Features</h2><ul><li>Draw template for sprite generation</li><li>HSL color range picker</li><li><strong>Frame Animation</strong></li><li>X/Y mirroring</li></ul>
+            
+                <img src="/images/18777c07-afae-4ab8-b8bb-4b0051ae4d08.gif"/>
+            
+        <p>Fun program I created for sprite generation — mostly in the span of a few days. It’s kind-of almost usable, just needs a bit of work to become user-friendly. The most exciting feature is the animation. For this I created a special move tool which lets you move a specific pixel while keeping its state.</p><p>I stopped working on this project for multiple reasons, one of which is that I could not find an adequate method to select <em>ranges of colours</em>. The inital colour system (shown in image above) involved three range sliders for hue, saturation, and lightness (HSL). There were some obvious flaws with this system, for example one cannot create a palette of purple and yellow without including blue, teal, and green. I tried to design alternate systems to specify a palette of colours, the most successful of which is shown below. There are nodes of colour which can be connected together to specify the range of colours <em>between</em> the two nodes.</p>
+            
+                <img src="/images/9df008a5-2cae-49c8-9268-476671ef1f74.png"/>
+            
+        
     </main>
 </body>
 </html>
