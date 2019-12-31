@@ -2,3 +2,5 @@
 **/.DS_STORE
 secret.py
 .cache.json
+cache/
+temp/

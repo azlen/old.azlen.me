@@ -1,0 +1,18 @@
+{
+    "blocks": {
+        "text": "<p>{{ text }}</p>",
+        "header": "<h1 id=\"{{ header_id }}\">{{ text }}</h1>",
+        "sub_header": "<h2 id=\"{{ header_id }}\">{{ text }}</h2>",
+        "sub_sub_header": "<h3 id=\"{{ header_id }}\">{{ text }}</h3>",
+        "code": {
+            "markup": "{{ rawtext }}",
+            "other": "<pre><code>{% highlight {{ code_lang }} %} {{ text }} {% endhighlight %}</code></pre>"
+        },
+        "callout": { 
+            "🔮": 
+        }
+    },
+    "text": {
+
+    }
+}

@@ -18,6 +18,7 @@ body {
     background-color: #FBF8F5;
     color: #000000;
     font-family: 'EB Garamond', Garamond, serif;
+    font-family: 'Ibarra Real Nova', Garamond, serif;
     font-size: 20px;
     padding-top: 4rem;
 }
@@ -192,6 +193,7 @@ figure img {
 }
 figcaption {
     font-family: 'EB Garamond', Garamond, serif;
+    font-family: 'Ibarra Real Nova', Garamond, serif;
     font-size: 16px;
     color: #999;
     font-style: italic;

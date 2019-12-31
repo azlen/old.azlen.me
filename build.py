@@ -71,7 +71,8 @@ tableofcontents = []
 navigation = []
 
 cache = {}
-if args.cached and os.path.exists('.cache.json'):
+#if args.cached and os.path.exists('.cache.json'):
+if os.path.exists('.cache.json'):
     with open('.cache.json', 'r') as f:
         _c = json.loads(f.read())
         cache = _c['data']
@@ -314,6 +315,7 @@ def componentToHTML(block, lt, nt):
             shutil.copy2(public_path, temp_path)
         else:
             r = client.session.get(block.source)
+            print(r)
             with open(temp_path, 'wb') as image:
                 image.write(r.content)
 
@@ -450,6 +452,16 @@ def renderQueue():
     for page_id in processingQueue:
         page = processingQueue[page_id]
 
+        if page_id in cache.keys():
+            cached_page = cache[page_id]
+            if cached_page['updated'] < page['updated'].timestamp():
+                print(page['name'])
+                print("%d : %d" % (cached_page['updated'], page['updated'].timestamp()))
+            else:
+                print("%s GOOD" % page['name'])
+
+        continue
+        
         if args.cached and page_id in cache.keys():
             cached_page = cache[page_id]
             
@@ -525,6 +537,7 @@ def renderQueue():
             if datetime.now().timestamp() - page['updated'].start.timestamp() < (1000*60*60*24*7):
                 page['flags']['updated'] = True"""
 
+    return
 
     for item in wikiCollection:
         print(item['name'])
@@ -558,6 +571,8 @@ def renderQueue():
             }
         }
 
+        
+
         template = templateEnv.get_template('{}.html'.format(page['template']))
         outputText = template.render(**template_data)
 
@@ -572,6 +587,7 @@ def renderQueue():
         with open(os.path.join(folder, 'index.html'), 'w') as f:
             f.write(outputText)
     
+    # generate glossary in .ndtl format for Merveille's collaborative wiki
     with open(os.path.join(temp_dir, 'glossary.ndtl'), 'w') as f:
         for category in glossary:
             f.write(category.upper() + '\n')
@@ -579,6 +595,7 @@ def renderQueue():
             for term, definition in glossary[category].items():
                 f.write('  {} : {}\n'.format(term, definition))
     
+    # generate twtxt for peer-to-peer discussion feed
     with open(os.path.join(temp_dir, 'twtxt.txt'), 'w') as f:
         entries = twtxt.collection.get_rows()
         entries = list(map(lambda x: x.get_all_properties(), entries))
@@ -602,6 +619,7 @@ projectCollection = addCollectionToQueue(projects, 'projects')
 
 renderQueue()
 
+"""
 with open('.newcache.json', 'w') as f:
     cache_data = {}
     for page_id in processingQueue:
@@ -621,6 +639,7 @@ if os.path.exists('.cache.json'):
     os.remove('.cache.json')
 
 os.rename('.newcache.json', '.cache.json')
+"""
 
 print(glossary)
 
