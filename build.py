@@ -36,10 +36,15 @@ def countwords(data):
         count = len(block['rawtext'].split())
         sitedata['wordcount'] += count
 
-        page['wordcount'] = page['wordcount'] + count if 'wordcount' in page else count
+        #page['wordcount'] = page['wordcount'] + count if 'wordcount' in page else count
+        page['wordcount'] += count
 
 def countpages(page):
+    page['wordcount'] = 0
     sitedata['pagecount'] += 1
+
+    if 'edited' in page:
+        print(page['edited'])
 
 website.listen('blocks/callout/🔮', addGlossaryItem)
 website.listen('blocks', countwords)
@@ -58,11 +63,12 @@ for page in website.cache.values():
     }
 
 from datetime import datetime
+website.env.globals['datetime'] = datetime
 website.env.globals['fromiso'] = datetime.fromisoformat
 
 #def wordcount_to_freq(wordcount):
 #   return 
-website.env.filters['wordcount_to_freq'] = lambda x: int(min(100.0 + x / 13000.0 * 19800.0, 19900.0) / 100.0) * 100
+website.env.filters['wordcount_to_freq'] = lambda x: int(min(200.0 + max(x, 0) / 5000.0 * 19700.0, 19900.0) / 100.0) * 100
 
 website.render({
     'site': sitedata
