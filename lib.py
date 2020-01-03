@@ -1,5 +1,9 @@
 from notion.client import NotionClient
+
 from notion.collection import NotionDate
+from notion.collection import CollectionRowBlock
+from notion.block import PageBlock
+
 import regex as re
 import shutil
 from datetime import datetime
@@ -54,7 +58,8 @@ templates = {
                 </div>
                 {% endfor %}
             </div>
-        """
+        """,
+        'page': '' # todoooo
 
     },
     "text": {
@@ -186,11 +191,18 @@ class NotionWebsiteBuilder:
             for fn in self.callbacks[attribute]:
                 fn(data)
 
+    def _urlize(self, string_to_urlize):
+        out = string_to_urlize.lower()
+        out = re.sub(r'[^\w -]', '', out) # remove symbols
+        out = re.sub(r'\s+', '_', out.strip()) # convert spaces to underscore
+        return out
+
     # generate unique string-id: "test", "test1", "test2", "test3", etc. without repeats
     def _idfy(self, string_to_idfy):
-        a = string_to_idfy.lower()
-        a = re.sub(r'\s+', '_', a)
-        a = re.sub(r'\W+', '', a)
+        a = self._urlize(string_to_idfy)
+        #a = string_to_idfy.lower()
+        #a = re.sub(r'\s+', '_', a)
+        #a = re.sub(r'\W+', '', a)
 
         out = a
         i = 1
@@ -266,19 +278,21 @@ class NotionWebsiteBuilder:
                     'end': isoformat(value.end),
                     #'timezone': value.timezone,
                 }
+            elif type(value) == list:
+                value = list(map(lambda url: self.downloadImage(self._idfy('%s %s' % (_metadata['name'], key)) + '.png', url), value))
             
             page[key] = value
-
-        page['children'] = self.blocksToJSONArray(_pageblock.children)
 
         if cache_path != None:
             page['path'] = cache_path
             self.cache[page['id']] = page
 
+        page['children'] = self.blocksToJSONArray(_pageblock.children, page_ref=page)
+
         return page
 
     # convert array of Notion blocks to JSON data, each containing relevant information for their respective HTML templates
-    def blocksToJSONArray(self, blocks):
+    def blocksToJSONArray(self, blocks, page_ref=None):
         output = []
 
         prev_data = {'type':''}
@@ -322,6 +336,8 @@ class NotionWebsiteBuilder:
                 data['image_name'] = file_id + extension
                 data['image_path'] = os.path.join('/images', data['image_name'])
 
+                self.downloadImage(data['image_name'], data['image_source'])
+
                 """print(data['image_source'])
                 os.makedirs(os.path.join(self.cache_dir, 'images'), exist_ok=True)
                 os.makedirs(os.path.join(self.build_dir, 'images'), exist_ok=True)
@@ -352,7 +368,7 @@ class NotionWebsiteBuilder:
                 if children != None:
                     children = list(map(self.client.get_block, children))
 
-                    item['children'] += self.blocksToJSONArray(children)
+                    item['children'] += self.blocksToJSONArray(children, page_ref=page_ref)
 
                 if block.type == prev_data['type']:
                     append_to_array = False
@@ -374,12 +390,28 @@ class NotionWebsiteBuilder:
 
                     block_ids = column.get('content')
                     if block_ids != None:
-                        column_data['children'] = self.blocksToJSONArray(list(map(self.client.get_block, block_ids)))
+                        column_data['children'] = self.blocksToJSONArray(list(map(self.client.get_block, block_ids)), page_ref=page_ref)
                     
                     data['columns'].append(column_data)
+            
+            if block.type == 'page':
+                data['id'] = block.id
+                
+                if type(block) == CollectionRowBlock:
+                    data['link_type'] = 'reference'
+                    #data['id'] = block.id
+                elif type(block) == PageBlock:
+                    # not gonna handle this right now... they have no properties.f,sd.f
+                    continue
+                #data['title'] = page_data['name']
+                #data['description'] = page_data['description']
+
+                #if 'thumbnail' in page_data:
+                #    data['thumbnail_image'] = page_data['thumbnail'][0]
 
             if block.type not in templates['blocks']:
                 print("ERROR: UNIMPLEMENTED BLOCK TYPE %s" % block.type)
+                print(block.get())
 
 
             if append_to_array:
@@ -390,7 +422,7 @@ class NotionWebsiteBuilder:
                 #self._cb('blocks/%s' % block.type, data)
         
         return output
-
+    
     # add collection to cache/queue from notion url
     def addCollection(self, name, url, folder=None):
         subpages = []
@@ -417,9 +449,7 @@ class NotionWebsiteBuilder:
             print(row.get('version'))
 
             if permalink.strip() == "":
-                permalink = props['name'].lower()
-                permalink = re.sub(r'[^\w -]', '', permalink) # remove symbols
-                permalink = re.sub(r'\s+', '_', permalink.strip()) # convert spaces to underscore
+                permalink = self._urlize(props['name'])
             elif permalink.startswith('/'):
                 permalink = permalink[1:]
 
@@ -444,12 +474,12 @@ class NotionWebsiteBuilder:
         # create temporary build directory
         os.makedirs(self.build_dir, exist_ok=True)
 
-        # move cached images to build directory
-        #cached_image_dir = os.path.join(self.cache_dir, 'images')
-        #if  os.path.exists(cached_image_dir):
-        #    shutil.copytree(cached_image_dir, os.path.join(self.build_dir, 'images'))
-        #else:
-        #    os.makedirs(os.path.join(self.build_dir, 'images'), exist_ok=True)
+        #move cached images to build directory
+        cached_image_dir = os.path.join(self.cache_dir, 'images')
+        if  os.path.exists(cached_image_dir):
+            shutil.copytree(cached_image_dir, os.path.join(self.build_dir, 'images'))
+        else:
+            os.makedirs(os.path.join(self.build_dir, 'images'), exist_ok=True)
 
         os.makedirs(os.path.join(self.cache_dir, 'images'), exist_ok=True)
         os.makedirs(os.path.join(self.build_dir, 'images'), exist_ok=True)
@@ -496,6 +526,7 @@ class NotionWebsiteBuilder:
             'content': content,
             'page': page_data,
             'collection': self.collections,
+            'cache': self.cache
         }
 
         template_name = page['template'] if page['template'] is not None else 'default'
@@ -510,7 +541,21 @@ class NotionWebsiteBuilder:
         outputHTML = template.render(**template_data)
 
         return outputHTML
+    
+    def downloadImage(self, name, source):
+        absolute_path = os.path.join('/', 'images', name)
+        image_cache_path = os.path.join(self.cache_dir, absolute_path[1:])
+        #image_build_path = os.path.join(self.build_dir, path)
+
+        if not os.path.isfile(image_cache_path):
+            req = self.client.session.get(source)
+            print(req)
+            with open(image_cache_path, 'wb') as image:
+                image.write(req.content)
         
+        return absolute_path
+        #if not os.path.isfile(image_build_path): # make sure not to copy same image twice... if that's even possible?
+        #    shutil.copy2(image_cache_path, image_build_path)
 
     def renderBlock(self, data):
         #self._cb('blocks', data)
@@ -538,24 +583,15 @@ class NotionWebsiteBuilder:
         else:
             template_string = _bls[data['type']]
         
-        if data['type'] == 'image':
-            image_cache_path = os.path.join(self.cache_dir, data['image_path'][1:])
-            image_build_path = os.path.join(self.build_dir, data['image_path'][1:])
-
-            if not os.path.isfile(image_cache_path):
-                req = self.client.session.get(data['image_source'])
-                print(req)
-                with open(image_cache_path, 'wb') as image:
-                    image.write(req.content)
-            
-            if not os.path.isfile(image_build_path): # make sure not to copy same image twice... if that's even possible?
-                shutil.copy2(image_cache_path, image_build_path)
+        #if data['type'] == 'image':
+        #    self.downloadImage(data['image_path'][1:], data['image_source'])
 
         # create template
         template = jinja2.Template(template_string)
 
         # recursive render function within jinja to render nested blocks
         template.globals['render'] = lambda x: self.renderBlock(x)
+        template.globals['cache'] = self.cache
 
         # return html
         if 'text' in data:

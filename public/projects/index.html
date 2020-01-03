@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#EEEBE8">
     
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
     <!--<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">-->
     
     <!-- STYLE -->
@@ -60,14 +60,28 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: "Heebo", sans-serif;
-    margin-bottom: 1.0rem;
+    font-family: "Space Mono", monospace;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    line-height: 1.2 !important; /* in case it wraps lines */
 }
 
 h1.title {
+    font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 2.0rem
+}
+
+h2, h3 { font-variant-ligatures: no-common-ligatures }
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 p, ol, ul, table, blockquote {
@@ -134,9 +148,15 @@ a.homepage-link {
     width: 15px;
 }
 
-/*a.age1 { color: #9ef542 }
-a.age2 { color: #ffde21 }
-a.age3 { color: #b8a89c }*/
+a.age1 { color: #8cbd19 }
+a.age1 > span { background-image: radial-gradient(1px 1px at center, #8cbd19 0.5px, transparent 1px) !important }
+a.age2 { color: #c58b0d }
+a.age2 > span { background-image: radial-gradient(1px 1px at center, #c58b0d 0.5px, transparent 1px) !important }
+a.age3 { color: #685e57 }
+a.age3 > span { background-image: radial-gradient(1px 1px at center, #685e57 0.5px, transparent 1px) !important }
+
+a.evergreen { color: #7b23e0 }
+a.evergreen > span { background-image: radial-gradient(1px 1px at center, #7b23e0 0.5px, transparent 1px) !important }
 
 pre {
     tab-size: 4;
@@ -227,7 +247,11 @@ main {
 
 .column {
     flex: 1;
+    margin: 0 10px;
 }
+.column:first-child { margin-left: 0 }
+.column:last-child { margin-right: 0 }
+
 
 figure {
     display: block;
@@ -313,6 +337,57 @@ blockquote {
 .toc-indent-1 { padding-left: 0px ; }
 .toc-indent-2 { padding-left: 25px; }
 .toc-indent-3 { padding-left: 50px; }
+
+.pagecover { 
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pagecover > img {
+    margin: 0;
+    transform: scale(1);
+    transition: 0.25s transform;
+}
+.pagecover:hover > img{
+    transform: scale(1.05);
+}
+
+.pagelink {
+    display: flex;
+    height: 95px;
+    background-color: #D2CECA;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.25s background-color;
+    text-decoration: none;
+    color: #000000;
+}
+.pagelink:hover {
+    background-color: rgb(179, 190, 209);
+}
+.pagelink-icon {
+    width: 95px;
+    flex: 1 0 1;
+    background-size: cover;
+}
+.pagelink-text {
+    flex: 1;
+    padding: 15px 20px 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pagelink-text-title {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.pagelink-text-description {
+    font-size: 12;
+    /*font-family: "EB Garamond"*/
+}
 
 @media screen and (max-width: 1200px) {
     #tl {
@@ -457,86 +532,118 @@ blockquote {
     </div>
     <main>
         <h1 class="title">Projects</h1>
+        <p><em>This page is a work in progress, please bear with me as I work to document my nest of shiny objects. It seems that cataloguing may be the biggest project of them all...</em></p>
+            <div class="column-container">
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagecover" href="/projects/neuropolis">
+    <img src="/images/neuropolis_cover.png" />
+</a>
+                    
+                </div>
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagecover" href="/projects/micro_learning_futures">
+    <img src="/images/micro_learning_futures_cover.png" />
+</a>
+                    
+                </div>
+                
+            </div>
         
-            
-                <img src="/images/b59a3bce-5ec9-4bf0-91c9-b52a7ebc8319.png"/>
-            
+            <div class="column-container">
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagecover" href="/projects/ink_chinese">
+    <img src="/images/ink_chinese_cover.png" />
+</a>
+                    
+                </div>
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagelink" href="/projects/geolograph">
+  
+    <div class="pagelink-icon" style="background-image: url(/images/geolograph_thumbnail.png)"></div>
+  
+
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">Geolograph</div>
+    <div class="pagelink-text-description">Synthesizer which uses topographic data to generate sound waves.</div>
+  </div>
+</a>
+                    
+                        
+<a class="pagelink" href="/projects/personal_website">
+  
+    <div class="pagelink-icon" style="background-image: url(/images/personal_website_thumbnail.png)"></div>
+  
+
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">Personal Website</div>
+    <div class="pagelink-text-description">My personal website, blog, wiki, and garden of ideas and thoughts.</div>
+  </div>
+</a>
+                    
+                </div>
+                
+            </div>
         
-	<p>
-		<a href="/projects/geolograph"><span>Geolograph</span></a> <span style="opacity:0.3"> – November 2019</span><br/>
-		<i>Synthesizer which uses topographic data to generate sound waves.</i>
-	</p>
+            <div class="column-container">
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagelink" href="/projects/face_detection_instrument">
+  
+    <div class="pagelink-icon" style="background-image: url(/images/face_detection_instrument_thumbnail.png)"></div>
+  
 
-	<p>
-		<a href="/projects/micro_learning_futures"><span>Micro Learning Futures</span></a> <span style="opacity:0.3"> – November 2019</span><br/>
-		<i></i>
-	</p>
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">Face Detection Instrument</div>
+    <div class="pagelink-text-description">Face-controlled musical instrument as an experimental mode of interaction.</div>
+  </div>
+</a>
+                    
+                        
+<a class="pagelink" href="/projects/perceptual_shift_ambigrams">
+  
+    <div class="pagelink-icon" style="background-image: url(/images/perceptual_shift_ambigrams_thumbnail.png)"></div>
+  
 
-	<p>
-		<a href="/projects/collaborative_learning_platform"><span>Collaborative Learning Platform</span></a> <span style="opacity:0.3"> – February 2019</span><br/>
-		<i>Online learning platform where students build their own curriculum.</i>
-	</p>
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">Perceptual Shift Ambigrams</div>
+    <div class="pagelink-text-description">Combine two words into a single word that can be read as either.</div>
+  </div>
+</a>
+                    
+                </div>
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagelink" href="/projects/bananagram_variations">
+  
+    <div class="pagelink-icon" style="background-image: url(/images/bananagram_variations_thumbnail.png)"></div>
+  
 
-	<p>
-		<a href="/projects/ink_chinese"><span>Ink Chinese</span></a> <span style="opacity:0.3"> – December 2018</span><br/>
-		<i>Cross-platform app for learning to read and write Chinese Characters.</i>
-	</p>
-
-	<p>
-		<a href="/projects/face_detection_instrument"><span>Face Detection Instrument</span></a> <span style="opacity:0.3"> – October 2018</span><br/>
-		<i>Plays sound based off facial landmark detection using Python and SuperCollider.</i>
-	</p>
-
-	<p>
-		<a href="/projects/generative_business_cards"><span>Generative Business Cards</span></a> <span style="opacity:0.3"> – September 2018</span><br/>
-		<i>Experiment in teaching computer program to design business cards.</i>
-	</p>
-
-	<p>
-		<a href="/projects/reddit_logo_generator"><span>Reddit Logo Generator</span></a> <span style="opacity:0.3"> – August 2018</span><br/>
-		<i>Logo Generator for made for /r/proceduralgeneration subreddit.</i>
-	</p>
-
-	<p>
-		<a href="/projects/bananagram_variations"><span>Bananagram Variations</span></a> <span style="opacity:0.3"> – May 2018</span><br/>
-		<i>Constraints and spinoffs of the popular wordgame, Bananagrams.</i>
-	</p>
-
-	<p>
-		<a href="/projects/neuropolis"><span>Neuropolis</span></a> <span style="opacity:0.3"> – March 2018</span><br/>
-		<i>Future video series focused on the intersection between psychology and city design.</i>
-	</p>
-
-	<p>
-		<a href="/projects/pattern_generator"><span>Pattern Generator</span></a> <span style="opacity:0.3"> – February 2018</span><br/>
-		<i>Pattern generator through iterative combination.</i>
-	</p>
-
-	<p>
-		<a href="/projects/embol"><span>Embol</span></a> <span style="opacity:0.3"> – December 2017</span><br/>
-		<i>Video game about social anxiety made for Ludum Dare 40.</i>
-	</p>
-
-	<p>
-		<a href="/projects/cthulhu_tarot"><span>Cthulhu Tarot</span></a> <span style="opacity:0.3"> – May 2017</span><br/>
-		<i>Tarot deck inspired by the works of H.P. Lovecraft.</i>
-	</p>
-
-	<p>
-		<a href="/projects/nymero"><span>Nymero</span></a> <span style="opacity:0.3"> – October 2016</span><br/>
-		<i>Tool for remembering long numbers using the Mnemonic Major System.</i>
-	</p>
-
-	<p>
-		<a href="/projects/perceptual_shift_ambigrams"><span>Perceptual Shift Ambigrams</span></a> <span style="opacity:0.3"> – March 2016</span><br/>
-		<i>Combine two words into a single word that can be read as either.</i>
-	</p>
-
-	<p>
-		<a href="/projects/sprite_generator"><span>Sprite Generator</span></a> <span style="opacity:0.3"> – December 2015</span><br/>
-		<i>Video game sprite generator based on Dave Bollinger's Pixel Spaceships.</i>
-	</p>
-
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">Bananagram Variations</div>
+    <div class="pagelink-text-description">Constraints and spinoffs of the popular wordgame, Bananagrams.</div>
+  </div>
+</a>
+                    
+                </div>
+                
+            </div>
+        
     </main>
 </body>
 </html>

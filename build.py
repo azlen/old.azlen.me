@@ -46,9 +46,50 @@ def countpages(page):
     if 'edited' in page:
         print(page['edited'])
 
+def setflags(page):
+    page['flags'] = {
+        'new': False,
+        'updated': False
+    }
+
+def test(page):
+    if 'cover' in page:
+        print(page['cover'])
+    if 'thumbnail' in page:
+        print(page['thumbnail'])
+
+
+website.templates['blocks']['callout']['👉'] = """
+<a class="pagecover" href="{{ href }}">
+    <img src="{{ cover_image}}" />
+</a>
+"""
+
+website.templates['blocks']['page'] = """
+<a class="pagelink" href="{{ cache[id].path }}">
+  {% if cache[id].thumbnail %}
+    <div class="pagelink-icon" style="background-image: url({{ cache[id].thumbnail[0] }})"></div>
+  {% endif %}
+
+  <div class="pagelink-text">
+    <div class="pagelink-text-title">{{ cache[id].name }}</div>
+    <div class="pagelink-text-description">{% if cache[id].description %}{{ cache[id].description }}{% endif %}</div>
+  </div>
+</a>
+"""
+def test2(data):
+    page_id = data['block']['text'][0][1][0][1]
+    data['block']['cover_image'] = website.cache[page_id]['cover'][0]
+    data['block']['href'] = website.cache[page_id]['path']
+
+    print(data['block'])
+
 website.listen('blocks/callout/🔮', addGlossaryItem)
+website.listen('blocks/callout/👉', test2)
 website.listen('blocks', countwords)
 website.listen('pages', countpages)
+website.listen('pages', setflags)
+website.listen('pages', test)
 
 
 website.addCollection('pages', 'https://www.notion.so/eidka/b539082b0b02490580f7fd5872d1798e?v=38b84447673746abb18521983b30abe0', folder='')
@@ -56,15 +97,26 @@ website.addCollection('blog', 'https://www.notion.so/eidka/7dc1a478d8274055a1f7b
 website.addCollection('wiki', 'https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9')
 website.addCollection('projects', 'https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8')
 
-for page in website.cache.values():
-    page['flags'] = {
-        'new': False,
-        'updated': False
-    }
+#for page in website.cache.values():
+#    page['flags'] = {
+#        'new': False,
+#        'updated': False
+#    }
 
 from datetime import datetime
+def fromiso(iso):
+    if type(iso) == str:
+        return datetime.fromisoformat(iso)
+    elif type(iso) == datetime:
+        return iso
+    else:
+        print(iso)
+        print(type(iso))
+        print('ERROR WRONG fromiso FORMAT %s' % iso)
+        #return datetime.now()
+        
 website.env.globals['datetime'] = datetime
-website.env.globals['fromiso'] = datetime.fromisoformat
+website.env.globals['fromiso'] = fromiso
 
 #def wordcount_to_freq(wordcount):
 #   return 
@@ -146,8 +198,8 @@ if args.serve:
     
     while True:
         out = p.stderr.read(1)
-        if out == '' and p.poll() != None:
+        """if out == '' and p.poll() != None:
             break
         if out != '':
             sys.stdout.write(out)
-            sys.stdout.flush()
+            sys.stdout.flush()"""

@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#EEEBE8">
     
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
     <!--<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">-->
     
     <!-- STYLE -->
@@ -60,14 +60,28 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: "Heebo", sans-serif;
-    margin-bottom: 1.0rem;
+    font-family: "Space Mono", monospace;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    line-height: 1.2 !important; /* in case it wraps lines */
 }
 
 h1.title {
+    font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 2.0rem
+}
+
+h2, h3 { font-variant-ligatures: no-common-ligatures }
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 p, ol, ul, table, blockquote {
@@ -134,9 +148,15 @@ a.homepage-link {
     width: 15px;
 }
 
-/*a.age1 { color: #9ef542 }
-a.age2 { color: #ffde21 }
-a.age3 { color: #b8a89c }*/
+a.age1 { color: #8cbd19 }
+a.age1 > span { background-image: radial-gradient(1px 1px at center, #8cbd19 0.5px, transparent 1px) !important }
+a.age2 { color: #c58b0d }
+a.age2 > span { background-image: radial-gradient(1px 1px at center, #c58b0d 0.5px, transparent 1px) !important }
+a.age3 { color: #685e57 }
+a.age3 > span { background-image: radial-gradient(1px 1px at center, #685e57 0.5px, transparent 1px) !important }
+
+a.evergreen { color: #7b23e0 }
+a.evergreen > span { background-image: radial-gradient(1px 1px at center, #7b23e0 0.5px, transparent 1px) !important }
 
 pre {
     tab-size: 4;
@@ -227,7 +247,11 @@ main {
 
 .column {
     flex: 1;
+    margin: 0 10px;
 }
+.column:first-child { margin-left: 0 }
+.column:last-child { margin-right: 0 }
+
 
 figure {
     display: block;
@@ -313,6 +337,57 @@ blockquote {
 .toc-indent-1 { padding-left: 0px ; }
 .toc-indent-2 { padding-left: 25px; }
 .toc-indent-3 { padding-left: 50px; }
+
+.pagecover { 
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pagecover > img {
+    margin: 0;
+    transform: scale(1);
+    transition: 0.25s transform;
+}
+.pagecover:hover > img{
+    transform: scale(1.05);
+}
+
+.pagelink {
+    display: flex;
+    height: 95px;
+    background-color: #D2CECA;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.25s background-color;
+    text-decoration: none;
+    color: #000000;
+}
+.pagelink:hover {
+    background-color: rgb(179, 190, 209);
+}
+.pagelink-icon {
+    width: 95px;
+    flex: 1 0 1;
+    background-size: cover;
+}
+.pagelink-text {
+    flex: 1;
+    padding: 15px 20px 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pagelink-text-title {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.pagelink-text-description {
+    font-size: 12;
+    /*font-family: "EB Garamond"*/
+}
 
 @media screen and (max-width: 1200px) {
     #tl {
@@ -457,7 +532,7 @@ blockquote {
     </div>
     <main>
         <h1 class="title">Geological Phonograph</h1>
-        <p>Just like a needle of a phonograph moves along the grooves of a record, what would it sound like to move a needle along the grooves and topology of the Earth? Each mountain, valley, field, or ocean might have its own unique sound, a special timbre or series of harmonics never before heard but waiting to be discovered in the very land beneath our feet. To build such a physical contraption would be impossible, the scale of the earth is frankly a world apart from our quaint phonograph record—despite them both being round.</p><p>But nothing is impossible, not even a planet-scale geological phonograph. So to make this geolograph a reality, I took out my trusty silicon-based inference machine, codename “<span style="font-family:'Space Mono'; font-size:60%;">COMPUTER</span> ”, and wrote in a series of alphanumeric instructions...</p><p>The first experiment was not planet-scale, more of a proof-of-concept, testing the waters of my future earth-based music machine. I created a mathematical topology through an algorithm known as “perlin noise”, a kind of faux-earth of rolling hills in all directions. Then sculpted the sound by overlaying a circle on top of this terrain, and sampling a series of points along the circle to capture the dips, squiggles and bumps of the topology. This created a unique tone which, if visualized, looks like a drunken sine wave; and being annoying and loud, it rather sounded like one too! But with a few small changes, and mutating the topology over time by moving the two-dimensional function through three-dimensional space, the sonic potential of the sound became clear.</p><p>Once I had proved that topological sound synthesis was not only possible but could produce unique sounds and timbres, it was time to test this algorithm in the real world; well, on the real world. After drifting through the derelict side-streets of dataset commercialization, I finally stumbled upon an open cache of topological data. Sourced from NASA’s Shuttle Radar Topography Mission back in the year 2000, the data was older than I was, and likely just as outdated. With a resolution of 30 metres over the United States, and 90 throughout the rest of the world, I could only hope the quality was sufficient for acoustic applications. It’s nothing to the sub-meter resolution boasted by vendors selling the earth on the free market, but I wasn’t going to spend the megabucks and sign off half my soul for a simple side-project.</p><p>My second experiment was what I would call a successful failure. I pulled in chunks of the shuttle radar data, and spun up some circles and geospatial LFOs. The sounds were mesmerizing, such buzzing, industrial, or ethereal sounds as never had been heard before. But then I found a problem which threw a wrench in this entire operation. Despite some generous optimizations, it would take about 1.2 seconds to generate a single of audio, the CPU simply couldn’t handle sampling 44100 data points in sub-second speed. On top of this I have somehow managed to decouple the bootloader from my operating system and have temporarily lost access to half the computer. Oh well.</p><p>I had been looking for an excuse to start over and the computer malfunction pushed me to completely rewrite the audio synthesis. Choosing a lower-level language for faster processing and multi-threading. I had never written in Rust before, but it sounded closer to the metal, I just hoped that it wouldn’t coat my hardware in iron-oxides. A few days later, I had the system back up and running; down to 100 milliseconds per second of audio, it was definitely worth the effort. Rust had the added benefit of hooking up to Nannou, a framework with graphical capabilities which I used to create a simple interface for interacting with the instrument.</p>
+        <p>Just like a needle of a phonograph moves along the grooves of a record, what would it sound like to move a needle along the grooves and topology of the Earth? Each mountain, valley, field, or ocean might have its own unique sound, a special timbre or series of harmonics never before heard but waiting to be discovered in the very land beneath our feet. To build such a physical contraption would be impossible, the scale of the earth is frankly a world apart from our quaint phonograph record—despite them both being round.</p><p>But nothing is impossible, not even a planet-scale geological phonograph. So to make this geolograph a reality, I took out my trusty silicon-based inference machine, codename “<span style="font-family:'Space Mono'; font-size:60%;">COMPUTER</span>”, and wrote in a series of alphanumeric instructions...</p><p>The first experiment was not planet-scale, more of a proof-of-concept, testing the waters of my future earth-based music machine. I created a mathematical topology through an algorithm known as “perlin noise”, a kind of faux-earth of rolling hills in all directions. Then sculpted the sound by overlaying a circle on top of this terrain, and sampling a series of points along the circle to capture the dips, squiggles and bumps of the topology. This created a unique tone which, if visualized, looks like a drunken sine wave; and being annoying and loud, it rather sounded like one too! But with a few small changes, and mutating the topology over time by moving the two-dimensional function through three-dimensional space, the sonic potential of the sound became clear.</p><p>Once I had proved that topological sound synthesis was not only possible but could produce unique sounds and timbres, it was time to test this algorithm in the real world; well, on the real world. After drifting through the derelict side-streets of dataset commercialization, I finally stumbled upon an open cache of topological data. Sourced from NASA’s Shuttle Radar Topography Mission back in the year 2000, the data was older than I was, and likely just as outdated. With a resolution of 30 metres over the United States, and 90 throughout the rest of the world, I could only hope the quality was sufficient for acoustic applications. It’s nothing to the sub-meter resolution boasted by vendors selling the earth on the free market, but I wasn’t going to spend the megabucks and sign off half my soul for a simple side-project.</p><p>My second experiment was what I would call a successful failure. I pulled in chunks of the shuttle radar data, and spun up some circles and geospatial LFOs. The sounds were mesmerizing, such buzzing, industrial, or ethereal sounds as never had been heard before. But then I found a problem which threw a wrench in this entire operation. Despite some generous optimizations, it would take about 1.2 seconds to generate a single of audio, the CPU simply couldn’t handle sampling 44100 data points in sub-second speed. On top of this I have somehow managed to decouple the bootloader from my operating system and have temporarily lost access to half the computer. Oh well.</p><p>I had been looking for an excuse to start over and the computer malfunction pushed me to completely rewrite the audio synthesis. Choosing a lower-level language for faster processing and multi-threading. I had never written in Rust before, but it sounded closer to the metal, I just hoped that it wouldn’t coat my hardware in iron-oxides. A few days later, I had the system back up and running; down to 100 milliseconds per second of audio, it was definitely worth the effort. Rust had the added benefit of hooking up to Nannou, a framework with graphical capabilities which I used to create a simple interface for interacting with the instrument.</p>
             
                 <img src="/images/3c84af58-539e-44cc-8331-374d17232e8b.png"/>
             

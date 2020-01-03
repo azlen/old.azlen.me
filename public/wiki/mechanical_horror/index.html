@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#EEEBE8">
     
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
     <!--<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">-->
     
     <!-- STYLE -->
@@ -60,14 +60,28 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: "Heebo", sans-serif;
-    margin-bottom: 1.0rem;
+    font-family: "Space Mono", monospace;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    line-height: 1.2 !important; /* in case it wraps lines */
 }
 
 h1.title {
+    font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 2.0rem
+}
+
+h2, h3 { font-variant-ligatures: no-common-ligatures }
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 p, ol, ul, table, blockquote {
@@ -134,9 +148,15 @@ a.homepage-link {
     width: 15px;
 }
 
-/*a.age1 { color: #9ef542 }
-a.age2 { color: #ffde21 }
-a.age3 { color: #b8a89c }*/
+a.age1 { color: #8cbd19 }
+a.age1 > span { background-image: radial-gradient(1px 1px at center, #8cbd19 0.5px, transparent 1px) !important }
+a.age2 { color: #c58b0d }
+a.age2 > span { background-image: radial-gradient(1px 1px at center, #c58b0d 0.5px, transparent 1px) !important }
+a.age3 { color: #685e57 }
+a.age3 > span { background-image: radial-gradient(1px 1px at center, #685e57 0.5px, transparent 1px) !important }
+
+a.evergreen { color: #7b23e0 }
+a.evergreen > span { background-image: radial-gradient(1px 1px at center, #7b23e0 0.5px, transparent 1px) !important }
 
 pre {
     tab-size: 4;
@@ -227,7 +247,11 @@ main {
 
 .column {
     flex: 1;
+    margin: 0 10px;
 }
+.column:first-child { margin-left: 0 }
+.column:last-child { margin-right: 0 }
+
 
 figure {
     display: block;
@@ -313,6 +337,57 @@ blockquote {
 .toc-indent-1 { padding-left: 0px ; }
 .toc-indent-2 { padding-left: 25px; }
 .toc-indent-3 { padding-left: 50px; }
+
+.pagecover { 
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pagecover > img {
+    margin: 0;
+    transform: scale(1);
+    transition: 0.25s transform;
+}
+.pagecover:hover > img{
+    transform: scale(1.05);
+}
+
+.pagelink {
+    display: flex;
+    height: 95px;
+    background-color: #D2CECA;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.25s background-color;
+    text-decoration: none;
+    color: #000000;
+}
+.pagelink:hover {
+    background-color: rgb(179, 190, 209);
+}
+.pagelink-icon {
+    width: 95px;
+    flex: 1 0 1;
+    background-size: cover;
+}
+.pagelink-text {
+    flex: 1;
+    padding: 15px 20px 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pagelink-text-title {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.pagelink-text-description {
+    font-size: 12;
+    /*font-family: "EB Garamond"*/
+}
 
 @media screen and (max-width: 1200px) {
     #tl {
@@ -457,7 +532,7 @@ blockquote {
     </div>
     <main>
         <h1 class="title">Mechanical Horror</h1>
-        <p><em>Mechanical Horror</em> is a writing genre which I have come up as a modern interpretation of Cosmic Horror. Instead of creatures and god-like beings outside of human comprehension which would drive you insane just thinking of their existence, the focus is on machines, technology beyond comprehension. Machines and contraptions so bizarre that they possess your soul and mind, seep into your very conciousness and being.</p><p>Mechanical Horror is interesting as it much more relevant to today's world and technology. Writing about the incomprehensibility of technology or machines gone askew makes one think deeper about the technology around them.</p>
+        <p><em>Mechanical Horror</em> is a writing genre which I have come up as a modern interpretation of Cosmic Horror. Instead of creatures and god-like beings outside of human comprehension which would drive you insane just thinking of their existence, the focus is on machines, technology beyond comprehension. Machines and contraptions so bizarre that they possess your soul and mind, seep into your very conciousness and being.</p><p>Mechanical Horror is interesting as it much more relevant to today's world and technology. Writing about the incomprehensibility of technology or machines gone askew makes one think deeper about the technology around them.</p><h3 id="">Ideas</h3><ul><li>Technology so incomprehensible that merely trying to understand the inner workings of a system is enough to drive a person insane</li><li>Horror of the mundane, how techological devices have already shaped our lives—are we the real robots in truth?</li><li>Exploring the idea of living inside a simulation, what is the operating system of life, the interface of our desires?</li><li>The worshipping of technology, cults of the internet, the ritualistic ways that society not only uses but sacrifices itself to its technogods</li></ul>
     </main>
 </body>
 </html>

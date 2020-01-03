@@ -28,7 +28,7 @@
     <meta name="theme-color" content="#EEEBE8">
     
     <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
     <!--<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">-->
     
     <!-- STYLE -->
@@ -60,14 +60,28 @@ body {
 }
 
 h1, h2, h3 {
-    font-family: "Heebo", sans-serif;
-    margin-bottom: 1.0rem;
+    font-family: "Space Mono", monospace;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    line-height: 1.2 !important; /* in case it wraps lines */
 }
 
 h1.title {
+    font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
     margin-bottom: 2.0rem
+}
+
+h2, h3 { font-variant-ligatures: no-common-ligatures }
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 20px;
 }
 
 p, ol, ul, table, blockquote {
@@ -134,9 +148,15 @@ a.homepage-link {
     width: 15px;
 }
 
-/*a.age1 { color: #9ef542 }
-a.age2 { color: #ffde21 }
-a.age3 { color: #b8a89c }*/
+a.age1 { color: #8cbd19 }
+a.age1 > span { background-image: radial-gradient(1px 1px at center, #8cbd19 0.5px, transparent 1px) !important }
+a.age2 { color: #c58b0d }
+a.age2 > span { background-image: radial-gradient(1px 1px at center, #c58b0d 0.5px, transparent 1px) !important }
+a.age3 { color: #685e57 }
+a.age3 > span { background-image: radial-gradient(1px 1px at center, #685e57 0.5px, transparent 1px) !important }
+
+a.evergreen { color: #7b23e0 }
+a.evergreen > span { background-image: radial-gradient(1px 1px at center, #7b23e0 0.5px, transparent 1px) !important }
 
 pre {
     tab-size: 4;
@@ -227,7 +247,11 @@ main {
 
 .column {
     flex: 1;
+    margin: 0 10px;
 }
+.column:first-child { margin-left: 0 }
+.column:last-child { margin-right: 0 }
+
 
 figure {
     display: block;
@@ -313,6 +337,57 @@ blockquote {
 .toc-indent-1 { padding-left: 0px ; }
 .toc-indent-2 { padding-left: 25px; }
 .toc-indent-3 { padding-left: 50px; }
+
+.pagecover { 
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pagecover > img {
+    margin: 0;
+    transform: scale(1);
+    transition: 0.25s transform;
+}
+.pagecover:hover > img{
+    transform: scale(1.05);
+}
+
+.pagelink {
+    display: flex;
+    height: 95px;
+    background-color: #D2CECA;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.25s background-color;
+    text-decoration: none;
+    color: #000000;
+}
+.pagelink:hover {
+    background-color: rgb(179, 190, 209);
+}
+.pagelink-icon {
+    width: 95px;
+    flex: 1 0 1;
+    background-size: cover;
+}
+.pagelink-text {
+    flex: 1;
+    padding: 15px 20px 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pagelink-text-title {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.pagelink-text-description {
+    font-size: 12;
+    /*font-family: "EB Garamond"*/
+}
 
 @media screen and (max-width: 1200px) {
     #tl {
@@ -504,41 +579,6 @@ blockquote {
 	
 		
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
 		
 	
 
@@ -553,41 +593,6 @@ blockquote {
 	
 	
 		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 	
 		
 	
@@ -652,41 +657,6 @@ blockquote {
 	
 		
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
 		
 	
 
@@ -701,41 +671,6 @@ blockquote {
 	
 	
 		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-
-	
-
-	
 	
 		
 	
@@ -800,7 +735,7 @@ blockquote {
 	
 		
 	
-
+		
 	
 
 	
@@ -810,6 +745,166 @@ blockquote {
 	
 
 	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
 	
 		
 	
@@ -877,6 +972,8 @@ blockquote {
 	
 		
 	
+		
+	
 
 	
 		
@@ -889,6 +986,8 @@ blockquote {
 	
 
 	
+	
+		
 	
 		
 	
@@ -959,42 +1058,9 @@ blockquote {
 	
 		
 	
-
-	
 		
 	
 
-	
-
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
 	
 		
 	
@@ -1006,8 +1072,8 @@ blockquote {
 	
 
 	
-
 	
+		
 	
 		
 	
@@ -1072,7 +1138,7 @@ blockquote {
 	
 		
 	
-
+		
 	
 
 	
@@ -1082,6 +1148,49 @@ blockquote {
 	
 
 	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+		
 	
 		
 	
@@ -1149,6 +1258,8 @@ blockquote {
 	
 		
 	
+		
+	
 
 	
 		
@@ -1161,6 +1272,136 @@ blockquote {
 	
 
 	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+		
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
 	
 		
 	
@@ -1219,121 +1460,6 @@ blockquote {
 		
 	
 		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
 			
 			
 		
@@ -1399,43 +1525,6 @@ blockquote {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
 		
 	
 
@@ -1450,6 +1539,49 @@ blockquote {
 	
 
 	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+
+	
+	
+		
 	
 		
 	
@@ -1526,6 +1658,8 @@ blockquote {
 	
 		
 	
+		
+	
 
 	
 
@@ -1540,6 +1674,8 @@ blockquote {
 	
 
 	
+	
+		
 	
 		
 	
@@ -1615,6 +1751,8 @@ blockquote {
 		
 	
 		
+	
+		
 			
 			
 		
@@ -1662,45 +1800,6 @@ blockquote {
 	
 		
 	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
 		
 	
 
@@ -1719,45 +1818,6 @@ blockquote {
 	
 	
 		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-		
-	
-
-	
-
-	
-
-	
-		
-	
-
-	
-		
-	
-
-	
 	
 		
 	
@@ -1826,6 +1886,51 @@ blockquote {
 	
 		
 	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
 
 	
 
@@ -1867,6 +1972,8 @@ blockquote {
 	
 		
 	
+		
+	
 
 	
 
@@ -1881,6 +1988,51 @@ blockquote {
 	
 
 	
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	
+
+	
+		
+	
+
+	
+		
+	
+
+	
+	
+		
 	
 		
 	
@@ -1923,7 +2075,7 @@ blockquote {
 <img class="chlandi" src="/chlandi/200.png"/>
 
 
-<a href="/wiki/aphantasia" class="wiki-link age3">
+<a href="/wiki/aphantasia" class="wiki-link age3 ">
 	<span>Aphantasia</span>
 </a><br/>
 
@@ -1935,14 +2087,14 @@ blockquote {
 <img class="chlandi" src="/chlandi/400.png"/>
 
 
-<a href="/wiki/chiasm" class="wiki-link age3">
+<a href="/wiki/chiasm" class="wiki-link age3 ">
 	<span>Chiasm</span>
 </a><br/>
 
 <img class="chlandi" src="/chlandi/3200.png"/>
 
 
-<a href="/wiki/creativity_games" class="wiki-link age3">
+<a href="/wiki/creativity_games" class="wiki-link age3 evergreen">
 	<span>Creativity Games</span>
 </a><br/>
 
@@ -1954,7 +2106,7 @@ blockquote {
 <img class="chlandi" src="/chlandi/1100.png"/>
 
 
-<a href="/wiki/hidden_question" class="wiki-link age3">
+<a href="/wiki/hidden_question" class="wiki-link age3 ">
 	<span>Hidden Question</span>
 </a><br/>
 
@@ -1966,7 +2118,7 @@ blockquote {
 <img class="chlandi" src="/chlandi/2400.png"/>
 
 
-<a href="/wiki/internet_car_analogy" class="wiki-link age3">
+<a href="/wiki/internet_car_analogy" class="wiki-link age3 ">
 	<span>Internet Car Analogy</span>
 </a><br/>
 
@@ -1980,27 +2132,45 @@ blockquote {
                     
                         
 
+<!--<h3>L</h3>-->
+<p>
+
+<img class="chlandi" src="/chlandi/4000.png"/>
+
+
+	
+
+<a href="/wiki/language_learning_techniques" class="wiki-link age1 ">
+	<span>Language Learning Techniques</span>
+</a><br/>
+
+</p>
+
 <!--<h3>M</h3>-->
 <p>
 
-<img class="chlandi" src="/chlandi/500.png"/>
+<img class="chlandi" src="/chlandi/900.png"/>
 
 
-<a href="/wiki/mechanical_horror" class="wiki-link age3">
+	
+
+<a href="/wiki/mechanical_horror" class="wiki-link age1 ">
 	<span>Mechanical Horror</span>
 </a><br/>
 
 <img class="chlandi" src="/chlandi/600.png"/>
 
 
-<a href="/wiki/merveilles" class="wiki-link age3">
+<a href="/wiki/merveilles" class="wiki-link age3 ">
 	<span>Merveilles Town</span>
 </a><br/>
 
 <img class="chlandi" src="/chlandi/2300.png"/>
 
 
-<a href="/wiki/metrics" class="wiki-link age3">
+	
+
+<a href="/wiki/metrics" class="wiki-link age2 ">
 	<span>Metrics</span>
 </a><br/>
 
@@ -2012,14 +2182,18 @@ blockquote {
 <img class="chlandi" src="/chlandi/1100.png"/>
 
 
-<a href="/wiki/pillars_of_interest" class="wiki-link age3">
+	
+
+<a href="/wiki/pillars_of_interest" class="wiki-link age2 evergreen">
 	<span>Pillars of Interest</span>
 </a><br/>
 
 <img class="chlandi" src="/chlandi/700.png"/>
 
 
-<a href="/wiki/possibility_spaces" class="wiki-link age3">
+	
+
+<a href="/wiki/possibility_spaces" class="wiki-link age2 ">
 	<span>Possibility Spaces</span>
 </a><br/>
 
@@ -2039,14 +2213,14 @@ blockquote {
 <img class="chlandi" src="/chlandi/900.png"/>
 
 
-<a href="/wiki/riddles" class="wiki-link age3">
+<a href="/wiki/riddles" class="wiki-link age3 ">
 	<span>Riddles</span>
 </a><br/>
 
 <img class="chlandi" src="/chlandi/1200.png"/>
 
 
-<a href="/wiki/rituals" class="wiki-link age3">
+<a href="/wiki/rituals" class="wiki-link age3 ">
 	<span>Rituals</span>
 </a><br/>
 
@@ -2058,7 +2232,9 @@ blockquote {
 <img class="chlandi" src="/chlandi/2800.png"/>
 
 
-<a href="/wiki/speed_reading" class="wiki-link age3">
+	
+
+<a href="/wiki/speed_reading" class="wiki-link age2 ">
 	<span>Speed Reading</span>
 </a><br/>
 
