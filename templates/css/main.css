@@ -388,7 +388,7 @@ blockquote {
         display: block;
     }
     .column {
-        margin: auto;
+        margin: auto !important;
         margin-bottom: 2.0rem;
         width: 400px;
         max-width: 100%;
