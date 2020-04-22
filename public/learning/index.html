@@ -24,14 +24,18 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    
     <link rel="manifest" href="/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#EEEBE8">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#EEEBE8">
+
+    
+        <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
@@ -55,9 +59,7 @@ html, body {
 }
 
 body {
-    background-color: #DDDAD7;
-    background-color: #EEEBE8;
-    background-color: #FBF8F5;
+    background-color: #FAFAFA;
     color: #000000;
     font-family: 'EB Garamond', Garamond, serif;
     /*font-family: 'Ibarra Real Nova', Garamond, serif;*/
@@ -376,37 +378,92 @@ blockquote {
 .pagelink {
     display: flex;
     height: 95px;
-    background-color: #D2CECA;
+    /*background-color: #D2CECA;*/
     margin-bottom: 20px;
     cursor: pointer;
     transition: 0.25s background-color;
     text-decoration: none;
     color: #000000;
+
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
 }
-.pagelink:hover {
+/*.pagelink:hover {
     background-color: rgb(179, 190, 209);
-}
+}*/
 .pagelink-icon {
     width: 95px;
     flex: 1 0 1;
     background-size: cover;
 }
 .pagelink-text {
-    flex: 1;
-    padding: 15px 20px 15px 20px;
+    flex: 1 0 235px;
+    padding: 15px 10px 15px 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 .pagelink-text-title {
     font-family: "Space Mono", monospace;
     font-size: 13px;
     font-weight: bold;
     line-height: 1.2;
+    white-space: nowrap;
+
+    transition: all .2s ease-out;
 }
 .pagelink-text-description {
-    font-size: 12;
+    font-size: 14;
     /*font-family: "EB Garamond"*/
+    max-width: 300px;
+
+    transition: all .2s ease-out;
+}
+.pagelink-arrow {
+    opacity: 0;
+    width: 45px;
+    height: 45px;
+    
+    position: absolute;
+    top: 25px;
+    right: 40px;
+
+    transition: all .2s ease-out;
+}
+.pagelink:hover .pagelink-arrow {
+    opacity: 1;
+    z-index: 1001;
+    right: 25px;
+}
+.pagelink:hover .pagelink-text-title, .pagelink:hover .pagelink-text-description {
+    opacity: 0.5;
+}
+
+.pagelink::before {
+    content: "";
+    position: absolute;
+    z-index: 1000;
+    top: 1px;
+    right: 1px;
+    width: 200px;
+    height: 93px;
+
+    border-radius: 5px;
+
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+
+    opacity: 0;
+    transition: all .2s ease-out;
+}
+.pagelink:hover::before {
+    opacity: 0.9;
 }
 
 @media screen and (max-width: 1200px) {
@@ -556,7 +613,23 @@ blockquote {
             
         </header>
 
-        <p>This page is is currently a work in process. I hope that it will become evolving repository for my future learning efforts, not only to document what I learn and link to integral resources, books, or media, but also to describe and organize my thoughts on <em>how</em> I will approach learning certain topics.</p><h2 id="">Classes</h2><h3 id="">Computational Ceramics</h3><p>Turning digital forms into ceramic pieces through a variety of techniques: mold making, clay 3d printing, sledging with CNC cut templates. </p><h3 id="">Ecological Perspectives of Design</h3><h2 id="">Ongoing</h2><h3 id=""><a href="/projects/micro_learning_futures"><span>Micro Learning Futures</span></a> </h3><p>A month-long challenge over November 2019; each day I will write a short design concept around the idea of building future learning platforms. These could be design modifications to existing tools (e.g. forums or video conferencing) to make them more conducive as a learning environment, concepts for <em>new</em> learning tools, ways to improve current educational institutions or learning spaces within cities, or anything which relates in some way to imagining new futures for learning.</p><h3 id=""><a href="/projects/neuropolis"><span>Neuropolis</span></a> </h3><p>Researching, writing, and thinking about a video series I plan to create exploring the intersection between cities and psychology. The first episode is currently in the process of recording and filming. More info and resources soon...</p><h2 id="">Interests</h2><p>My projects generally stem from three ‘pillars’ of interest: the <strong>mind</strong>, <strong>city</strong>, and <strong>education</strong>. These interests also form the longer-term goals which I am interested in exploring further:</p><ul><li><strong>Mind</strong> : I want to explore how the mind works and develop tools to think and learn more effectively.</li><ul><li>How can I use existing mnemonic techniques or invent new ones to remember more effectively?</li><li>Hammers are one of many tools to manipulate physical matter, but what tools could exist in our <em>mental toolbox</em> to manipulate thoughts or ideas?</li></ul><li><strong>City</strong> : I want to imagine and build the cities of the future.</li><ul><li>How can cities be better designed to foster community and participation?</li><li>In what ways do cities affect us psychologically?</li></ul><li><strong>Education</strong> : I want to create new mediums, platforms, or opportunities for learning.</li><ul><li>Instead of how MOOCs try to replicate university lectures but at a collosal and impersonal scale, how can we make online education more personal and niche to individual interests? The internet is a perfect platform to connect small groups of motivated people around a common interest or niche area of study.</li><li>Are there ways to improve on the design of forums or video calls to create more comfortable online spaces for learning and collaboration?</li></ul></ul>
+        <p>This page is is currently a work in process. I hope that it will become evolving repository for my future learning efforts, not only to document what I learn and link to integral resources, books, or media, but also to describe and organize my thoughts on <em>how</em> I will approach learning certain topics.</p><h2 id="">Ongoing</h2><h3 id=""><a href="/projects/micro_learning_futures"><span>Micro Learning Futures</span></a> </h3><p>A month-long challenge over November 2019; each day I will write a short design concept around the idea of building future learning platforms. These could be design modifications to existing tools (e.g. forums or video conferencing) to make them more conducive as a learning environment, concepts for <em>new</em> learning tools, ways to improve current educational institutions or learning spaces within cities, or anything which relates in some way to imagining new futures for learning.</p><h3 id=""><a href="/projects/neuropolis"><span>Neuropolis</span></a> </h3><p>Researching, writing, and thinking about a video series I plan to create exploring the intersection between cities and psychology. The first episode is currently in the process of recording and filming. More info and resources soon...</p><h2 id="">Interests</h2>
+
+<a class="pagelink" href="/wiki/pillars_of_interest">
+    
+        <div class="pagelink-icon" style="background-image: url(/thumbnail.png)"></div>
+    
+
+    <div class="pagelink-text">
+        <div class="pagelink-text-title">Pillars of Interest</div>
+        <div class="pagelink-text-description">My projects generally stem from three ‘pillars’ of interest: the mind, city, and education.</div>
+    </div>
+
+    <svg class="pagelink-arrow" width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M52.1739 2L100 52M100 52L52.1739 102M100 52H0" stroke="black" stroke-width="5"/>
+    </svg>
+</a>
+
     </main>
 </body>
 </html>

@@ -40,7 +40,9 @@ def countwords(data):
         page['wordcount'] += count
 
 def countpages(page):
+    # reset wordcount (for cached pages)
     page['wordcount'] = 0
+
     sitedata['pagecount'] += 1
 
     if 'edited' in page:
@@ -70,12 +72,18 @@ website.templates['blocks']['page'] = """
 <a class="pagelink" href="{{ cache[id].path }}">
     {% if cache[id].thumbnail %}
         <div class="pagelink-icon" style="background-image: url({{ cache[id].thumbnail[0] }})"></div>
+    {% else %}
+        <div class="pagelink-icon" style="background-image: url(/thumbnail.png)"></div>
     {% endif %}
 
     <div class="pagelink-text">
         <div class="pagelink-text-title">{{ cache[id].name }}</div>
         <div class="pagelink-text-description">{% if cache[id].description %}{{ cache[id].description }}{% endif %}</div>
     </div>
+
+    <svg class="pagelink-arrow" width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M52.1739 2L100 52M100 52L52.1739 102M100 52H0" stroke="black" stroke-width="5"/>
+    </svg>
 </a>
 {% else %}
 ERROR {{ id }}

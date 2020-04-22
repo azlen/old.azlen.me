@@ -24,14 +24,15 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    
     <link rel="manifest" href="/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#EEEBE8">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#EEEBE8">
+
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/chlandi/700.png">
+    
     
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
@@ -55,9 +56,7 @@ html, body {
 }
 
 body {
-    background-color: #DDDAD7;
-    background-color: #EEEBE8;
-    background-color: #FBF8F5;
+    background-color: #FAFAFA;
     color: #000000;
     font-family: 'EB Garamond', Garamond, serif;
     /*font-family: 'Ibarra Real Nova', Garamond, serif;*/
@@ -376,37 +375,92 @@ blockquote {
 .pagelink {
     display: flex;
     height: 95px;
-    background-color: #D2CECA;
+    /*background-color: #D2CECA;*/
     margin-bottom: 20px;
     cursor: pointer;
     transition: 0.25s background-color;
     text-decoration: none;
     color: #000000;
+
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
 }
-.pagelink:hover {
+/*.pagelink:hover {
     background-color: rgb(179, 190, 209);
-}
+}*/
 .pagelink-icon {
     width: 95px;
     flex: 1 0 1;
     background-size: cover;
 }
 .pagelink-text {
-    flex: 1;
-    padding: 15px 20px 15px 20px;
+    flex: 1 0 235px;
+    padding: 15px 10px 15px 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 .pagelink-text-title {
     font-family: "Space Mono", monospace;
     font-size: 13px;
     font-weight: bold;
     line-height: 1.2;
+    white-space: nowrap;
+
+    transition: all .2s ease-out;
 }
 .pagelink-text-description {
-    font-size: 12;
+    font-size: 14;
     /*font-family: "EB Garamond"*/
+    max-width: 300px;
+
+    transition: all .2s ease-out;
+}
+.pagelink-arrow {
+    opacity: 0;
+    width: 45px;
+    height: 45px;
+    
+    position: absolute;
+    top: 25px;
+    right: 40px;
+
+    transition: all .2s ease-out;
+}
+.pagelink:hover .pagelink-arrow {
+    opacity: 1;
+    z-index: 1001;
+    right: 25px;
+}
+.pagelink:hover .pagelink-text-title, .pagelink:hover .pagelink-text-description {
+    opacity: 0.5;
+}
+
+.pagelink::before {
+    content: "";
+    position: absolute;
+    z-index: 1000;
+    top: 1px;
+    right: 1px;
+    width: 200px;
+    height: 93px;
+
+    border-radius: 5px;
+
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+
+    opacity: 0;
+    transition: all .2s ease-out;
+}
+.pagelink:hover::before {
+    opacity: 0.9;
 }
 
 @media screen and (max-width: 1200px) {
@@ -554,7 +608,7 @@ blockquote {
         <header>
             <h1 class="title">Possibility Spaces</h1>
             
-            <div class="date">July 26, 2019</div>
+                <div class="date">July 26, 2019</div>
             
         </header>
 
