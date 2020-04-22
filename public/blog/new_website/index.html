@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title></title>
+    <title>New Website</title>
     <meta name="description" content="Short reflection on transitioning to new website and build process">
 
     <!-- META TAGS -->
@@ -67,10 +67,24 @@ h1, h2, h3 {
 }
 
 h1.title {
+    margin-bottom: 0.2rem;
+}
+header .date {
+    text-align: center;
+    font-family: "Space Mono", monospace;
+    color: #999999;
+    font-size: 14px;
+}
+header {
+    margin-bottom: 2.0rem;
+}
+
+h1.title {
     font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
-    margin-bottom: 2.0rem
+    /*margin-bottom: 2.0rem*/
+    margin-bottom: 0.2rem;
 }
 
 h2, h3 { font-variant-ligatures: no-common-ligatures }
@@ -531,7 +545,13 @@ blockquote {
         -->
     </div>
     <main>
-        <h1 class="title">New Website</h1>
+        <header>
+            <h1 class="title">New Website</h1>
+            
+            <div class="date">July 26, 2019</div>
+            
+        </header>
+
         <p>My website has always been a pet peeve of mine. Every few months I would get tired of the current design and completely rewrite the website from the ground up. Each time with the intention of starting a blog or actually using the website for something useful. And each time, the website would sit there stagnant, collecting dust.</p><p>Now, I could say that I was simply too busy, but I think my problem was actually with <em>technology</em>. As a programmer, I would write each website in HTML and CSS, and often using Jekyll to build a static site from markdown files.</p>
             
                 <img src="/images/0eb0829b-fcb7-47a6-abdd-5fd9e3e533f2.png"/>

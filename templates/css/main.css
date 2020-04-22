@@ -31,10 +31,24 @@ h1, h2, h3 {
 }
 
 h1.title {
+    margin-bottom: 0.2rem;
+}
+header .date {
+    text-align: center;
+    font-family: "Space Mono", monospace;
+    color: #999999;
+    font-size: 14px;
+}
+header {
+    margin-bottom: 2.0rem;
+}
+
+h1.title {
     font-family: "Heebo", sans-serif;
     text-align: center;
     margin-top: -10px;
-    margin-bottom: 2.0rem
+    /*margin-bottom: 2.0rem*/
+    margin-bottom: 0.2rem;
 }
 
 h2, h3 { font-variant-ligatures: no-common-ligatures }

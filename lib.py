@@ -141,6 +141,7 @@ class NotionWebsiteBuilder:
         self.template_dir = template_dir    # html templates along with associated css and svg
 
         os.makedirs(cache_dir, exist_ok=True)
+        os.makedirs(os.path.join(cache_dir, 'images'), exist_ok=True)
         #os.makedirs(build_dir, exist_ok=True)
 
         # initialize jinja2 template environment
@@ -465,6 +466,7 @@ class NotionWebsiteBuilder:
 
     def render(self, data={}):
         for page in self.cache.values():
+            print(page)
             self.generateBlockCallbacks(page)
 
         # Remove temporary build dir if already exists

@@ -1,12 +1,18 @@
 <html>
 <head>
-    <title>{{ page.title }}</title>
+    <title>{{ page.name }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% endif %}">
 
     <!-- META TAGS -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="{{ page.name }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% endif %}">
+    <meta property="og:image" content="https://azlen.me/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!--<meta property="og:url" content="">-->
 
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -83,7 +89,13 @@
         -->
     </div>
     <main>
-        <h1 class="title">{{ page.name }}</h1>
+        <header>
+            <h1 class="title">{{ page.name }}</h1>
+            {% if page.posted %}
+            <div class="date">{{ fromiso(page.posted.start).strftime("%B %d, %Y") }}</div>
+            {% endif %}
+        </header>
+
         {{ content }}
     </main>
 </body>

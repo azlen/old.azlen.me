@@ -66,23 +66,29 @@ website.templates['blocks']['callout']['👉'] = """
 """
 
 website.templates['blocks']['page'] = """
+{% if id in cache %}
 <a class="pagelink" href="{{ cache[id].path }}">
-  {% if cache[id].thumbnail %}
-    <div class="pagelink-icon" style="background-image: url({{ cache[id].thumbnail[0] }})"></div>
-  {% endif %}
+    {% if cache[id].thumbnail %}
+        <div class="pagelink-icon" style="background-image: url({{ cache[id].thumbnail[0] }})"></div>
+    {% endif %}
 
-  <div class="pagelink-text">
-    <div class="pagelink-text-title">{{ cache[id].name }}</div>
-    <div class="pagelink-text-description">{% if cache[id].description %}{{ cache[id].description }}{% endif %}</div>
-  </div>
+    <div class="pagelink-text">
+        <div class="pagelink-text-title">{{ cache[id].name }}</div>
+        <div class="pagelink-text-description">{% if cache[id].description %}{{ cache[id].description }}{% endif %}</div>
+    </div>
 </a>
+{% else %}
+ERROR {{ id }}
+{% endif %}
 """
+
 def test2(data):
     page_id = data['block']['text'][0][1][0][1]
-    data['block']['cover_image'] = website.cache[page_id]['cover'][0]
-    data['block']['href'] = website.cache[page_id]['path']
-
-    print(data['block'])
+    if page_id in website.cache:
+        data['block']['cover_image'] = website.cache[page_id]['cover'][0]
+        data['block']['href'] = website.cache[page_id]['path']
+    else:
+        print('COVER FOR PAGE ' + page_id + ' NOT FOUND')
 
 website.listen('blocks/callout/🔮', addGlossaryItem)
 website.listen('blocks/callout/👉', test2)
