@@ -328,7 +328,7 @@ class NotionWebsiteBuilder:
                 data['image_source'] = block.source
 
                 file_id = block.get('id')
-                extension = re.match('.*(\..*)', data['image_source']).group(1)
+                extension = re.match('.*(\.[^\?]*)', data['image_source']).group(1)
 
                 caption = block.get('properties.caption')
                 if caption != None:

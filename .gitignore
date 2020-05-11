@@ -4,3 +4,4 @@ secret.py
 .cache.json
 cache/
 temp/
+notes/azlen.json

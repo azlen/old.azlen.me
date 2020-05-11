@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
+
+    <style>
+        {% include 'css/style.css' %}
+
+        body {
+            overflow: hidden;
+        }
+
+        p, li {
+            font-size: 12px;
+            line-height: 17px;
+            -webkit-letter-spacing: -0.017%;
+            -moz-letter-spacing: -0.017%;
+            -ms-letter-spacing: -0.017%;
+            letter-spacing: -0.017%;
+        }
+        h1 { font-size: 20px; }
+        h2 { font-size: 16px; }
+        h3 { font-size: 14px; }
+        .page {
+            border: none;
+            overflow: hidden;
+            padding: 0;
+            height: 100%;
+        }
+        .page > .content {
+            padding: 10px;
+            border-radius: 0;
+            height: 100%;
+        }
+
+        a {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .backlinks {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    {% include 'page.html' %}
+</body>
+</html>

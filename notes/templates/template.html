@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
+
+    <style>
+        {% include 'css/style.css' %}
+    </style>
+
+    <script>
+        {% include 'js/pinch-zoom.min.js' %}
+    </script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+</head>
+<body>
+    <header id="header">
+        <a href="/" id="logo">
+            <svg width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M109 34C109 27.3696 111.634 21.0107 116.322 16.3223C121.011 11.6339 127.37 9 134 9C140.63 9 146.989 11.6339 151.678 16.3223C156.366 21.0107 159 27.3696 159 34C159 40.6304 156.366 46.9893 151.678 51.6777C146.989 56.3661 140.63 59 134 59C127.37 59 121.011 56.3661 116.322 51.6777C111.634 46.9893 109 40.6304 109 34Z" stroke="black" stroke-width="18" stroke-linecap="square"></path>
+                <path d="M16.3223 116.322C11.6339 121.011 9 127.37 9 134C9 140.63 11.6339 146.989 16.3223 151.678C21.0107 156.366 27.3696 159 34 159C40.6304 159 46.9893 156.366 51.6777 151.678C56.3661 146.989 59 140.63 59 134C59 127.37 56.3661 121.011 51.6777 116.322C46.9893 111.634 40.6304 109 34 109C27.3696 109 21.0107 111.634 16.3223 116.322Z" stroke="black" stroke-width="18" stroke-linecap="square"></path>
+                <path d="M9 54C9 52.4471 9 49.786 9 46.5086C9 25.7979 25.7893 9.00001 46.5 9.00002V9.00002C67.2107 9.00004 84 25.7894 84 46.5V121.5C84 142.211 100.789 159 121.5 159V159C142.211 159 159 142.202 159 121.491C159 118.214 159 115.553 159 114" stroke="black" stroke-width="18" stroke-linecap="square"></path>
+            </svg>
+        </a>
+        <!--<div class="stat">wc {{ website_wordcount }}<br>
+        pg {{ website_pages }}</div>-->
+    </header> 
+    <!--<div class="pinch-zoom-container">-->
+        <div class="pinch-zoom">
+            {% include 'page.html' %}
+        </div>
+    <!--</div>--> 
+
+    
+    <script>
+        let pages = ["{{ uuid }}"]
+
+        //let globalLevel = 1;
+        function fetchNote(uuid, level) {
+            if(pages.indexOf(uuid) != -1) {
+                let page = document.querySelector('.page[data-uuid="' + uuid + '"]');
+                page.scrollIntoView();
+                return;
+            }
+
+            level = Number(level) || pages.length;
+
+            const request = new Request('/' + uuid + '/page.html');
+            fetch(request).then(function(response) {
+                response.text().then(function(text) {
+                    let container = document.querySelector('div.pinch-zoom');
+                    let children = Array.prototype.slice.call(container.children);
+
+                    console.log(children);
+
+                    let fragment = document.createElement('template');
+                    
+                    for(let i = level; i < pages.length; i++) {
+                        container.removeChild(children[i]);
+                        destroyPreviews(children[i]);
+                        /*console.log(pages[i].tips)
+                        pages[i].tips.forEach(function(tip) {
+                            console.log(tip)
+                            tip.destroy()
+                        })*/
+                    }
+                    pages = pages.slice(0, level);
+
+                    fragment.innerHTML = text
+
+                    let element = fragment.content.querySelector('.page');
+
+                    pages.push(uuid);
+
+                    container.appendChild(element);
+                    
+                    
+                    setTimeout(function(element, level) {
+                        initializePreviews(element, level+1);
+                        element.scrollIntoView();
+                    }.bind(null, element, level), 10)
+                    
+
+                    updateLinkStatuses();
+                })
+            })
+        }
+
+        function updateLinkStatuses() {
+            let links = Array.prototype.slice.call(document.querySelectorAll('a[data-uuid]'));
+
+            links.forEach(function(link) {
+                if(pages.indexOf(link.dataset.uuid) !== -1) {
+                    link.classList.add('linked')
+                    if(link._tippy) link._tippy.disable();
+                } else {
+                    link.classList.remove('linked')
+                    if(link._tippy) link._tippy.enable();
+                }
+            })
+        }
+
+        function destroyPreviews(page) {
+            links = Array.prototype.slice.call(page.querySelectorAll('a[data-uuid]'))
+            links.forEach(function(link) {
+                if(link.hasOwnProperty('_tippy')) {
+                    link._tippy.destroy();
+                }
+            })
+        }
+
+        function initializePreviews(page, level) {
+            level = level || pages.length;
+
+            let tippyOptions = {
+                allowHTML: true,
+                theme: 'light',
+                interactive: true,
+                interactiveBorder: 10,
+                delay: 100,
+                touch: 'hold',
+                maxWidth: 'none',
+                inlinePositioning: false,
+                placement: 'right',
+            }
+
+            links = Array.prototype.slice.call(page.querySelectorAll('a[data-uuid]'))
+
+            links.forEach(function(element) {
+                uuid = element.dataset.uuid;
+                element.dataset.level = level;
+
+                if(element.classList.contains('internal')) {
+                    tip = tippy(element, Object.assign({}, tippyOptions, {
+                        content: '<iframe width="400px" height="300px" src="/' + uuid + '/embed.html"></iframe>',
+                    }))
+                }
+
+                //pages[level-1].tips.push(tip)
+
+                element.addEventListener('click', function(e) {
+                    if(!e.ctrlKey && !e.metaKey) {
+                        e.preventDefault();
+
+                        fetchNote(this.dataset.uuid, this.dataset.level)
+                    }
+                })
+            })
+
+            privateLinks = Array.prototype.slice.call(page.querySelectorAll('a.internal.private'))
+
+            privateLinks.forEach(function(element) {
+                if(element.classList.contains('internal')) {
+                    tip = tippy(element, Object.assign({}, tippyOptions, {
+                        allowHTML: false,
+                        content: 'The content of this page is private',
+                        //inlinePositioning: true,
+                        arrow: false,
+                        //followCursor: 'initial',
+                        placement: 'top'
+                    }))
+                }
+            })
+            
+        }
+
+        initializePreviews(document.querySelector('.page'));
+
+        
+        let el, pz;
+        window.onload = function() {
+            el = document.querySelector('div.pinch-zoom');
+            pz = new PinchZoom(el, {
+                use2d: false,
+                maxZoom: 1,
+                minZoom: 0.1,
+                draggableUnzoomed: false,
+                onDragUpdate: function(object, event) {
+                    fixProps(object);
+                },
+            });
+
+            //pz.setContainerY(window.innerHeight)
+            //pz.setContainerX(el.offsetWidth)
+            pz.sanitize = function(){}
+            pz.zoomOutAnimation = function(){}
+            pz.sanitizeOffset = function(offset) { return offset }
+            pz.getInitialZoomFactor = function() { return 1 }
+            pz.computeInitialOffset = function() { this.initialOffset = {x: 0, y: 0} }
+            pz.resetOffset = function() {}
+            pz.canDrag = function() { return true }
+
+            function fixProps(object) {
+                object.offset.x = Math.min(object.offset.x, 0);
+
+                object.offset.y = -((1-object.zoomFactor) * window.innerHeight/2) / 1.5;
+                el.style.setProperty('height', window.innerHeight / object.zoomFactor + 'px');
+            }
+            fixProps(pz);
+            window.addEventListener('resize', fixProps.bind(null, pz));
+
+            pz.updateAspectRatio();
+            pz.setupOffsets();
+
+            window.addEventListener('wheel', function(e) {
+                if(e.altKey || e.metaKey || e.ctrlKey) {
+
+                    prevZoomFactor = pz.zoomFactor;
+                    pz.zoomFactor = Math.max(Math.min(pz.zoomFactor + e.deltaY / 2000, 1), 0.1);
+                    deltaZoomFactor = pz.zoomFactor - prevZoomFactor;
+                    pz.offset.x += deltaZoomFactor / 2 + deltaZoomFactor * el.parentElement.offsetWidth/2;
+                    fixProps(pz);
+                    pz.update();
+                    e.preventDefault();
+                }
+            }, { passive: false })
+
+            pz.offset = {x: 0, y: 0}
+        }
+
+
+        /*window.onload = function() {
+            el = document.querySelector('div.pinch-zoom');
+
+            panzoom(el, {
+                beforeWheel: function(e) {
+                    // allow wheel-zoom only if altKey is down. Otherwise - ignore
+                    var shouldIgnore = !e.altKey;
+                    return shouldIgnore;
+                },
+                filterKey: function() {
+                    // don't let panzoom handle this event:
+                    return true;
+                }
+            });
+        }*/
+    </script>
+</body>
+</html>

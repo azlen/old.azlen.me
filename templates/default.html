@@ -64,7 +64,12 @@
             <nav>
                 {% for p in collection.pages | rejectattr('navigation', 'none') | sort(attribute="navigation") %}
                     {% if p.navigation > 0 %}
-                        <a href="{{ p.path }}">{{ p.name }}</a>
+                        <a href="{{ p.redirect or p.path }}">
+                            {{ p.name }}
+                            {% if p.tag %}
+                                <span class="tag {{ {'new':'blue', 'updated':'green'}.get(p.tag) or '' }}">{{ p.tag }}</span>
+                            {% endif %}
+                        </a>
                     {% endif %}
                 {% endfor %}
                 <!--<a href="/about">About</a>

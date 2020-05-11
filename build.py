@@ -5,6 +5,8 @@ import regex as re
 import os
 import argparse
 
+import sys
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--push', action='store_true', help='Commit and push new changes')
 parser.add_argument('--forcepush', action='store_true', help='Commit and push new changes')
@@ -135,6 +137,17 @@ website.env.globals['fromiso'] = fromiso
 #def wordcount_to_freq(wordcount):
 #   return 
 website.env.filters['wordcount_to_freq'] = lambda x: int(min(200.0 + max(x, 0) / 5000.0 * 19700.0, 19900.0) / 100.0) * 100
+
+cwd = os.getcwd()
+
+os.chdir(os.path.join(os.getcwd(), 'notes'))
+import importlib
+notes = importlib.import_module('notes.build')
+
+os.chdir(cwd)
+
+sitedata['wordcount'] += notes.wordcount
+sitedata['pagecount'] += notes.pagecount
 
 website.render({
     'site': sitedata

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
+
+    <style>
+        html, body {
+    padding: 0;
+    margin: 0;
+    background: #EEEEEE;
+
+    font-family: 'Nunito Sans', sans-serif;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 17px;
+}
+
+p, li {
+    line-height: 24px;
+    -webkit-letter-spacing: -0.024%;
+    -moz-letter-spacing: -0.024%;
+    -ms-letter-spacing: -0.024%;
+    letter-spacing: -0.024%;
+}
+
+body {
+    display: flex;
+}
+
+#header {
+    flex: 0 0 1;
+    background: #FFFFFF;
+    border-style: solid;
+    border-color: #DDDDDD;
+    border-width: 0px;
+    border-right-width: 1px;
+
+    padding: 48px 20px;
+}
+
+#logo {
+    display: block;
+    /*position: absolute;*/
+    /*margin: 48px 20px;*/
+}
+#logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.stat {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8px;
+}
+
+.pinch-zoom-container {
+    flex: 1;
+    /*position: inherit !important;*/
+    height: 100%;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    padding: 0px 15px;
+    
+}
+.pinch-zoom {
+    max-width: 100%;
+}
+
+.page {
+    white-space: normal;
+    display: inline-block;
+    width: 620px;
+    padding: 20px 15px 100px 15px;
+    max-width: 100%;
+    height: 100% !important;
+    max-height: 100%;
+    overflow-y: auto;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+.page:last-child {
+    margin-right: 15px;
+}
+
+.page > .content {
+    background: #FFFFFF;
+    padding: 20px 50px;
+    /*position: relative;*/
+    border-radius: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    opacity: 0.5;
+}
+a.internal {
+    color: #FF3E3E;
+}
+a.external {
+    color: #F9C33B;
+}
+
+a.internal.linked {
+    background: rgba(255, 62, 62, 0.25);
+}
+
+a.internal.private {
+    color: #AAAAAA;
+}
+
+code {
+    white-space: pre;
+    font-size: 13px;
+    background: #EEEEEE;
+    padding: 1px 10px;
+    border: 1px solid #BBB;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+img {
+    width: 100%;
+}
+
+/*p > span {
+    background-color: #666666;
+}
+p > span a {
+    background-color: #FF0000;
+}*/
+
+#svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    user-select: none;
+}
+
+iframe {
+    overflow: hidden;
+    overflow-y: hidden;
+    border: none;
+}
+
+/*.tippy-box {
+    position: relative;
+}
+.tippy-box:before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+}
+
+.tippy-box[data-placement^=right]>.tippy-arrow:before {
+    left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;
+}
+
+[data-tippy-root] {
+    left: 10px !important;
+    top: -20px !important;
+}*/
+
+.tippy-box>.tippy-arrow:before {
+    /*left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;*/
+    transform: scale(2);
+}
+
+
+.backlinks {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+    /*margin: 15px;*/
+    margin-top: 20px;
+}
+
+.backlinks h3 {
+    color: #666666;
+    margin: 0;
+    padding: 15px 10px;
+}
+
+.backlinks-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.backlinks .backlink-item {
+    width: 50%;
+    max-width: calc(49%-10px);
+    display: inline-block;
+    color: #000000;
+    vertical-align: top;
+    padding: 0px 10px;
+    border-radius: 10px;
+    transition: all .15s ease-out;
+    box-sizing: border-box;
+}
+.backlinks .backlink-item.linked {
+    background: rgba(255, 62, 62, 0.1);
+}
+.backlinks .backlink-item:hover {
+    background: #EBEBEB;
+    opacity: 1;
+}
+.backlinks .backlink-item.linked:hover {
+    background: rgba(255, 62, 62, 0.25);
+}
+.backlinks a.backlink-item > p {
+    font-size: 12px;
+    line-height: 16px;
+}
+.backlink-text {
+    opacity: 0.5;
+}
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+
+    #header {
+        border-right-width: 0;
+        border-bottom-width: 1px;
+        padding: 10px 30px;
+    }
+
+    #logo {
+        margin: 0;
+    }
+
+
+    #logo svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    #header > * {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .pinch-zoom-container {
+        padding: 0;
+    }
+
+    .page > .content {
+        padding: 10px 20px;
+    }
+
+    .backlinks .backlink-item {
+        display: block;
+        width: 100%;
+    }
+}
+
+        body {
+            overflow: hidden;
+        }
+
+        p, li {
+            font-size: 12px;
+            line-height: 17px;
+            -webkit-letter-spacing: -0.017%;
+            -moz-letter-spacing: -0.017%;
+            -ms-letter-spacing: -0.017%;
+            letter-spacing: -0.017%;
+        }
+        h1 { font-size: 20px; }
+        h2 { font-size: 16px; }
+        h3 { font-size: 14px; }
+        .page {
+            border: none;
+            overflow: hidden;
+            padding: 0;
+            height: 100%;
+        }
+        .page > .content {
+            padding: 10px;
+            border-radius: 0;
+            height: 100%;
+        }
+
+        a {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .backlinks {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page" data-uuid="mGB7thFQ">
+    <div class="content">
+        <h1>Games are inherently engaging mediums</h1>
+        
+            <p><span>Unlike books and videos, games require constant participation. Good games keep balance of flow state between difficulty and skill. Too difficult and the player will give up, too easy and there is no challenge.</span></p>
+        
+            <p><span><a class="internal" data-uuid="87c5trme" href="/87c5trme">Engaging mediums encourage thought</a>, and games encourage active thought and strategization within the bounded world of the game. While playing a game we are actively learning a deep network of information and strategy, but this information often does little to transfer into real-world contexts</span></p>
+        
+            <p><span>How might we take inspiration from games to design more engaging mediums for learning?<ul><li>Games give a set of verbs to manipulate the game world (<a class="internal" data-uuid="aYfD38Yo" href="/aYfD38Yo">Design verbs not objects</a>), known as game mechanics. There are typically one or two core mechanics (which define the genre) and then many more layers which can be introduced throughout playing the game.</li><li>Games present challenges (monsters, puzzles) which you must use these game mechanics to overcome. Often in new or interesting ways.</li><li>Games give the player agency over exploring and manipulating the game world. You can spend lots of time in one location or you can speed run through the game in as little time as possible.</li><li>Games often hide secrets and achievements that you can unlock. These are optional but give an extra challenge which either lets you further develop your skill or attracts you to come back later.</li><li>Some games often go over familiar locations multiple times but with different challenges or abilities you pick up along the way each time.</li><li>Some games will include a timer to speed you up and give a sense of impending danger.</li><li>Games often have leaderboards for high-achieving players</li><li>Engaging games will often have good pacing, alternating between slow relaxed gameplay and fast-paced battles or challenges<ul><li><iframe allowfullscreen="true">, </iframe></li></ul></li></ul></span></p>
+        
+    </div>
+
+    
+    <div class="backlinks">
+        <h3>Links to this note</h3>
+        <div class="backlinks-container">
+        
+            <a class="backlink-item" data-uuid="87c5trme" href="/87c5trme">
+                <p class="backlink-title">Engaging mediums encourage thought</p>
+                <p class="backlink-text">It is difficult however to design engaging mediums. This could be because engagement takes effort on the part of the participant, or perhaps it is because we don't know how to design engaging mediums well. It is why many games have a tutorial, and some of the best designed games teach you naturally through gameplay. Games are inherently engaging mediums but only within the bounded world of the game.</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="SxRusvcR" href="/SxRusvcR">
+                <p class="backlink-title">What writing can learn from game design</p>
+                <p class="backlink-text">Games are inherently engaging mediums, and through taking lessons from game design perhaps we can learn to make our writing more engaging or imagine new ways to expand the medium of writing itself.</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="MtBNxyXK" href="/MtBNxyXK">
+                <p class="backlink-title">Personal projects structure learning and engagement</p>
+                <p class="backlink-text">Personal projects solve this. When working on a project, reading and researching become steps towards a bigger goal or motivation. That which was previously passive content forms a new meaning as being a tool for bringing you closer to this goal. Similarly Games are inherently engaging mediums because they give the player a goal along with tools to work towards that goal.</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="V42qDrst" href="/V42qDrst">
+                <p class="backlink-title">Three engagement factors</p>
+                <p class="backlink-text">Most mediums we interact with are passive: books, movies, social media. However Games are inherently engaging mediums because they combine three important factors for engagement: goals, spaces, and tools.</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="k9xDPpLQ" href="/k9xDPpLQ">
+                <p class="backlink-title">Enabling environment</p>
+                <p class="backlink-text">Andy mentions that Most games aren’t enabling environments which I find interesting because Games are inherently engaging mediums. But not all engaging mediums are enabling environments. Thinking back to Three engagement factors, a common pattern across the examples is the environment of curiosity: enabling environments provide a space and tools to navigate that space towards your own personal goals (and not the goals that the environment places upon you like in games or school)</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="iZN9MNDr" href="/iZN9MNDr">
+                <p class="backlink-title">Δ Model of engagement</p>
+                <p class="backlink-text">Engagement is an active loop of participation, or conversation with a medium. Games are inherently engaging mediums because they create create active participation. Conversely books and television tend to be primarily immersive mediums (Immersive mediums replace thought) which do not require active participation.</p>
+            </a>
+        
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>

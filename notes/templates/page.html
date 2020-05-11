@@ -1,0 +1,22 @@
+<div class="page" data-uuid="{{ uuid }}">
+    <div class="content">
+        <h1>{{ title }}</h1>
+        {% for child in blocks %}
+            <p><span>{{ child.html }}</span></p>
+        {% endfor %}
+    </div>
+
+    {% if references | length > 0 %}
+    <div class="backlinks">
+        <h3>Links to this note</h3>
+        <div class="backlinks-container">
+        {% for link in references %}
+            <a class="backlink-item" data-uuid="{{ link.link_from }}" href="/{{ link.link_from }}">
+                <p class="backlink-title">{{ link.title }}</p>
+                <p class="backlink-text">{{ link.text }}</p>
+            </a>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>

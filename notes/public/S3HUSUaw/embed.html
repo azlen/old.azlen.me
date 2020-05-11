@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
+
+    <style>
+        html, body {
+    padding: 0;
+    margin: 0;
+    background: #EEEEEE;
+
+    font-family: 'Nunito Sans', sans-serif;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 17px;
+}
+
+p, li {
+    line-height: 24px;
+    -webkit-letter-spacing: -0.024%;
+    -moz-letter-spacing: -0.024%;
+    -ms-letter-spacing: -0.024%;
+    letter-spacing: -0.024%;
+}
+
+body {
+    display: flex;
+}
+
+#header {
+    flex: 0 0 1;
+    background: #FFFFFF;
+    border-style: solid;
+    border-color: #DDDDDD;
+    border-width: 0px;
+    border-right-width: 1px;
+
+    padding: 48px 20px;
+}
+
+#logo {
+    display: block;
+    /*position: absolute;*/
+    /*margin: 48px 20px;*/
+}
+#logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.stat {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8px;
+}
+
+.pinch-zoom-container {
+    flex: 1;
+    /*position: inherit !important;*/
+    height: 100%;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    padding: 0px 15px;
+    
+}
+.pinch-zoom {
+    max-width: 100%;
+}
+
+.page {
+    white-space: normal;
+    display: inline-block;
+    width: 620px;
+    padding: 20px 15px 100px 15px;
+    max-width: 100%;
+    height: 100% !important;
+    max-height: 100%;
+    overflow-y: auto;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+.page:last-child {
+    margin-right: 15px;
+}
+
+.page > .content {
+    background: #FFFFFF;
+    padding: 20px 50px;
+    /*position: relative;*/
+    border-radius: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    opacity: 0.5;
+}
+a.internal {
+    color: #FF3E3E;
+}
+a.external {
+    color: #F9C33B;
+}
+
+a.internal.linked {
+    background: rgba(255, 62, 62, 0.25);
+}
+
+a.internal.private {
+    color: #AAAAAA;
+}
+
+code {
+    white-space: pre;
+    font-size: 13px;
+    background: #EEEEEE;
+    padding: 1px 10px;
+    border: 1px solid #BBB;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+img {
+    width: 100%;
+}
+
+/*p > span {
+    background-color: #666666;
+}
+p > span a {
+    background-color: #FF0000;
+}*/
+
+#svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    user-select: none;
+}
+
+iframe {
+    overflow: hidden;
+    overflow-y: hidden;
+    border: none;
+}
+
+/*.tippy-box {
+    position: relative;
+}
+.tippy-box:before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+}
+
+.tippy-box[data-placement^=right]>.tippy-arrow:before {
+    left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;
+}
+
+[data-tippy-root] {
+    left: 10px !important;
+    top: -20px !important;
+}*/
+
+.tippy-box>.tippy-arrow:before {
+    /*left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;*/
+    transform: scale(2);
+}
+
+
+.backlinks {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+    /*margin: 15px;*/
+    margin-top: 20px;
+}
+
+.backlinks h3 {
+    color: #666666;
+    margin: 0;
+    padding: 15px 10px;
+}
+
+.backlinks-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.backlinks .backlink-item {
+    width: 50%;
+    max-width: calc(49%-10px);
+    display: inline-block;
+    color: #000000;
+    vertical-align: top;
+    padding: 0px 10px;
+    border-radius: 10px;
+    transition: all .15s ease-out;
+    box-sizing: border-box;
+}
+.backlinks .backlink-item.linked {
+    background: rgba(255, 62, 62, 0.1);
+}
+.backlinks .backlink-item:hover {
+    background: #EBEBEB;
+    opacity: 1;
+}
+.backlinks .backlink-item.linked:hover {
+    background: rgba(255, 62, 62, 0.25);
+}
+.backlinks a.backlink-item > p {
+    font-size: 12px;
+    line-height: 16px;
+}
+.backlink-text {
+    opacity: 0.5;
+}
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+
+    #header {
+        border-right-width: 0;
+        border-bottom-width: 1px;
+        padding: 10px 30px;
+    }
+
+    #logo {
+        margin: 0;
+    }
+
+
+    #logo svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    #header > * {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .pinch-zoom-container {
+        padding: 0;
+    }
+
+    .page > .content {
+        padding: 10px 20px;
+    }
+
+    .backlinks .backlink-item {
+        display: block;
+        width: 100%;
+    }
+}
+
+        body {
+            overflow: hidden;
+        }
+
+        p, li {
+            font-size: 12px;
+            line-height: 17px;
+            -webkit-letter-spacing: -0.017%;
+            -moz-letter-spacing: -0.017%;
+            -ms-letter-spacing: -0.017%;
+            letter-spacing: -0.017%;
+        }
+        h1 { font-size: 20px; }
+        h2 { font-size: 16px; }
+        h3 { font-size: 14px; }
+        .page {
+            border: none;
+            overflow: hidden;
+            padding: 0;
+            height: 100%;
+        }
+        .page > .content {
+            padding: 10px;
+            border-radius: 0;
+            height: 100%;
+        }
+
+        a {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .backlinks {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page" data-uuid="S3HUSUaw">
+    <div class="content">
+        <h1>Immersive mediums replace thought</h1>
+        
+            <p><span>In an fMRI study, certain films have very high inter-subject correlation of thought patterns (Hasson et al, 2008). This points towards film literally replacing our own internal narrative of thought with its own narrative as we become deeply immersed into the film. A similar effect can be seen across any medium of consumption. When we read we stepping into the author's thoughts or world they have constructed, often leaving our own thought process behind.</span></p>
+        
+            <p><span>The level of immersivity depends both on the medium and the reader. Some may be more engaged with material than others: writing, questioning, taking notes, turning the medium into more of a conversation (<a class="internal" data-uuid="V42qDrst" href="/V42qDrst">Three engagement factors</a>).</span></p>
+        
+            <p><span>In opposition with: <a class="internal" data-uuid="87c5trme" href="/87c5trme">Engaging mediums encourage thought</a></span></p>
+        
+            <p><span><h2>References</h2></span></p>
+        
+            <p><span>Hasson, U., Landesman, O., Knappmeyer, B., Vallines, I., Rubin, N., & Heeger, D. J. (2008). Neurocinematics: The Neuroscience of Film. Projections, 2(1), 1–26. doi:10.3167/proj.2008.020102</span></p>
+        
+    </div>
+
+    
+    <div class="backlinks">
+        <h3>Links to this note</h3>
+        <div class="backlinks-container">
+        
+            <a class="backlink-item" data-uuid="87c5trme" href="/87c5trme">
+                <p class="backlink-title">Engaging mediums encourage thought</p>
+                <p class="backlink-text">In opposition with: Immersive mediums replace thought</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="WNJbLJTE" href="/WNJbLJTE">
+                <p class="backlink-title">Benefits and disadvantages of video as a medium</p>
+                <p class="backlink-text">Important: Immersive mediums replace thought</p>
+            </a>
+        
+            <a class="backlink-item" data-uuid="iZN9MNDr" href="/iZN9MNDr">
+                <p class="backlink-title">Δ Model of engagement</p>
+                <p class="backlink-text">Engagement is an active loop of participation, or conversation with a medium. Games are inherently engaging mediums because they create create active participation. Conversely books and television tend to be primarily immersive mediums (Immersive mediums replace thought) which do not require active participation.</p>
+            </a>
+        
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>
