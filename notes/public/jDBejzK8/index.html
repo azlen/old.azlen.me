@@ -311,6 +311,10 @@ iframe {
         display: block;
         width: 100%;
     }
+
+    .page {
+        padding-bottom: 150px;
+    }
 }
     </style>
 
@@ -434,7 +438,8 @@ iframe {
                 interactive: true,
                 interactiveBorder: 10,
                 delay: 100,
-                touch: 'hold',
+                //touch: 'hold',
+                touch: 'none',
                 maxWidth: 'none',
                 inlinePositioning: false,
                 placement: 'right',
@@ -504,7 +509,7 @@ iframe {
             pz.getInitialZoomFactor = function() { return 1 }
             pz.computeInitialOffset = function() { this.initialOffset = {x: 0, y: 0} }
             pz.resetOffset = function() {}
-            pz.canDrag = function() { return true }
+            pz.canDrag = function() { return false }
 
             function fixProps(object) {
                 object.offset.x = Math.min(object.offset.x, 0);
@@ -533,6 +538,17 @@ iframe {
 
             pz.offset = {x: 0, y: 0}
         }
+
+        /*function fixMobile() {
+            if(window.innerWidth < 450) {
+                pz.disable()
+            } else {
+                pz.enable()
+            }
+        }*/
+        
+        fixMobile()
+        window.addEventListener('resize', fixMobile)
 
 
         /*window.onload = function() {

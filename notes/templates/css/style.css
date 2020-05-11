@@ -265,4 +265,8 @@ iframe {
         display: block;
         width: 100%;
     }
+
+    .page {
+        padding-bottom: 150px;
+    }
 }
