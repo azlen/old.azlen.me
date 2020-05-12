@@ -10,7 +10,24 @@
     <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
 
     <style>
-        html, body {
+        /*:root {
+    --background-color: #EEEEEE;
+    --
+    --page-background: #212121;
+    --text-color: #ededed;
+    --color-alpha: #50a8d8;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #111;
+		--page-background: #212121;
+		--text-color: #ededed;
+		--color-alpha: #50a8d8;
+	}
+}*/
+
+html, body {
     padding: 0;
     margin: 0;
     background: #EEEEEE;
@@ -109,14 +126,14 @@ a:hover {
     opacity: 0.5;
 }
 a.internal {
-    color: #FF3E3E;
+    color: #37AD49;
 }
 a.external {
-    color: #F9C33B;
+    color: rgb(125, 59, 249);
 }
 
 a.internal.linked {
-    background: rgba(255, 62, 62, 0.25);
+    background: rgba(55, 157, 74, 0.25);
 }
 
 a.internal.private {
@@ -199,7 +216,8 @@ iframe {
 }
 
 .backlinks h3 {
-    color: #666666;
+    /*color: #666666;*/
+    opacity: 0.5;
     margin: 0;
     padding: 15px 10px;
 }
@@ -221,14 +239,14 @@ iframe {
     box-sizing: border-box;
 }
 .backlinks .backlink-item.linked {
-    background: rgba(255, 62, 62, 0.1);
+    background: rgba(55, 157, 74, 0.1);
 }
 .backlinks .backlink-item:hover {
     background: #EBEBEB;
     opacity: 1;
 }
 .backlinks .backlink-item.linked:hover {
-    background: rgba(255, 62, 62, 0.25);
+    background: rgba(55, 157, 74, 0.25);
 }
 .backlinks a.backlink-item > p {
     font-size: 12px;
@@ -282,6 +300,48 @@ iframe {
         padding-bottom: 150px;
     }
 }
+
+body.dark {
+    background-color: #222222;
+    color: #FFFFFF;
+}
+
+body.dark #header {
+    background-color: #000000;
+    border-color: #222222;
+}
+
+body.dark #logo svg * {
+    stroke: #FFFFFF;
+}
+
+body.dark .page > .content {
+    background-color: #000000;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.25);
+}
+
+body.dark .backlinks {
+    background-color: #000000;
+}
+
+body.dark .backlinks h3 {
+    color: #999999;
+}
+
+body.dark .backlinks .backlink-item {
+    color: #FFFFFF;
+}
+
+body.dark .backlinks .backlink-item.linked {
+    background: rgba(55, 157, 74, 0.2);
+}
+body.dark .backlinks .backlink-item:hover {
+    background: #222222;
+}
+body.dark .backlinks .backlink-item.linked:hover {
+    background: rgba(55, 157, 74, 0.3);
+}
+
 
         body {
             overflow: hidden;
