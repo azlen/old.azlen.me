@@ -75,6 +75,8 @@
     <script>
         let pages = ["{{ uuid }}"]
 
+        let switchDirectionWindowWidth = 900
+
         //let globalLevel = 1;
         function fetchNote(uuid, level) {
             if(pages.indexOf(uuid) != -1) {
@@ -116,6 +118,7 @@
                     
                     
                     setTimeout(function(element, level) {
+                        element.dataset.level = level+1
                         initializePreviews(element, level+1);
                         element.scrollIntoView();
                     }.bind(null, element, level), 10)
@@ -162,7 +165,7 @@
                 touch: 'none',
                 maxWidth: 'none',
                 inlinePositioning: false,
-                placement: 'right',
+                placement: window.innerWidth > switchDirectionWindowWidth ? 'right' : 'top'
             }
 
             links = Array.prototype.slice.call(page.querySelectorAll('a[data-uuid]'))
@@ -206,6 +209,18 @@
         }
 
         initializePreviews(document.querySelector('.page'));
+
+        let lastWidth = window.innerWidth
+        window.addEventListener('resize', function(e) {
+            if((window.innerWidth > switchDirectionWindowWidth) != (lastWidth > switchDirectionWindowWidth)) {
+                let pages = [].slice.call(document.querySelectorAll('.page[data-uuid]'))
+                pages.forEach(function(page) {
+                    destroyPreviews(page)
+                    initializePreviews(page, Number(page.dataset.level))
+                })
+            }
+            lastWidth = window.innerWidth
+        })
 
         
         let el, pz;
@@ -267,8 +282,8 @@
             }
         }*/
         
-        fixMobile()
-        window.addEventListener('resize', fixMobile)
+        //fixMobile()
+        //window.addEventListener('resize', fixMobile)
 
 
         /*window.onload = function() {

@@ -398,7 +398,7 @@ body.dark .backlinks .backlink-item.linked:hover {
     </header> 
     <!--<div class="pinch-zoom-container">-->
         <div class="pinch-zoom">
-            <div class="page" data-uuid="g3tibYFv">
+            <div class="page" data-uuid="g3tibYFv" data-level="1">
     <div class="content">
         <h1>About these notes</h1>
         
@@ -420,6 +420,8 @@ body.dark .backlinks .backlink-item.linked:hover {
     
     <script>
         let pages = ["g3tibYFv"]
+
+        let switchDirectionWindowWidth = 900
 
         //let globalLevel = 1;
         function fetchNote(uuid, level) {
@@ -462,6 +464,7 @@ body.dark .backlinks .backlink-item.linked:hover {
                     
                     
                     setTimeout(function(element, level) {
+                        element.dataset.level = level+1
                         initializePreviews(element, level+1);
                         element.scrollIntoView();
                     }.bind(null, element, level), 10)
@@ -508,7 +511,7 @@ body.dark .backlinks .backlink-item.linked:hover {
                 touch: 'none',
                 maxWidth: 'none',
                 inlinePositioning: false,
-                placement: 'right',
+                placement: window.innerWidth > switchDirectionWindowWidth ? 'right' : 'top'
             }
 
             links = Array.prototype.slice.call(page.querySelectorAll('a[data-uuid]'))
@@ -552,6 +555,18 @@ body.dark .backlinks .backlink-item.linked:hover {
         }
 
         initializePreviews(document.querySelector('.page'));
+
+        let lastWidth = window.innerWidth
+        window.addEventListener('resize', function(e) {
+            if((window.innerWidth > switchDirectionWindowWidth) != (lastWidth > switchDirectionWindowWidth)) {
+                let pages = [].slice.call(document.querySelectorAll('.page[data-uuid]'))
+                pages.forEach(function(page) {
+                    destroyPreviews(page)
+                    initializePreviews(page, Number(page.dataset.level))
+                })
+            }
+            lastWidth = window.innerWidth
+        })
 
         
         let el, pz;
@@ -613,8 +628,8 @@ body.dark .backlinks .backlink-item.linked:hover {
             }
         }*/
         
-        fixMobile()
-        window.addEventListener('resize', fixMobile)
+        //fixMobile()
+        //window.addEventListener('resize', fixMobile)
 
 
         /*window.onload = function() {
