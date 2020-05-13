@@ -137,15 +137,19 @@ def _processInternalLink(match, block):
 def renderMarkdown(text, ignoreLinks=False):
     if ':hiccup' in text:
         # THIS DOES NOT WORK WELL !!! VERY BROKEN
-        data = re.sub(r'(?!=[}\]\"\'])[\s\n]+?([\[:\{\"])', r', \1', text.strip(), flags=re.MULTILINE)
-        data = re.sub(r'{.*?([^{}\[\]]*?:(\w+))+', r'{"\2":', data)
-        data = re.sub(r':(\w+)', r'"\1",', data)
-        data = re.sub(r',+', r',', data)
-        data = re.sub(r':,', r':', data)
+        print(text)
+
+        data = re.sub(r'\n', '', text.strip())
+        data = re.sub(r'(\[\s*?):([\w-]+)', r'\1"\2",', data)
+        data = re.sub(r':([\w-]+)', r'"\1":', data)
+        data = re.sub(r'([\}\]\:][\s]*?)(\w+)([\s]*?[\[\{\]])', r'\1"\2"\3', data)
+        data = re.sub(r'([\}\]\"])([\s\n]*?)([\[\{\"])', r'\1,\2\3', data)
+
+        print(data[9:])
 
         #print(data[10:])
         #print(json.loads(data[10:]))
-        return convert(json.loads(data[10:]))
+        return convert(json.loads(data[9:]))
 
     if ignoreLinks == False:
         global wordcount

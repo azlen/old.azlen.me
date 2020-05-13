@@ -155,15 +155,20 @@ h1 {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     opacity: 0.5;
+    /*text-decoration: underline;*/
 }
 a.internal {
-    color: #37AD49;
+    color: rgb(73, 197, 91);
 }
 a.external {
-    color: rgb(125, 59, 249);
+    color: rgb(147, 100, 235);
+}
+a.settings {
+    color: rgb(250, 126, 54);
 }
 
 a.internal.linked {
@@ -393,8 +398,8 @@ body.dark .backlinks .backlink-item.linked:hover {
                 <path d="M9 54C9 52.4471 9 49.786 9 46.5086C9 25.7979 25.7893 9.00001 46.5 9.00002V9.00002C67.2107 9.00004 84 25.7894 84 46.5V121.5C84 142.211 100.789 159 121.5 159V159C142.211 159 159 142.202 159 121.491C159 118.214 159 115.553 159 114" stroke="black" stroke-width="18" stroke-linecap="square"></path>
             </svg>
         </a>
-        <!--<div class="stat">wc 9330<br>
-        pg 76</div>-->
+        <!--<div class="stat">wc 9372<br>
+        pg 77</div>-->
     </header> 
     <!--<div class="pinch-zoom-container">-->
         <div class="pinch-zoom">
@@ -436,6 +441,20 @@ body.dark .backlinks .backlink-item.linked:hover {
         let pages = ["iZN9MNDr"]
 
         let switchDirectionWindowWidth = 900
+
+        let darkmode = false;
+        function toggleDarkMode() {
+            window.localStorage.setItem('darkmode', !darkmode)
+            updateDarkMode()
+        }
+
+        function updateDarkMode() {
+            darkmode = localStorage.getItem('darkmode') === 'true'
+            document.body.classList.toggle('dark', darkmode)
+        }
+        updateDarkMode()
+
+        window.addEventListener('storage', updateDarkMode)
 
         //let globalLevel = 1;
         function fetchNote(uuid, level) {
@@ -512,32 +531,40 @@ body.dark .backlinks .backlink-item.linked:hover {
             })
         }
 
+        let tippyOptions = {
+            allowHTML: true,
+            theme: 'light',
+            interactive: true,
+            interactiveBorder: 10,
+            delay: 100,
+            //touch: 'hold',
+            touch: 'none',
+            maxWidth: 'none',
+            inlinePositioning: false,
+            placement: 'right'
+        }
+
+        function createPreview(link, overrideOptions) {
+            uuid = link.dataset.uuid
+            level = Number(link.dataset.level)
+            tip = tippy(link, Object.assign({}, tippyOptions, {
+                content: '<iframe width="400px" height="300px" src="/' + uuid + '/embed.html"></iframe>',
+            }, overrideOptions))
+        }
+
         function initializePreviews(page, level) {
             level = level || pages.length;
-
-            let tippyOptions = {
-                allowHTML: true,
-                theme: 'light',
-                interactive: true,
-                interactiveBorder: 10,
-                delay: 100,
-                //touch: 'hold',
-                touch: 'none',
-                maxWidth: 'none',
-                inlinePositioning: false,
-                placement: window.innerWidth > switchDirectionWindowWidth ? 'right' : 'top'
-            }
 
             links = Array.prototype.slice.call(page.querySelectorAll('a[data-uuid]'))
 
             links.forEach(function(element) {
-                uuid = element.dataset.uuid;
+                //uuid = element.dataset.uuid;
                 element.dataset.level = level;
 
                 if(element.classList.contains('internal')) {
-                    tip = tippy(element, Object.assign({}, tippyOptions, {
-                        content: '<iframe width="400px" height="300px" src="/' + uuid + '/embed.html"></iframe>',
-                    }))
+                    createPreview(element, {
+                        placement: window.innerWidth > switchDirectionWindowWidth ? 'right' : 'top'
+                    })
                 }
 
                 //pages[level-1].tips.push(tip)
@@ -570,7 +597,7 @@ body.dark .backlinks .backlink-item.linked:hover {
 
         initializePreviews(document.querySelector('.page'));
 
-        let lastWidth = window.innerWidth
+        let lastWidth = window.innerWidth;
         window.addEventListener('resize', function(e) {
             if((window.innerWidth > switchDirectionWindowWidth) != (lastWidth > switchDirectionWindowWidth)) {
                 let pages = [].slice.call(document.querySelectorAll('.page[data-uuid]'))

@@ -109,15 +109,20 @@ h1 {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     opacity: 0.5;
+    /*text-decoration: underline;*/
 }
 a.internal {
-    color: #37AD49;
+    color: rgb(73, 197, 91);
 }
 a.external {
-    color: rgb(125, 59, 249);
+    color: rgb(147, 100, 235);
+}
+a.settings {
+    color: rgb(250, 126, 54);
 }
 
 a.internal.linked {
