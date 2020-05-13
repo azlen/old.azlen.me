@@ -335,3 +335,6 @@ body.dark .backlinks .backlink-item.linked:hover {
     background: rgba(55, 157, 74, 0.3);
 }
 
+body.dark img {
+    filter: invert() hue-rotate(180deg);
+}
