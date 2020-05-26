@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tippy.js@6.2.3/themes/light.css" rel="stylesheet">
+
+    <style>
+        /*:root {
+    --background-color: #EEEEEE;
+    --
+    --page-background: #212121;
+    --text-color: #ededed;
+    --color-alpha: #50a8d8;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #111;
+		--page-background: #212121;
+		--text-color: #ededed;
+		--color-alpha: #50a8d8;
+	}
+}*/
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background: #EEEEEE;
+
+    font-family: 'Nunito Sans', sans-serif;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 17px;
+}
+
+p, li {
+    line-height: 24px;
+    -webkit-letter-spacing: -0.024%;
+    -moz-letter-spacing: -0.024%;
+    -ms-letter-spacing: -0.024%;
+    letter-spacing: -0.024%;
+}
+
+body {
+    display: flex;
+}
+
+#header {
+    flex: 0 0 1;
+    background: #FFFFFF;
+    border-style: solid;
+    border-color: #DDDDDD;
+    border-width: 0px;
+    border-right-width: 1px;
+
+    padding: 48px 20px;
+}
+
+#logo {
+    display: block;
+    /*position: absolute;*/
+    /*margin: 48px 20px;*/
+}
+#logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.stat {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 8px;
+}
+
+.pinch-zoom-container {
+    flex: 1;
+    /*position: inherit !important;*/
+    height: 100%;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    padding: 0px 15px;
+    
+}
+.pinch-zoom {
+    max-width: 100%;
+}
+
+.page {
+    white-space: normal;
+    display: inline-block;
+    width: 620px;
+    padding: 20px 15px 100px 15px;
+    max-width: 100%;
+    height: 100% !important;
+    max-height: 100%;
+    overflow-y: auto;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+.page:last-child {
+    margin-right: 15px;
+}
+
+.page > .content {
+    background: #FFFFFF;
+    padding: 20px 50px;
+    /*position: relative;*/
+    border-radius: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover {
+    opacity: 0.5;
+    /*text-decoration: underline;*/
+}
+a.internal {
+    color: rgb(73, 197, 91);
+}
+a.external {
+    color: rgb(147, 100, 235);
+}
+a.settings {
+    color: rgb(250, 126, 54);
+}
+
+a.internal.linked {
+    background: rgba(55, 157, 74, 0.25);
+}
+
+a.internal.private {
+    color: #AAAAAA;
+}
+
+code {
+    white-space: pre;
+    font-size: 13px;
+    background: #EEEEEE;
+    padding: 1px 10px;
+    border: 1px solid #BBB;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+img {
+    width: 100%;
+}
+
+/*p > span {
+    background-color: #666666;
+}
+p > span a {
+    background-color: #FF0000;
+}*/
+
+#svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    user-select: none;
+}
+
+iframe {
+    overflow: hidden;
+    overflow-y: hidden;
+    border: none;
+}
+
+/*.tippy-box {
+    position: relative;
+}
+.tippy-box:before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+}
+
+.tippy-box[data-placement^=right]>.tippy-arrow:before {
+    left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;
+}
+
+[data-tippy-root] {
+    left: 10px !important;
+    top: -20px !important;
+}*/
+
+.tippy-box>.tippy-arrow:before {
+    /*left: -15px;
+    border-width: 16px 16px 16px 0;
+    top: 13px !important;*/
+    transform: scale(2);
+}
+
+
+.backlinks {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+    /*margin: 15px;*/
+    margin-top: 20px;
+}
+
+.backlinks h3 {
+    /*color: #666666;*/
+    opacity: 0.5;
+    margin: 0;
+    padding: 15px 10px;
+}
+
+.backlinks-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.backlinks .backlink-item {
+    width: 50%;
+    max-width: calc(49%-10px);
+    display: inline-block;
+    color: #000000;
+    vertical-align: top;
+    padding: 0px 10px;
+    border-radius: 10px;
+    transition: all .15s ease-out;
+    box-sizing: border-box;
+}
+.backlinks .backlink-item.linked {
+    background: rgba(55, 157, 74, 0.1);
+}
+.backlinks .backlink-item:hover {
+    background: #EBEBEB;
+    opacity: 1;
+}
+.backlinks .backlink-item.linked:hover {
+    background: rgba(55, 157, 74, 0.25);
+}
+.backlinks a.backlink-item > p {
+    font-size: 12px;
+    line-height: 16px;
+}
+.backlink-text {
+    opacity: 0.5;
+}
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+
+    #header {
+        border-right-width: 0;
+        border-bottom-width: 1px;
+        padding: 10px 30px;
+    }
+
+    #logo {
+        margin: 0;
+    }
+
+
+    #logo svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    #header > * {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .pinch-zoom-container {
+        padding: 0;
+    }
+
+    .page > .content {
+        padding: 10px 20px;
+    }
+
+    .backlinks .backlink-item {
+        display: block;
+        width: 100%;
+    }
+
+    .page {
+        padding-bottom: 150px;
+    }
+}
+
+body.dark {
+    background-color: #222222;
+    color: #FFFFFF;
+}
+
+body.dark #header {
+    background-color: #000000;
+    border-color: #222222;
+}
+
+body.dark #logo svg * {
+    stroke: #FFFFFF;
+}
+
+body.dark .page > .content {
+    background-color: #000000;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.25);
+}
+
+body.dark .backlinks {
+    background-color: #000000;
+}
+
+body.dark .backlinks h3 {
+    color: #999999;
+}
+
+body.dark .backlinks .backlink-item {
+    color: #FFFFFF;
+}
+
+body.dark .backlinks .backlink-item.linked {
+    background: rgba(55, 157, 74, 0.2);
+}
+body.dark .backlinks .backlink-item:hover {
+    background: #222222;
+}
+body.dark .backlinks .backlink-item.linked:hover {
+    background: rgba(55, 157, 74, 0.3);
+}
+
+body.dark img {
+    filter: invert() hue-rotate(180deg);
+}
+
+        body {
+            overflow: hidden;
+        }
+
+        p, li {
+            font-size: 12px;
+            line-height: 17px;
+            -webkit-letter-spacing: -0.017%;
+            -moz-letter-spacing: -0.017%;
+            -ms-letter-spacing: -0.017%;
+            letter-spacing: -0.017%;
+        }
+        h1 { font-size: 20px; }
+        h2 { font-size: 16px; }
+        h3 { font-size: 14px; }
+        .page {
+            border: none;
+            overflow: hidden;
+            padding: 0;
+            height: 100%;
+        }
+        .page > .content {
+            padding: 10px;
+            border-radius: 0;
+            height: 100%;
+        }
+
+        a {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .backlinks {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page" data-uuid="fXPWxjpC" data-level="1">
+    <div class="content">
+        <h1>Playgrounds for the mind</h1>
+        
+            <p><span>Places of play, invention, and joy—the playground is not designed for an anti-purpose, instead of being designed with a specific goal in mind it is a place where people can come up with their own goals, create their own games, and have fun. Thinking back to my <a class="internal" data-uuid="nJHwBEjP" href="/nJHwBEjP">Three approaches to engagement</a>, the playground takes the space of curiosity where you are given a space and a set of actions to explore and interact with this space. I am curious, what would it look like to design a playground for the mind? a place to explore and come up with ideas, create your own games, and explore conceptual space in a similar way that playgrounds make it fun to move about physical space.</span></p>
+        
+            <p><span>Playgrounds are locations, you can visit and you can leave. <a class="internal" data-uuid="6AAWERe9" href="/6AAWERe9">Spaces can rewrite social norms</a>—how might social norms be rewritten to interact playfully with ideas?</span></p>
+        
+            <p><span>Playgrounds are flexible spaces, you can imagine it to be anything you want. Therefore a playground for the mind should be able to apply across many different concepts and ideas.</span></p>
+        
+            <p><span>Playgrounds are multiplayer, it is a place where groups of friends gather to play. The playground is not a solitary act. How can a playground for the mind enable us to think together?</span></p>
+        
+    </div>
+
+    
+</div>
+</body>
+</html>
