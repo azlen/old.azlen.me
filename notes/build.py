@@ -58,7 +58,7 @@ def processPage(page):
             })
     
     template_data = {
-        'title': renderMarkdown(title),
+        'title': renderMarkdown(title, ignoreLinks=True),
         'blocks': children,
         'uuid': uuid,
         'references': []
@@ -68,7 +68,7 @@ def processPage(page):
 
     for item in _linksTo:
         item['link_from'] = uuid
-        item['title'] = renderMarkdown(title)
+        item['title'] = renderMarkdown(title, ignoreLinks=True)
         item['text'] = renderMarkdown(item['text'], ignoreLinks=True)
 
         #if item['uuid'] == uuid:
@@ -135,6 +135,8 @@ def _processInternalLink(match, block):
         return '<a class="internal private" href="#">' + renderMarkdown(name) + '</a>'
 
 def renderMarkdown(text, ignoreLinks=False):
+    print(text)
+
     if ':hiccup' in text:
         # THIS DOES NOT WORK WELL !!! VERY BROKEN
         print(text)
