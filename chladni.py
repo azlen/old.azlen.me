@@ -303,4 +303,4 @@ for i in range(0,frames):
 """
 
 for i in range(100, 20000, 100):
-    generatePattern(i, 'chlandi/%d.png' % i)
+    generatePattern(i, 'chladni/%d.png' % i)
