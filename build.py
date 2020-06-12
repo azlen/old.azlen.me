@@ -92,6 +92,9 @@ ERROR {{ id }}
 {% endif %}
 """
 
+website.templates['blocks']['link_to_page'] = website.templates['blocks']['page']
+
+
 def test2(data):
     page_id = data['block']['text'][0][1][0][1]
     if page_id in website.cache:
@@ -107,11 +110,17 @@ website.listen('pages', countpages)
 website.listen('pages', setflags)
 website.listen('pages', test)
 
+#ORIG
+# website.addCollection('pages', 'https://www.notion.so/eidka/b539082b0b02490580f7fd5872d1798e?v=38b84447673746abb18521983b30abe0', folder='')
+# website.addCollection('blog', 'https://www.notion.so/eidka/7dc1a478d8274055a1f7b9f04d29057b?v=d4fb4101b07649cd95c5fcf63cc7c232')
+# website.addCollection('wiki', 'https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9')
+# website.addCollection('projects', 'https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8')
 
-website.addCollection('pages', 'https://www.notion.so/eidka/b539082b0b02490580f7fd5872d1798e?v=38b84447673746abb18521983b30abe0', folder='')
-website.addCollection('blog', 'https://www.notion.so/eidka/7dc1a478d8274055a1f7b9f04d29057b?v=d4fb4101b07649cd95c5fcf63cc7c232')
-website.addCollection('wiki', 'https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9')
-website.addCollection('projects', 'https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8')
+
+website.addCollection('pages', 'https://www.notion.so/xiqo/d4bc1e0d76644a58b31dea6159354538?v=55bdd5f4295847d295d83d97c42d7ff2', folder='')
+website.addCollection('blog', 'https://www.notion.so/xiqo/b4d0b773477a4f008d6397d2dbdc19af?v=c5e1f2be13a041babd4da4231bb1661f')
+website.addCollection('projects', 'https://www.notion.so/xiqo/fbe593a66bcc45388a455934a73459d9?v=279245a2926f4cf5b497dd327cd6841b')
+
 
 #for page in website.cache.values():
 #    page['flags'] = {
@@ -161,18 +170,18 @@ with open(os.path.join('public', 'glossary.ndtl'), 'w') as f:
         for term, definition in sitedata['glossary'][category].items():
             f.write('  {} : {}\n'.format(term, definition))
 
-# generate twtxt for peer-to-peer discussion feed
-twtxt = website.client.get_collection_view("https://www.notion.so/eidka/51c6a2837c4c4d20b843b936f45ff75b?v=78a7ba17c6da434d8cc61232be5d7064")
-with open(os.path.join('public', 'twtxt.txt'), 'w') as f:
-    entries = twtxt.collection.get_rows()
-    entries = list(map(lambda x: x.get_all_properties(), entries))
-    entries = list(sorted(entries, key=lambda x: x['created'], reverse=True))
+# # generate twtxt for peer-to-peer discussion feed
+# twtxt = website.client.get_collection_view("https://www.notion.so/eidka/51c6a2837c4c4d20b843b936f45ff75b?v=78a7ba17c6da434d8cc61232be5d7064")
+# with open(os.path.join('public', 'twtxt.txt'), 'w') as f:
+#     entries = twtxt.collection.get_rows()
+#     entries = list(map(lambda x: x.get_all_properties(), entries))
+#     entries = list(sorted(entries, key=lambda x: x['created'], reverse=True))
 
-    for row in entries:         
-        #date = row['created'].isoformat()   
-        # By default `.isoformat()` returns without timezone stamp
-        date = row['created'].strftime('%Y-%m-%dT%H:%M:%S+00:00')
-        f.write('{}\t{}\n'.format(date, row['text']))
+#     for row in entries:         
+#         #date = row['created'].isoformat()   
+#         # By default `.isoformat()` returns without timezone stamp
+#         date = row['created'].strftime('%Y-%m-%dT%H:%M:%S+00:00')
+#         f.write('{}\t{}\n'.format(date, row['text']))
 
 website.saveCache()
 
