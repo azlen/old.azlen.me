@@ -314,6 +314,8 @@ blockquote {
 .toc-indent-2 { padding-left: 25px; }
 .toc-indent-3 { padding-left: 50px; }
 
+.toggle-indent { padding-left: 50px; }
+
 .pagecover { 
     display: block;
     margin-bottom: 20px;

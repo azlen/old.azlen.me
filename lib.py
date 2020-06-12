@@ -48,6 +48,13 @@ templates = {
         'numbered_list': '<ol>{% for li in children %}{{ render(li) }}{% endfor %}</ol>',
         'bulleted_list': '<ul>{% for li in children %}{{ render(li) }}{% endfor %}</ul>',
         'list_item': '<li>{{ text }}</li>{% if children %}{% for sub_list in children %}{{ render(sub_list) }}{% endfor %}{% endif %}',
+        'toggle': '{% for li in children %}{{ render(li) }}{% endfor %}',
+        'toggle_list_item': """
+            <details>
+                <summary>{{ text }}</summary>
+                <div class="toggle-indent">{% if children %}{% for sub_list in children %}{{ render(sub_list) }}{% endfor %}{% endif %}
+            </details>
+            """,
         'column_list': """
             <div class="column-container">
                 {% for col in columns %}
@@ -381,6 +388,30 @@ class NotionWebsiteBuilder:
                     prev_data['children'].append(item)
                 else:
                     data['children'] = [item]
+
+            if block.type in ['toggle']:
+                item = {
+                    #'type':  block.type + '_item',
+                    'type': 'toggle_list_item',
+                    'text': data.pop('text', None),
+                    'rawtext': data.pop('rawtext', None),
+                    'children': []
+                }
+
+                # can I just do block.children ?
+                children = block.get('content')
+                if children != None:
+                    children = list(map(self.client.get_block, children))
+
+                    item['children'] += self.blocksToJSONArray(children, page_ref=page_ref)
+
+                if block.type == prev_data['type']:
+                    append_to_array = False
+
+                    prev_data['children'].append(item)
+                else:
+                    data['children'] = [item]
+
             
             if block.type == 'column_list':
                 data['columns'] = []
