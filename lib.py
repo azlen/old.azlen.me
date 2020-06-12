@@ -59,7 +59,9 @@ templates = {
                 {% endfor %}
             </div>
         """,
-        'page': '' # todoooo
+        'page': '', # todoooo
+        'link_to_page':'' #,
+
 
     },
     "text": {
@@ -328,7 +330,7 @@ class NotionWebsiteBuilder:
                 data['image_source'] = block.source
 
                 file_id = block.get('id')
-                extension = re.match('.*(\.[^\?]*)', data['image_source']).group(1)
+                extension = re.match('.*(\.[^\?\/]*)', data['image_source']).group(1)
 
                 caption = block.get('properties.caption')
                 if caption != None:
@@ -336,9 +338,11 @@ class NotionWebsiteBuilder:
 
                 data['image_name'] = file_id + extension
                 data['image_path'] = os.path.join('/images', data['image_name'])
-
-                self.downloadImage(data['image_name'], data['image_source'])
-
+                try:
+                    self.downloadImage(data['image_name'], data['image_source'])
+                except:
+                    breakpoint()
+                print("")
                 """print(data['image_source'])
                 os.makedirs(os.path.join(self.cache_dir, 'images'), exist_ok=True)
                 os.makedirs(os.path.join(self.build_dir, 'images'), exist_ok=True)
@@ -455,7 +459,6 @@ class NotionWebsiteBuilder:
                 permalink = permalink[1:]
 
             path = os.path.join('/', folder, permalink)
-            
             page = self.pageToJSON(row.id, cache_path=path)
             subpages.append(page)
             
@@ -531,7 +534,7 @@ class NotionWebsiteBuilder:
             'cache': self.cache
         }
 
-        template_name = page['template'] if page['template'] is not None else 'default'
+        template_name = page['template'] if (page['template'] != '' and (page['template'] is not None)) else 'default'
 
         # render html
         template = self.env.get_template('{}.html'.format(template_name))
