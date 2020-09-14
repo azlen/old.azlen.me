@@ -262,14 +262,20 @@ class NotionWebsiteBuilder:
 
         _pagedata = _pageblock.get()
         _metadata = _pageblock.get_all_properties()
+
+        print(_pagedata)
+        print(_metadata)
         
         page = {
             'id': page_id,
-            'version': _pagedata['version']
+            'version': _pagedata['version'],
+            'template': None
         }
 
         for key in _metadata:
             value = _metadata[key]
+
+            #print("VAL", value, )
 
             if type(value) == datetime:
                 value = isoformat(value)
@@ -280,8 +286,23 @@ class NotionWebsiteBuilder:
                     #'timezone': value.timezone,
                 }
             elif type(value) == list:
-                value = list(map(lambda url: self.downloadImage(self._idfy('%s %s' % (_metadata['name'], key)) + '.png', url), value))
-            
+                print('-----------------------------------------------------------')
+                print(key, value)
+
+                # Notion API is breaking so I must take extreme measures!!!
+                if key == 'cover':
+                    value = _pageblock.get('properties.xbMd') or _pageblock.get('properties.+)+$')
+                elif key == 'thumbnail':
+                    value = _pageblock.get('properties.WMsb')
+                
+                print(value)
+                if key in ['cover', 'thumbnail'] and value != None:
+                    value = map(lambda x: x[1][0][1], filter(lambda x: x[0] != ',', value))
+                    value = map(lambda url: "https://notion.so/image/%s?table=block&id=%s" % (urllib.parse.quote(url, safe='~()*!.\''), page_id), value)
+                    value = list(map(lambda url: self.downloadImage(self._idfy('%s %s' % (_metadata['name'], key)) + '.png', url), value))
+                elif value == None:
+                    value = []
+                
             page[key] = value
 
         if cache_path != None:
@@ -325,9 +346,16 @@ class NotionWebsiteBuilder:
 
             if block.type == 'image':
                 #data['image_source'] = block.get('properties.source')[0][0]
-                data['image_source'] = block.source
-
                 file_id = block.get('id')
+                data['image_source'] = block.source or 'https://notion.so/image/%s?table=block&id=%s' % (urllib.parse.quote(block.get('properties.source')[0][0], safe='~()*!.\''), file_id)
+
+                #print("TEST")
+                #print('display source', block.display_source)
+                print('source', data['image_source'])
+                #print('file id', block.file_id)
+                #print(block.get('properties.source'))
+
+                #file_id = block.get('id')
                 extension = re.match('.*(\.[^\?]*)', data['image_source']).group(1)
 
                 caption = block.get('properties.caption')
@@ -444,7 +472,7 @@ class NotionWebsiteBuilder:
                 continue
 
             props = row.get_all_properties()
-            permalink = props['permalink']
+            permalink = props['permalink'] or ''
 
             print(row.id)
             print(row.get('version'))
@@ -531,7 +559,7 @@ class NotionWebsiteBuilder:
             'cache': self.cache
         }
 
-        template_name = page['template'] if page['template'] is not None else 'default'
+        template_name = page['template'] or 'default'
 
         # render html
         template = self.env.get_template('{}.html'.format(template_name))
@@ -551,7 +579,6 @@ class NotionWebsiteBuilder:
 
         if not os.path.isfile(image_cache_path):
             req = self.client.session.get(source)
-            print(req)
             with open(image_cache_path, 'wb') as image:
                 image.write(req.content)
         
@@ -636,7 +663,7 @@ class NotionWebsiteBuilder:
                     if prop_type == 'a':            # external link
                         data['href'] = prop[1]
 
-                        if re.search(r'^(https://azlen\.me)', data['href']) is not None:
+                        if (re.search(r'^(https://azlen\.me)', data['href']) is not None) or data['href'][0] == '/':
                             # actually internal link
                             prop_type = 'p'
                     

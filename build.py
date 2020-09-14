@@ -95,6 +95,8 @@ ERROR {{ id }}
 def test2(data):
     page_id = data['block']['text'][0][1][0][1]
     if page_id in website.cache:
+        print(page_id)
+        print(website.cache[page_id])
         data['block']['cover_image'] = website.cache[page_id]['cover'][0]
         data['block']['href'] = website.cache[page_id]['path']
     else:
@@ -112,12 +114,8 @@ website.addCollection('pages', 'https://www.notion.so/eidka/b539082b0b02490580f7
 website.addCollection('blog', 'https://www.notion.so/eidka/7dc1a478d8274055a1f7b9f04d29057b?v=d4fb4101b07649cd95c5fcf63cc7c232')
 website.addCollection('wiki', 'https://www.notion.so/eidka/df41aba6463b4d8cb3b6c2b40b0de634?v=bcea2c4e405441399470592c2a096be9')
 website.addCollection('projects', 'https://www.notion.so/eidka/a1b4d1e913f0400d8baf0581caaedea7?v=52e1aaf92d1b4875a16ca2d09c7c60c8')
+website.addCollection('learn', 'https://www.notion.so/eidka/689ef0cc7a7840a0b395f181254683af?v=8bca47456d764fde9d71f0d74d196d0a')
 
-#for page in website.cache.values():
-#    page['flags'] = {
-#        'new': False,
-#        'updated': False
-#    }
 
 from datetime import datetime
 def fromiso(iso):
@@ -130,7 +128,7 @@ def fromiso(iso):
         print(type(iso))
         print('ERROR WRONG fromiso FORMAT %s' % iso)
         #return datetime.now()
-        
+
 website.env.globals['datetime'] = datetime
 website.env.globals['fromiso'] = fromiso
 

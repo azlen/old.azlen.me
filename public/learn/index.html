@@ -1,0 +1,676 @@
+<html>
+<head>
+    <title>Learn with me</title>
+    <meta name="description" content="">
+
+    <!-- META TAGS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Learn with me">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://azlen.me/og-image.png">
+    <!--<meta name="twitter:card" content="summary_large_image">-->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://azlen.me/twitter-image.png">
+    <meta name="twitter:site" content="@azlenelza">
+    <meta name="twitter:creator" content="@azlenelza">
+    <!--<meta property="og:url" content="">-->
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#EEEBE8">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#EEEBE8">
+
+    
+        <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    
+    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700|Space+Mono|Heebo:500,900&display=swap" rel="stylesheet"> 
+    <!--<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">-->
+    
+    <!-- STYLE -->
+    <style>
+        /* WEBSITE STYLES */
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background-color: #FAFAFA;
+    color: #000000;
+    font-family: 'EB Garamond', Garamond, serif;
+    /*font-family: 'Ibarra Real Nova', Garamond, serif;*/
+    font-size: 20px;
+    padding-top: 4rem;
+}
+
+h1, h2, h3 {
+    font-family: "Space Mono", monospace;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    line-height: 1.2 !important; /* in case it wraps lines */
+}
+
+h1.title {
+    margin-bottom: 0.2rem;
+}
+header .date {
+    text-align: center;
+    font-family: "Space Mono", monospace;
+    color: #999999;
+    font-size: 14px;
+}
+header {
+    margin-bottom: 2.0rem;
+}
+
+h1.title {
+    font-family: "Heebo", sans-serif;
+    text-align: center;
+    margin-top: -10px;
+    /*margin-bottom: 2.0rem*/
+    margin-bottom: 0.2rem;
+}
+
+h2, h3 { font-variant-ligatures: no-common-ligatures }
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+p, ol, ul, table, blockquote {
+    margin-bottom: 1.6rem;
+    line-height: 1.42em;
+    line-height: 1.6em;
+}
+
+ol, ul {
+    padding-left: 2.0rem;
+}
+
+main a {
+    color: #ff3392;
+    text-decoration: none;
+    /*border-bottom: 1px dotted;*/
+}
+main a:not(.viewmore) > span {
+    background-image: radial-gradient(1px 1px at center, #ff3392 0.5px, transparent 1px);
+    background-position: 0 1.10em;
+    background-repeat: repeat-x;
+    background-size: 3px 3px;
+    text-shadow:    0.5px 0.5px #FBF8F5, 0.5px -0.5px #FBF8F5, -0.5px 0.5px #FBF8F5, -0.5px -0.5px #FBF8F5,
+                    1px 1px #FBF8F5, 1px -1px #FBF8F5, -1px 1px #FBF8F5, -1px -1px #FBF8F5,
+                    1.5px 1.5px #FBF8F5, 1.5px -1.5px #FBF8F5, -1.5px 1.5px #FBF8F5, -1.5px -1.5px #FBF8F5;
+
+}
+h1 a > span, h2 a > span, h3 a > span{
+    /*border-width: 2px;*/
+
+    background-image: radial-gradient(1px 1px at center, #ff3392 1px, transparent 1.6px) !important;
+    background-position: 0 1.15em !important;
+    background-size: 4px 3px !important;
+}
+
+a.viewmore {
+    display: inline-block;
+
+    color: #000000;
+    border: none;
+
+    font-family: "Space Mono", sans-serif;
+    font-size: 12px;
+
+    border-radius: 7px;
+    padding: 2px 15px;
+    background-color: #D6D4D0;
+}
+a.viewmore:hover {
+    background-color: #C6C4C0;
+}
+
+a.wiki-link {
+    font-size: 16px;
+}
+/*a.wiki-link > span { background-image: none !important }*/
+a.homepage-link {
+    font-size: 18px;
+}
+
+.chladni {
+    display: inline-block;
+    margin: 0 0 -3px 0;
+    width: 15px;
+}
+
+a.age1 { color: #8cbd19 }
+a.age1 > span { background-image: radial-gradient(1px 1px at center, #8cbd19 0.5px, transparent 1px) !important }
+a.age2 { color: #c58b0d }
+a.age2 > span { background-image: radial-gradient(1px 1px at center, #c58b0d 0.5px, transparent 1px) !important }
+a.age3 { color: #685e57 }
+a.age3 > span { background-image: radial-gradient(1px 1px at center, #685e57 0.5px, transparent 1px) !important }
+
+a.evergreen { color: #7b23e0 }
+a.evergreen > span { background-image: radial-gradient(1px 1px at center, #7b23e0 0.5px, transparent 1px) !important }
+
+pre {
+    tab-size: 4;
+}
+
+p code {
+    display: inline-block;
+    font-family: "Space Mono", monospace;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    font-size: 15px;
+    padding: 0px 5px;
+}
+
+pre {
+    padding: 0.8rem;
+    border-radius: 5px;
+    font-family: "Space Mono", monospace;
+    font-size: 15px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    margin: auto;
+    margin-bottom: 1.4rem;
+    max-height: 360px;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    padding: 0px 20px;
+    max-width: 36em;
+    margin: auto;
+    padding-bottom: 10rem;
+}
+
+#logo svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+#tl {
+    position: fixed;
+    top: 4rem;
+    left: 4rem;
+}
+
+#tl nav {
+    margin-top: 2.0rem;
+}
+
+#tl nav a {
+    display: block;
+    text-decoration: none;
+}
+
+#tl nav a,
+#tl .stat {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    color: #999;
+}
+
+#tl nav a svg {
+    width: 13px;
+    height: 13px;
+    margin-bottom: 10px;
+    fill: #999;
+    stroke: #999;
+}
+
+#tl nav a:hover {
+    color: #444;
+}
+#tl nav a:hover svg {
+    fill: #444;
+    stroke: #444;
+}
+
+.column-container {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    margin: 0 10px;
+}
+.column:first-child { margin-left: 0 }
+.column:last-child { margin-right: 0 }
+
+
+figure {
+    display: block;
+    text-align: center;
+    margin-bottom: 1.4rem;
+}
+figure img {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+}
+figcaption {
+    font-family: 'EB Garamond', Garamond, serif;
+    /*font-family: 'Ibarra Real Nova', Garamond, serif;
+    font-family: 'Source Serif Pro', Garamond, serif;*/
+    font-size: 16px;
+    color: #999;
+    font-style: italic;
+}
+
+
+.table-container {
+    overflow-x: auto;
+}
+table {
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+table th {
+    font-weight: bold;
+}
+
+table.small td:not(:last-child) {
+    padding-right: 20px;
+}
+
+table.normal {
+    position: relative;
+    width: 100%;
+}
+table.normal td, table.normal th {
+    text-align: left;
+    padding: 4px 15px;
+    outline: 1px solid #BBB;
+}
+table.nowrap td, table.nowrap th {
+    white-space: nowrap;
+}
+
+blockquote {
+    margin-left: 20px;
+    margin-right: 40px;
+
+    padding-left: 25px;
+    border-left: 5px solid #DAD7D7;
+    color: #999;
+}
+
+.divider {
+    margin-bottom: 10rem;
+}
+
+.tag {
+    background-color: #999;
+    font-family: "Space Mono", courier;
+    font-size: 9px;
+    padding: 0px 7px 1px 7px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 5px;
+}
+.tag.inline-date { 
+    margin-left: 0px;
+    font-size: 12px;
+    margin-right: 4px;
+    vertical-align: top;
+ }
+.tag.green { background-color: #76ad00; }
+.tag.blue { background-color: #0095eb; }
+
+.toc { margin-top: 0; }
+.toc-indent-1 { padding-left: 0px ; }
+.toc-indent-2 { padding-left: 25px; }
+.toc-indent-3 { padding-left: 50px; }
+
+.pagecover { 
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pagecover > img {
+    margin: 0;
+    transform: scale(1);
+    transition: 0.25s transform;
+}
+.pagecover:hover > img{
+    transform: scale(1.05);
+}
+
+.pagelink {
+    display: flex;
+    height: 95px;
+    /*background-color: #D2CECA;*/
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.25s background-color;
+    text-decoration: none;
+    color: #000000;
+
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+/*.pagelink:hover {
+    background-color: rgb(179, 190, 209);
+}*/
+.pagelink-icon {
+    width: 95px;
+    flex: 1 0 1;
+    background-size: cover;
+}
+.pagelink-text {
+    flex: 1 0 235px;
+    padding: 15px 10px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.pagelink-text-title {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    transition: all .2s ease-out;
+}
+.pagelink-text-description {
+    font-size: 14;
+    /*font-family: "EB Garamond"*/
+    max-width: 300px;
+
+    transition: all .2s ease-out;
+}
+.pagelink-arrow {
+    opacity: 0;
+    width: 45px;
+    height: 45px;
+    
+    position: absolute;
+    top: 25px;
+    right: 40px;
+
+    transition: all .2s ease-out;
+}
+.pagelink:hover .pagelink-arrow {
+    opacity: 1;
+    z-index: 1001;
+    right: 25px;
+}
+.pagelink:hover .pagelink-text-title, .pagelink:hover .pagelink-text-description {
+    opacity: 0.5;
+}
+
+.pagelink::before {
+    content: "";
+    position: absolute;
+    z-index: 1000;
+    top: 1px;
+    right: 1px;
+    width: 200px;
+    height: 93px;
+
+    border-radius: 5px;
+
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+
+    opacity: 0;
+    transition: all .2s ease-out;
+}
+.pagelink:hover::before {
+    opacity: 0.9;
+}
+
+@media screen and (max-width: 1200px) {
+    #tl {
+        position: static;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    #tl .stat {
+        display: none;
+    }
+    #tl nav {
+        margin-top: 0;
+    }
+    #tl nav a {
+        display: inline-block;
+        font-size: 16px;
+    }
+    #tl nav a:not(:last-child) {
+        margin-right: 20px;
+    }
+    #tl nav.social {
+        display: none;
+    }
+    #tl nav a svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .toc { display: none; }
+}
+
+@media screen and (max-width: 720px) {
+    .column-container {
+        display: block;
+    }
+    .column {
+        margin: auto !important;
+        margin-bottom: 2.0rem;
+        width: 400px;
+        max-width: 100%;
+    }
+    a.wiki-link {
+        font-size: inherit;
+    }
+    a.homepage-link {
+        font-size: inherit;
+    }
+}
+
+::-moz-selection {
+    background-color: #ff3392;
+    background-color: #000000;
+    text-shadow: none;
+    color: #FFFFFF;
+}
+
+::selection {
+    background-color: #ff3392;
+    background-color: #000000;
+    text-shadow: none;
+    color: #FFFFFF;
+}
+
+
+
+.join-button {
+    padding: 5px 30px;
+    border: 0;
+    /*background: #ada;*/
+    background: #999;
+    color: #FFF;
+    font-family: "Space Mono";
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 15px;
+    /*border: 1px solid #9b9;*/
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    display: block;
+    cursor: pointer;
+    transition: .1s all ease-out;
+}
+
+        /* CODE BLOCK STYLING */
+        .highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #0099FF; font-style: italic } /* Comment */
+.highlight .err { color: #AA0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #006699; font-weight: bold } /* Keyword */
+.highlight .o { color: #555555 } /* Operator */
+.highlight .cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #009999 } /* Comment.Preproc */
+.highlight .c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #003300; font-weight: bold } /* Generic.Heading */
+.highlight .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+.highlight .go { color: #AAAAAA } /* Generic.Output */
+.highlight .gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #99CC66 } /* Generic.Traceback */
+.highlight .kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #006699 } /* Keyword.Pseudo */
+.highlight .kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #007788; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #FF6600 } /* Literal.Number */
+.highlight .s { color: #CC3300 } /* Literal.String */
+.highlight .na { color: #330099 } /* Name.Attribute */
+.highlight .nb { color: #336666 } /* Name.Builtin */
+.highlight .nc { color: #00AA88; font-weight: bold } /* Name.Class */
+.highlight .no { color: #336600 } /* Name.Constant */
+.highlight .nd { color: #9999FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #CC00FF } /* Name.Function */
+.highlight .nl { color: #9999FF } /* Name.Label */
+.highlight .nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #330099; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #003333 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #FF6600 } /* Literal.Number.Float */
+.highlight .mh { color: #FF6600 } /* Literal.Number.Hex */
+.highlight .mi { color: #FF6600 } /* Literal.Number.Integer */
+.highlight .mo { color: #FF6600 } /* Literal.Number.Oct */
+.highlight .sb { color: #CC3300 } /* Literal.String.Backtick */
+.highlight .sc { color: #CC3300 } /* Literal.String.Char */
+.highlight .sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #CC3300 } /* Literal.String.Double */
+.highlight .se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #CC3300 } /* Literal.String.Heredoc */
+.highlight .si { color: #AA0000 } /* Literal.String.Interpol */
+.highlight .sx { color: #CC3300 } /* Literal.String.Other */
+.highlight .sr { color: #33AAAA } /* Literal.String.Regex */
+.highlight .s1 { color: #CC3300 } /* Literal.String.Single */
+.highlight .ss { color: #FFCC33 } /* Literal.String.Symbol */
+.highlight .bp { color: #336666 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #003333 } /* Name.Variable.Class */
+.highlight .vg { color: #003333 } /* Name.Variable.Global */
+.highlight .vi { color: #003333 } /* Name.Variable.Instance */
+.highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
+    </style>
+</head>
+<body>
+    <!--NOTION_ID:598ca5b1-0b1a-4bc1-a990-f6ffaf961165-->
+    <div id="tl">
+        <a href="/" id="logo">
+            <svg width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M109 34C109 27.3696 111.634 21.0107 116.322 16.3223C121.011 11.6339 127.37 9 134 9C140.63 9 146.989 11.6339 151.678 16.3223C156.366 21.0107 159 27.3696 159 34C159 40.6304 156.366 46.9893 151.678 51.6777C146.989 56.3661 140.63 59 134 59C127.37 59 121.011 56.3661 116.322 51.6777C111.634 46.9893 109 40.6304 109 34Z" stroke="black" stroke-width="18" stroke-linecap="square"/>
+<path d="M16.3223 116.322C11.6339 121.011 9 127.37 9 134C9 140.63 11.6339 146.989 16.3223 151.678C21.0107 156.366 27.3696 159 34 159C40.6304 159 46.9893 156.366 51.6777 151.678C56.3661 146.989 59 140.63 59 134C59 127.37 56.3661 121.011 51.6777 116.322C46.9893 111.634 40.6304 109 34 109C27.3696 109 21.0107 111.634 16.3223 116.322Z" stroke="black" stroke-width="18" stroke-linecap="square"/>
+<path d="M9 54C9 52.4471 9 49.786 9 46.5086C9 25.7979 25.7893 9.00001 46.5 9.00002V9.00002C67.2107 9.00004 84 25.7894 84 46.5V121.5C84 142.211 100.789 159 121.5 159V159C142.211 159 159 142.202 159 121.491C159 118.214 159 115.553 159 114" stroke="black" stroke-width="18" stroke-linecap="square"/>
+</svg>
+        </a>
+        
+        <!--
+        
+        -->
+    </div>
+    <main>
+        <header>
+            <h1 class="title">Learn with me</h1>
+            
+        </header>
+
+        <p>This page is an invitation for you to join in on my learning adventures. Feel free to explore each of the topics below and fill out the form linked on each page if you're interested in joining one of the learning groups.</p>
+            <div class="column-container">
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagecover" href="/learn/architecture_of_writing">
+    <img src="/images/architecture_of_writing_cover.png" />
+</a>
+                    
+                        
+<a class="pagecover" href="/learn/chinese">
+    <img src="/images/chinese_cover.png" />
+</a>
+                    
+                </div>
+                
+                <div class="column" style="flex: 0.5">
+                    
+                        
+<a class="pagecover" href="/learn/environmental_psychology">
+    <img src="/images/environmental_psychology_cover.png" />
+</a>
+                    
+                        
+<a class="pagecover" href="/learn/future_of_learning">
+    <img src="/images/future_of_learning_cover.png" />
+</a>
+                    
+                </div>
+                
+            </div>
+        
+    </main>
+</body>
+</html>
