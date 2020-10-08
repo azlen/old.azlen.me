@@ -54,7 +54,7 @@ def processPage(page):
     if 'children' in page.keys():
         for child in page['children']:
             children.append({
-                'html': renderMarkdown(fix_encoding(child['string'])) + renderBullets(child)
+                'html': applyHeading(renderMarkdown(fix_encoding(child['string'])), child) + renderBullets(child)
             })
     
     template_data = {
@@ -114,7 +114,7 @@ def renderBullets(block):
     output = '<ul>'
     for child in block['children']:
         output += '<li>'
-        output += renderMarkdown(child['string'])
+        output += applyHeading(renderMarkdown(child['string']), block)
 
         if 'children' in child.keys():
             output += renderBullets(child)
@@ -175,6 +175,16 @@ def renderMarkdown(text, ignoreLinks=False):
     text = re.sub(r'\(\((.+?)\)\)', lambda x: renderMarkdown(block_ids[x.group(1)]['string'], ignoreLinks=True), text)
 
     return text
+
+def applyHeading(html, block):
+    if 'heading' in block:
+        if block['heading'] == 1:
+            return '<h1>' + html + '</h1>'
+        if block['heading'] == 2:
+            return '<h2>' + html + '</h2>'
+        if block['heading'] == 3:
+            return '<h3>' + html + '</h3>'
+    return html
 
 with open('azlen.json', 'r') as f:
     data = json.loads(f.read())
